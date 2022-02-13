@@ -58,3 +58,7 @@ class BaseModel(models.Model):
     def activate(self):
         self.is_active = True
         self.save()
+
+    # todo: unique error -> restore
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
