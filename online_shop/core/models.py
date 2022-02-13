@@ -27,6 +27,14 @@ class BaseModel(models.Model):
         help_text=_("This is deleted datetime")
     )
 
+    restored_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+        verbose_name=_('Restored Datetime'),
+        help_text=_('This is Restored Datetime')
+    )
+
     is_deleted = models.BooleanField(
         default=False,
         editable=False,
@@ -48,6 +56,7 @@ class BaseModel(models.Model):
         self.save(using=using)
 
     def restore(self):
+        self.restored_at = timezone.now()
         self.is_deleted = False
         self.save()
 
