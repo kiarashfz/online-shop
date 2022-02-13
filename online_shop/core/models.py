@@ -51,6 +51,8 @@ class BaseModel(models.Model):
         help_text=_("This is active status"),
     )
 
+    # todo: havaset bashe to front hame productaiio biar k true bashe is activesh
+
     def delete(self, using=None, keep_parents=False):
         self.deleted_at = timezone.now()
         self.is_deleted = True
