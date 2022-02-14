@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rosetta',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ LANGUAGES = (
     ('en', 'english'),
     ('fa', 'Farsi'),
 )
-LOCALE_PATHS = BASE_DIR / 'locale'
+LOCALE_PATHS = (BASE_DIR / 'locale', )
 
 TIME_ZONE = 'Asia/Tehran'
 
