@@ -181,3 +181,52 @@ class Property(BaseModel):
         verbose_name=_(''),
         help_text=_(''),
     )
+
+
+class Product(BaseModel):
+    class Meta:
+        verbose_name = _('Product')
+
+    name = models.CharField(
+        max_length=31,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    properties = models.ManyToManyField(
+        Property,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    stock = models.PositiveIntegerField(
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.RESTRICT,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    discount = models.ForeignKey(
+        Discount,
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
