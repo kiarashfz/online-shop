@@ -45,49 +45,73 @@ class Address(BaseModel):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     province = models.CharField(
         max_length=7,
         choices=PROVINCES,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     city = models.CharField(
         max_length=31,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     area = models.CharField(
         max_length=31,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     avenue = models.CharField(
         max_length=31,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     street = models.CharField(
         max_length=31,
         null=True,
         blank=True,
+        verbose_name=_(''),
+        help_text=_('')
     )
 
     alley = models.CharField(
         max_length=31,
         null=True,
         blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
-    no = models.PositiveSmallIntegerField()
 
-    unit = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
-    )
+no = models.PositiveSmallIntegerField(
+    verbose_name=_(''),
+    help_text=_(''),
+)
 
-    floor = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
-    )
+unit = models.PositiveSmallIntegerField(
+    null=True,
+    blank=True,
+    verbose_name=_(''),
+    help_text=_(''),
+)
 
-    postal_code = models.CharField(
-        max_length=31,
-    )
+floor = models.PositiveSmallIntegerField(
+    null=True,
+    blank=True,
+    verbose_name=_(''),
+    help_text=_(''),
+)
+
+postal_code = models.CharField(
+    max_length=31,
+    verbose_name=_(''),
+    help_text=_(''),
+)
