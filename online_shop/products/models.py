@@ -39,6 +39,8 @@ class Discount(BaseDiscount):
     class Meta:
         verbose_name = _('Discount')
 
+    # todo: methode jaam vase discount vase zamani ke ham producte discount dare ham categorysh discount mikhore
+
 
 class CustomerOffCode(BaseModel):
     class Meta:
@@ -101,3 +103,28 @@ class OffCode(BaseDiscount):
         verbose_name=_(''),
         help_text=_('Usable Count For each customer! Fill it if you want this off code for ALL customers!'),
     )
+
+
+class Category(BaseModel):
+    class Meta:
+        verbose_name = _('Category')
+
+    name = models.CharField(
+        max_length=31,
+    )
+
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+    )
+
+    discount = models.ForeignKey(
+        Discount,
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+    )
+
+    # todo: methodi k age discount barash set shod bere hame productaye toye in categoryo in discounto bzne
