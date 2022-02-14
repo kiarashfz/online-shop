@@ -90,8 +90,6 @@ class OffCode(BaseDiscount):
     customers = models.ManyToManyField(
         Customer,
         through=CustomerOffCode,
-        null=True,
-        blank=True,
         verbose_name=_(''),
         help_text=_(''),
     )
@@ -204,8 +202,6 @@ class Product(BaseModel):
 
     properties = models.ManyToManyField(
         Property,
-        null=True,
-        blank=True,
         verbose_name=_(''),
         help_text=_(''),
     )
