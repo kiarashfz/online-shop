@@ -2,6 +2,7 @@ from django.db import models
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Customer
+from products.validators import discount_type_validator
 
 
 class BaseDiscount(BaseModel):
@@ -38,6 +39,10 @@ class BaseDiscount(BaseModel):
         verbose_name=_(''),
         help_text=_(''),
     )
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        discount_type_validator(self)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Discount(BaseDiscount):
