@@ -20,6 +20,11 @@ class BaseDiscount(BaseModel):
         help_text=_(''),
     )
 
+    value = models.PositiveIntegerField(
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
     max_amount = models.PositiveIntegerField(
         null=True,
         blank=True,
