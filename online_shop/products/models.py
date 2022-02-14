@@ -172,8 +172,12 @@ class Property(BaseModel):
 
     key = models.CharField(
         max_length=255,
+        verbose_name=_(''),
+        help_text=_(''),
     )
 
     value = models.CharField(
         max_length=2555,
+        verbose_name=_(''),
+        help_text=_(''),
     )
