@@ -128,3 +128,39 @@ class Category(BaseModel):
     )
 
     # todo: methodi k age discount barash set shod bere hame productaye toye in categoryo in discounto bzne
+
+
+class Brand(BaseModel):
+    class Meta:
+        verbose_name = _('Brand')
+
+    name = models.CharField(
+        max_length=31,
+        unique=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    country = models.CharField(
+        max_length=31,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    discount = models.ForeignKey(
+        Discount,
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
