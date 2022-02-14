@@ -110,6 +110,7 @@ LANGUAGES = (
     ('en', 'english'),
     ('fa', 'Farsi'),
 )
+LOCALE_PATHS = BASE_DIR / 'locale'
 
 TIME_ZONE = 'Asia/Tehran'
 
