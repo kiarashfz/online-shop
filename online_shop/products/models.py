@@ -75,6 +75,7 @@ class OffCode(BaseDiscount):
         max_length=63,
         verbose_name=_(''),
         help_text=_(''),
+        unique=True,
     )
 
     min_buy = models.PositiveIntegerField(
@@ -91,4 +92,12 @@ class OffCode(BaseDiscount):
         blank=True,
         verbose_name=_(''),
         help_text=_(''),
+    )
+
+    usable_count = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        default=1,
+        verbose_name=_(''),
+        help_text=_('Usable Count For each customer! Fill it if you want this off code for ALL customers!'),
     )
