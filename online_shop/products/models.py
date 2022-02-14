@@ -230,3 +230,36 @@ class Product(BaseModel):
         verbose_name=_(''),
         help_text=_(''),
     )
+
+
+class Comment(BaseModel):
+    class Meta:
+        verbose_name = _('Comment')
+
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.RESTRICT,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    text = models.TextField(
+        verbose_name=_(''),
+        help_text=_(''),
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.RESTRICT,
+        verbose_name=_(''),
+        help_text=_(''),
+    )
