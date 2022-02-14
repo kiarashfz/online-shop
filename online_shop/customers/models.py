@@ -8,6 +8,9 @@ class Customer(BaseModel):
 
 
 class Address(BaseModel):
+    class Meta:
+        verbose_name = _('Address')
+
     PROVINCES = [
         ('thr', _('Tehran')),
         ('az-sh', _('Azarbayejan Sharghi')),
