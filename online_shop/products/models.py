@@ -164,3 +164,16 @@ class Brand(BaseModel):
         verbose_name=_(''),
         help_text=_(''),
     )
+
+
+class Property(BaseModel):
+    class Meta:
+        verbose_name = _('Property')
+
+    key = models.CharField(
+        max_length=255,
+    )
+
+    value = models.CharField(
+        max_length=2555,
+    )
