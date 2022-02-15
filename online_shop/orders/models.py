@@ -2,6 +2,7 @@ from django.db import models
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Address, Customer
+from orders.validators import validate_order_off_code_expire
 from products.models import OffCode, Product
 
 
@@ -24,6 +25,7 @@ class Order(BaseModel):
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
+        validators=[validate_order_off_code_expire]
     )
     # todo: validate kon addresesh male customere bashe htmn
 
