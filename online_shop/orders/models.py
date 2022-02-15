@@ -1,8 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Address, Customer
-from orders.validators import validate_order_off_code_expire
 from products.models import OffCode, Product
 
 
@@ -25,9 +26,13 @@ class Order(BaseModel):
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
-        validators=[validate_order_off_code_expire]
     )
+
     # todo: validate kon addresesh male customere bashe htmn
+
+    def full_clean(self, exclude=None, validate_unique=True):
+        if self.off_code.expire and self.off_code.expire < timezone.now():
+            raise ValidationError(_('your off code is expired!'))
 
 
 #     def off_code_check(self):
@@ -39,6 +44,7 @@ class Order(BaseModel):
 #             return False if len(
 #             self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count
 # todo: ba har order az tocke oon product kam she
+
 
 class OrderItem(BaseModel):
     class Meta:
