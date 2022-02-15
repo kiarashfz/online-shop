@@ -58,14 +58,14 @@ class OrderItem(BaseModel):
     product = models.ForeignKey(
         Product,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Product'),
+        help_text=_('Product of Order Item!'),
     )
 
     count = models.PositiveIntegerField(
         default=1,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Count'),
+        help_text=_('Count of product for Order Item!'),
     )
 
     order = models.ForeignKey(
@@ -73,15 +73,15 @@ class OrderItem(BaseModel):
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Order'),
+        help_text=_('The order that this Order Item is for!'),
     )
 
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Customer'),
+        help_text=_('Customer of this Order Item!'),
     )
 
     status = models.IntegerField(
@@ -89,6 +89,6 @@ class OrderItem(BaseModel):
         default=0,
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Status'),
+        help_text=_('Status of this Oder Item!'),
     )
