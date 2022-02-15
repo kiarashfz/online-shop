@@ -1,8 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Customer
-from products.validators import discount_type_validator
 
 
 class BaseDiscount(BaseModel):
@@ -17,32 +17,37 @@ class BaseDiscount(BaseModel):
     type = models.CharField(
         max_length=15,
         choices=TYPES,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('type'),
+        help_text=_('This is discount type!'),
     )
 
     value = models.PositiveIntegerField(
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('value'),
+        help_text=_('This is discount value!'),
     )
 
     max_amount = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('maximum amount'),
+        help_text=_('This is maximum amount for percentage discounts!'),
     )
 
     expire = models.DateTimeField(
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('expire date'),
+        help_text=_('This is he discount expire date!'),
     )
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        discount_type_validator(self)
-        super().save(force_insert, force_update, using, update_fields)
+    def __str__(self):
+        return f'{self.value}%' if self.type == 'percentage' else f'{self.value} Toman'
+
+    # todo: to order checkon validate kon age expiresh gozashte error bde
+
+    def full_clean(self, exclude=None, validate_unique=True):
+        if self.type == 'percentage' and not 0 < self.value < 100:
+            raise ValidationError(_('Percentage type value must be between 0 & 100.'))
 
 
 class Discount(BaseDiscount):
@@ -85,30 +90,32 @@ class OffCode(BaseDiscount):
 
     code = models.CharField(
         max_length=63,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Code'),
+        help_text=_('This is the code of off code!'),
         unique=True,
     )
 
     min_buy = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Minimum Buy'),
+        help_text=_('This off code could be activate when final price will bigger than minimum buy!'),
     )
 
     customers = models.ManyToManyField(
         Customer,
         through=CustomerOffCode,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Customers'),
+        help_text=_('Customers that can use this off code'),
+        null=True,
+        blank=True,
     )
 
     usable_count = models.PositiveSmallIntegerField(
         null=True,
         blank=True,
         default=1,
-        verbose_name=_(''),
+        verbose_name=_('Usable Count'),
         help_text=_('Usable Count For each customer! Fill it if you want this off code for ALL customers!'),
     )
 
