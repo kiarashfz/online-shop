@@ -142,7 +142,14 @@ class Category(BaseModel):
         blank=True,
     )
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        if self.discount:
+            for product in self.product_set:
+                product.discount = self.discount
+                product.save()
     # todo: methodi k age discount barash set shod bere hame productaye toye in categoryo in discounto bzne
+    # todo: age khode producte az qabl dc dasht dc e categoryo ba oon jaam kone
 
 
 class Brand(BaseModel):
@@ -179,6 +186,14 @@ class Brand(BaseModel):
         verbose_name=_(''),
         help_text=_(''),
     )
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        if self.discount:
+            for product in self.product_set:
+                product.discount = self.discount
+                product.save()
+    # todo: age khode producte az qabl dc dasht dc e categoryo ba oon jaam kone
 
 
 class Property(BaseModel):
