@@ -48,73 +48,62 @@ class Address(BaseModel):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Customer'),
+        help_text=_('Customer of this address!'),
     )
 
     province = models.CharField(
         max_length=7,
         choices=PROVINCES,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Province'),
     )
 
     city = models.CharField(
         max_length=31,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('City'),
     )
 
     area = models.CharField(
         max_length=31,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Area'),
     )
 
     avenue = models.CharField(
         max_length=31,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Avenue'),
     )
 
     street = models.CharField(
         max_length=31,
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_('')
+        verbose_name=_('Street'),
     )
 
     alley = models.CharField(
         max_length=31,
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Alley'),
     )
 
+    no = models.PositiveSmallIntegerField(
+        verbose_name=_('No.'),
+    )
 
-no = models.PositiveSmallIntegerField(
-    verbose_name=_(''),
-    help_text=_(''),
-)
+    unit = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_('Unit'),
+    )
 
-unit = models.PositiveSmallIntegerField(
-    null=True,
-    blank=True,
-    verbose_name=_(''),
-    help_text=_(''),
-)
+    floor = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_('Floor'),
+    )
 
-floor = models.PositiveSmallIntegerField(
-    null=True,
-    blank=True,
-    verbose_name=_(''),
-    help_text=_(''),
-)
-
-postal_code = models.CharField(
-    max_length=31,
-    verbose_name=_(''),
-    help_text=_(''),
-)
+    postal_code = models.CharField(
+        max_length=31,
+        verbose_name=_('Postal Code'),
+    )
