@@ -107,8 +107,6 @@ class OffCode(BaseDiscount):
         through=CustomerOffCode,
         verbose_name=_('Customers'),
         help_text=_('Customers that can use this off code'),
-        null=True,
-        blank=True,
     )
 
     usable_count = models.PositiveSmallIntegerField(
