@@ -262,6 +262,13 @@ class Product(BaseModel):
         verbose_name=_('Brand'),
     )
 
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        default='/products/default_product.jpeg',
+        upload_to='products',
+    )
+
     properties = models.ManyToManyField(
         Property,
         verbose_name=_('Properties'),
