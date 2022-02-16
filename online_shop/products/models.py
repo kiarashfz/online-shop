@@ -347,6 +347,10 @@ class Product(BaseModel):
     def __str__(self):
         return f'{self.name}'
 
+    def full_clean(self, exclude=None, validate_unique=True):
+        if self.discount and self.discount.type == 'amount' and (self.category_discount or self.brand_discount):
+            raise ValidationError('You cannot set amount discount when the product has category or brand discount!')
+
     @property
     def price_after_discounts(self):
         if self.discount and self.discount.expire and self.discount.expire < timezone.now():
