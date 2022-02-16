@@ -328,7 +328,6 @@ class Product(BaseModel):
         Discount,
         on_delete=models.RESTRICT,
         related_name='category_discount_set',
-        editable=False,
         null=True,
         blank=True,
         verbose_name=_('Category Discount'),
@@ -339,35 +338,10 @@ class Product(BaseModel):
         Discount,
         on_delete=models.RESTRICT,
         related_name='brand_discount_set',
-        editable=False,
         null=True,
         blank=True,
         verbose_name=_('Brand Discount'),
         help_text=_('The discount of Brand')
-    )
-
-    discount_decrease = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        editable=False,
-        verbose_name=_('Discount Decrease'),
-        default=0
-    )
-
-    category_discount_decrease = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        editable=False,
-        verbose_name=_('Discount Decrease'),
-        default=0
-    )
-
-    brand_discount_decrease = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        editable=False,
-        verbose_name=_('Discount Decrease'),
-        default=0
     )
 
     def __str__(self):
