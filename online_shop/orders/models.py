@@ -31,7 +31,7 @@ class Order(BaseModel):
     # todo: validate kon addresesh male customere bashe htmn
 
     def full_clean(self, exclude=None, validate_unique=True):
-        if self.off_code.expire and self.off_code.expire < timezone.now():
+        if self.off_code and self.off_code.expire and self.off_code.expire < timezone.now():
             raise ValidationError(_('Your off code is expired!'))
         if self.off_code and self.off_code.min_buy and self.total_price < self.off_code.min_buy:
             raise ValidationError(_(f'This off code minimum buy amount is {self.off_code.min_buy}!'))
@@ -62,13 +62,16 @@ class Order(BaseModel):
             return min(self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount
 
     def off_code_check(self):
-        if not self.off_code.customeroffcode_set.all():
-            return False if len(
-                self.customer.order_set.filter(off_code=self.off_code)) > self.off_code.usable_count else True
+        if self.off_code:
+            if not self.off_code.customeroffcode_set.all():
+                return not len(
+                    self.customer.order_set.filter(off_code=self.off_code)) > self.off_code.usable_count
+            else:
+                customer_off_code = CustomerOffCode.objects.get(off_code=self.off_code)
+                return not len(
+                    self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count
         else:
-            customer_off_code = CustomerOffCode.objects.get(off_code=self.off_code)
-            return False if len(
-                self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count else True
+            return True
 # todo: ba har order az stocke oon product kam she
 
 
