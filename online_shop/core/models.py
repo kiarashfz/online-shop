@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, IntegrityError, transaction
 from django.utils import timezone
 from .manager import BaseManager
 from django.utils.translation import gettext_lazy as _
@@ -53,7 +53,7 @@ class BaseModel(models.Model):
 
     # todo: havaset bashe to front hame productaiio biar k true bashe is activesh
 
-    def delete(self, using=None, keep_parents=False):
+    def deleter(self, using=None, keep_parents=False):
         self.deleted_at = timezone.now()
         self.is_deleted = True
         self.save(using=using)
@@ -72,5 +72,9 @@ class BaseModel(models.Model):
         self.save()
 
     # todo: unique error -> restore
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(force_insert, force_update, using, update_fields)
+    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    #     try:
+    #         with transaction.atomic():
+    #             super().save(force_insert, force_update, using, update_fields)
+    #     except IntegrityError:
+    #         self.restore()
