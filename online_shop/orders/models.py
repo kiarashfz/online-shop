@@ -4,7 +4,7 @@ from django.utils import timezone
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Address, Customer
-from products.models import OffCode, Product
+from products.models import OffCode, Product, CustomerOffCode
 
 
 class Order(BaseModel):
@@ -32,18 +32,44 @@ class Order(BaseModel):
 
     def full_clean(self, exclude=None, validate_unique=True):
         if self.off_code.expire and self.off_code.expire < timezone.now():
-            raise ValidationError(_('your off code is expired!'))
+            raise ValidationError(_('Your off code is expired!'))
+        if self.off_code and self.off_code.min_buy and self.total_price < self.off_code.min_buy:
+            raise ValidationError(_(f'This off code minimum buy amount is {self.off_code.min_buy}!'))
+        if not self.off_code_check():
+            raise ValidationError(_('Usable counts of this off code is finished!'))
 
+    def stock_reducer(self):
+        for order_item in self.orderitem_set.all():
+            product = order_item.product
+            product.stock -= order_item.count
+            product.save()
 
-#     def off_code_check(self):
-#         if self.off_code.usable_count:
-#             return False if len(
-#                 self.customer.order_set.filter(off_code=self.off_code)) > self.off_code.usable_count else True
-#         else:
-#             customer_off_code = CustomerOffCode.objects.get(off_code=self.off_code)
-#             return False if len(
-#             self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count
-# todo: ba har order az tocke oon product kam she
+    @property
+    def total_price(self):
+        products = self.orderitem_set.all().values_list('product')
+        total_price = 0
+        for p in products:
+            total_price += p.final_price
+        return total_price
+
+    @property
+    def final_price(self):
+        if not self.off_code:
+            return self.total_price
+        elif self.off_code and self.off_code.type == 'amount':
+            return self.total_price - min(self.off_code.value, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.off_code.value
+        elif self.off_code and self.off_code.type == 'percentage':
+            return min(self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount
+
+    def off_code_check(self):
+        if not self.off_code.customeroffcode_set.all():
+            return False if len(
+                self.customer.order_set.filter(off_code=self.off_code)) > self.off_code.usable_count else True
+        else:
+            customer_off_code = CustomerOffCode.objects.get(off_code=self.off_code)
+            return False if len(
+                self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count else True
+# todo: ba har order az stocke oon product kam she
 
 
 class OrderItem(BaseModel):
@@ -92,3 +118,7 @@ class OrderItem(BaseModel):
         verbose_name=_('Status'),
         help_text=_('Status of this Oder Item!'),
     )
+
+    def full_clean(self, exclude=None, validate_unique=True):
+        if self.count > self.product.stock:
+            raise ValidationError(f'This count of {self.product.name} is not available in store!')
