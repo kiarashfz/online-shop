@@ -175,23 +175,6 @@ class Category(BaseModel):
     def __str__(self):
         return self.name
 
-    hidden_discount = models.ForeignKey(
-        Discount,
-        on_delete=models.RESTRICT,
-        null=True,
-        blank=True,
-        editable=False,
-        related_name='category_hidden_discount_set',
-    )
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(force_insert, force_update, using, update_fields)
-        if self.discount != self.hidden_discount:
-            for product in self.product_set.all():
-                product.category_discount = self.discount
-                product.save()
-            self.hidden_discount = self.discount
-            self.save()
     # todo: methodi k age discount barash set shod bere hame productaye toye in categoryo in discounto bzne
     # todo: age khode producte az qabl dc dasht dc e categoryo ba oon jaam kone
 
@@ -231,26 +214,9 @@ class Brand(BaseModel):
         help_text=_('Discount for all products of this brand!'),
     )
 
-    hidden_discount = models.ForeignKey(
-        Discount,
-        on_delete=models.RESTRICT,
-        null=True,
-        blank=True,
-        editable=False,
-        related_name='brand_hidden_discount_set',
-    )
-
     def __str__(self):
         return self.name
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        super().save(force_insert, force_update, using, update_fields)
-        if self.discount != self.hidden_discount:
-            for product in self.product_set.all():
-                product.brand_discount = self.discount
-                product.save()
-            self.hidden_discount = self.discount
-            self.save()
     # todo: age khode producte az qabl dc dasht dc e categoryo ba oon jaam kone
 
 
@@ -324,61 +290,45 @@ class Product(BaseModel):
         help_text=_('Discount of this product!'),
     )
 
-    category_discount = models.ForeignKey(
-        Discount,
-        on_delete=models.RESTRICT,
-        related_name='category_discount_set',
-        null=True,
-        blank=True,
-        verbose_name=_('Category Discount'),
-        help_text=_('The discount of category')
-    )
-
-    brand_discount = models.ForeignKey(
-        Discount,
-        on_delete=models.RESTRICT,
-        related_name='brand_discount_set',
-        null=True,
-        blank=True,
-        verbose_name=_('Brand Discount'),
-        help_text=_('The discount of Brand')
-    )
-
     def __str__(self):
         return f'{self.name}'
 
     def full_clean(self, exclude=None, validate_unique=True):
-        if self.discount and self.discount.type == 'amount' and (self.category_discount or self.brand_discount):
+        if self.discount and self.discount.type == 'amount' and (self.category.discount or self.brand.discount):
             raise ValidationError('You cannot set amount discount when the product has category or brand discount!')
 
     @property
-    def price_after_discounts(self):
+    def final_price(self):
         if self.discount and self.discount.expire and self.discount.expire < timezone.now():
             self.discount = None
             self.save()
-        if self.category_discount and self.category_discount.expire and self.category_discount.expire < timezone.now():
-            self.category_discount = None
+        if self.category.discount and self.category.discount.expire and self.category.discount.expire < timezone.now():
+            self.category.discount = None
             self.save()
-        if self.brand_discount and self.brand_discount.expire and self.brand_discount.expire < timezone.now():
-            self.brand_discount = None
+        if (self.brand.discount if self.brand else None) and self.brand.discount.expire and self.brand.discount.expire < timezone.now():
+            self.brand.discount = None
             self.save()
-        if not self.discount and not self.category_discount and not self.brand_discount:
+        if not self.discount and not self.category.discount and not (self.brand.discount if self.brand else None):
             return self.price
-        elif self.discount and (self.category_discount or self.brand_discount):
-            total_discount = self.discount + self.category_discount + self.brand_discount
+        if self.discount and (self.category.discount or (self.brand.discount if self.brand else None)):
+            total_discount = self.discount + self.category.discount + (self.brand.discount if self.brand else None)
             return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
-        elif self.category_discount and (self.brand_discount or self.discount):
-            total_discount = self.category_discount + self.brand_discount + self.discount
+        elif self.category.discount and ((self.brand.discount if self.brand else None) or self.discount):
+            total_discount = self.category.discount + (self.brand.discount if self.brand else None) + self.discount
             return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
-        elif self.brand_discount:
-            total_discount = self.brand_discount
+        elif self.brand and self.brand.discount:
+            total_discount = self.brand.discount
             return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
         elif self.discount:
             total_discount = self.discount
             return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
-        elif self.category_discount:
-            total_discount = self.category_discount
+        elif self.category.discount:
+            total_discount = self.category.discount
             return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+        # else:
+        #     if self.di
+        #     total_discount = self.discount + self.category.discount
+        #     return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
 
 
 class Comment(BaseModel):
