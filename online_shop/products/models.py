@@ -265,7 +265,7 @@ class Product(BaseModel):
     image = models.ImageField(
         null=True,
         blank=True,
-        default='/products/default_product.jpeg',
+        default='products/default_product.jpeg',
         upload_to='products',
     )
 
