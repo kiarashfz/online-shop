@@ -1,3 +1,4 @@
+from django.contrib.auth.models import UserManager, AbstractUser
 from django.db import models
 
 
@@ -22,3 +23,20 @@ class BaseManager(models.Manager):
     # define deactivate item
     def get_deactivate_list(self):
         return self.get_queryset().filter(is_active=False)
+
+
+class MyUserManager(UserManager):
+    def create_superuser(self, username=None, email=None, password=None, **extra_fields):
+        username = extra_fields['phone']
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
+class User(AbstractUser):
+    objects = MyUserManager()
+
+    phone = models.CharField(
+        max_length=14,
+        unique=True,
+    )
+
+    USERNAME_FIELD = 'phone'
