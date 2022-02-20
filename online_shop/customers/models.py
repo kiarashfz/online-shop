@@ -1,10 +1,10 @@
 from django.db import models
-from core.models import BaseModel
+from core.models import BaseModel, User
 from django.utils.translation import gettext_lazy as _
 
 
-class Customer(BaseModel):
-    pass
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Address(BaseModel):
