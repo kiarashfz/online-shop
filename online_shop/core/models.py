@@ -1,4 +1,4 @@
-from django.db import models, IntegrityError, transaction
+from django.db import models
 from django.utils import timezone
 from .manager import BaseManager
 from django.utils.translation import gettext_lazy as _
