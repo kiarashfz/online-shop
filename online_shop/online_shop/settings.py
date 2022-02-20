@@ -31,16 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # installed apps
+    'admin_volt.apps.AdminVoltConfig',
+
+    # preinstalled apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    # registered apps
+    'rest_framework',
     'rosetta',
+    'core',
     'customers',
     'products',
     'orders',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +145,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kiawfz3673@gmail.com'
+EMAIL_HOST_PASSWORD = '135798642kia'
+
+AUTH_USER_MODEL = 'core.User'
