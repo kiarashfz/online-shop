@@ -254,6 +254,13 @@ class Product(BaseModel):
         verbose_name=_('Price'),
     )
 
+    final_price = models.PositiveIntegerField(
+        verbose_name=_('Final Price'),
+        editable=False,
+        null=True,
+        blank=True,
+    )
+
     brand = models.ForeignKey(
         Brand,
         on_delete=models.RESTRICT,
@@ -300,12 +307,16 @@ class Product(BaseModel):
     def __str__(self):
         return f'{self.name}'
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.final_price = self.final_price_calculator
+        super().save(force_insert, force_update, using, update_fields)
+
     def full_clean(self, exclude=None, validate_unique=True):
         if self.discount and self.discount.type == 'amount' and (self.category.discount or self.brand.discount):
             raise ValidationError('You cannot set amount discount when the product has category or brand discount!')
 
     @property
-    def final_price(self):
+    def final_price_calculator(self):
         if self.discount and self.discount.expire and self.discount.expire < timezone.now():
             self.discount = None
             self.save()
@@ -316,22 +327,22 @@ class Product(BaseModel):
             self.brand.discount = None
             self.save()
         if not self.discount and not self.category.discount and not (self.brand.discount if self.brand else None):
-            return self.price
+            return int(self.price)
         if self.discount and (self.category.discount or (self.brand.discount if self.brand else None)):
             total_discount = self.discount + self.category.discount + (self.brand.discount if self.brand else None)
-            return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.category.discount and ((self.brand.discount if self.brand else None) or self.discount):
             total_discount = self.category.discount + (self.brand.discount if self.brand else None) + self.discount
-            return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.brand and self.brand.discount:
             total_discount = self.brand.discount
-            return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.discount:
             total_discount = self.discount
-            return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.category.discount:
             total_discount = self.category.discount
-            return min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100
+            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         # else:
         #     if self.di
         #     total_discount = self.discount + self.category.discount
