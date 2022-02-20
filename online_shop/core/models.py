@@ -1,6 +1,7 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-from .manager import BaseManager
+from .manager import BaseManager, MyUserManager
 from django.utils.translation import gettext_lazy as _
 
 
@@ -78,3 +79,14 @@ class BaseModel(models.Model):
     #             super().save(force_insert, force_update, using, update_fields)
     #     except IntegrityError:
     #         self.restore()
+
+
+class User(AbstractUser):
+    objects = MyUserManager()
+
+    phone = models.CharField(
+        max_length=14,
+        unique=True,
+    )
+
+    USERNAME_FIELD = 'phone'
