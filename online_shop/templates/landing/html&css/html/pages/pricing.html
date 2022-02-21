@@ -73,6 +73,8 @@
 </head>
 
 <body>
+{% load humanize %}
+{% load product_extras %}
     <header class="header-global">
     <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">
         <div class="container position-relative">
@@ -103,8 +105,8 @@
                             <li><a class="dropdown-item" href="../../html/pages/about.html">About</a></li>
                             <li><a class="dropdown-item" href="../../html/pages/pricing.html">Pricing</a></li>
                             <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>
-                            <li><a class="dropdown-item" href="../../html/pages/sign-in.html">Sign in</a></li>
-                            <li><a class="dropdown-item" href="../../html/pages/sign-up.html">Sign up</a></li>
+                            <li><a class="dropdown-item" href="#">Sign in</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sign-up' %}">Sign up</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown mega-dropdown">
@@ -227,71 +229,74 @@
         <div class="container-fluid">
             <div class="row">
 {#            filter#}
-        <div class="container-fluid col-12">
+        <div class="container-fluid col-9">
             <div class="row card shadow-inset p-3">
                 <div class="card-body px-5 py-3 shadow-soft border border-light rounded" style="color: blue">
                 <h3 class="border-bottom border-dark">Filter</h3>
-{#                for#}
                 <label class="mt-5"><b>Category</b>
-                    <select class="form-control">
-                        <option value="Cars">Cars</option>
-                        <option value="Mobile">Mobile</option>
+                    <select id="category_filter" class="form-control">
+                        <option value="All">All</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
                     </select>
                 </label>
                 <label class="mt-5"><b>Brand</b>
-                    <select class="form-control">
-                        <option value="Cars">Samsung</option>
-                        <option value="Mobile">BMW</option>
+                    <select id="brand_filter" class="form-control">
+                        <option value="All">All</option>
+                        {% for brand in brands %}
+                            <option value="{{ brand.name }}">{{ brand.name }}</option>
+                        {% endfor %}
                     </select>
                 </label>
                 <label class="mt-3"><b>Minimum Price</b>
-                    <input type="number" class="form-control">
+                    <input id="min_price_filter" type="number" class="form-control">
                 </label>
                 <label class="mt-3"><b>Maximum Price</b>
-                    <input type="number" class="form-control">
+                    <input id="max_price_filter" type="number" class="form-control">
                 </label>
-                    {#                for#}
+                <button id="filter" type="submit" class="btn btn-primary">Apply</button>
                 </div>
             </div>
         </div>
 {#            filter#}
-        <div class="container-fluid col-md-10">
+        <div class="container-fluid col-10">
             <div class="row">
-        <div class="section section-lg pt-0">
+        <div class="section section-lg pt-0 col-12">
             <div class="container">
-                <div class="row">
-                    {% for product in object_list %}
-                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                            <div class="card bg-primary shadow-inset border-light p-4">
-                            <!-- Header -->
-                            <header class="card-header shadow-soft text-center border border-light rounded mb-2">
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}" height="200">
-                            </header>
-                            <!-- End Header -->
-                            <!-- Content -->
-                            <div class="card-body shadow-soft text-center border border-light rounded">
-                                <ul class="list-group mb-4">
-                                    <li class="list-group-item"><strong>Name:</strong> {{ product.name }}</li>
-                                    {% if product.discount %}
-                                    {% load humanize %}
-                                    {% load product_extras %}
-                                    <li class="list-group-item"><strong>Price:</strong> <del>{{ product.price | toman_format | intcomma }}</del><br>{{ product.final_price | toman_format | intcomma}}</li>
-                                    {% else %}
-                                    <li class="list-group-item"><strong>Price:</strong> {{ product.final_price | toman_format |intcomma}}<pre></pre></li>
-                                    {% endif %}
-                                    {% if product.brand %}
-                                    <li class="list-group-item"><strong>Brand:</strong> {{ product.brand }}</li>
-                                    {% else %}
-                                    <li class="list-group-item"><strong>Brand:</strong> -</li>
-                                    {% endif %}
-                                    <li class="list-group-item"><strong>Category:</strong> {{ product.category }}</li>
-                                </ul>
-                                <button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>Add to Cart</button>
-                            </div>
-                            <!-- End Content -->
-                        </div>
-                    </div>
-                    {% endfor %}
+                <div id="product_container" class="row">
+{#                    {% for product in object_list %}#}
+{#                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">#}
+{#                            <div class="card bg-primary shadow-inset border-light p-4">#}
+{#                            <!-- Header -->#}
+{#                            <header class="card-header shadow-soft text-center border border-light rounded mb-2">#}
+{#                                <img src="{{ product.image.url }}" alt="{{ product.name }}" height="200">#}
+{#                            </header>#}
+{#                            <!-- End Header -->#}
+{#                            <!-- Content -->#}
+{#                            <div class="card-body shadow-soft text-center border border-light rounded">#}
+{#                                <ul class="list-group mb-4">#}
+{#                                    <li class="list-group-item"><strong>Name:</strong> {{ product.name }}</li>#}
+{#                                    {% if product.discount %}#}
+{#                                    {% load humanize %}#}
+{#                                    {% load product_extras %}#}
+{#                                    <li class="list-group-item"><strong>Price:</strong> <del>{{ product.price | toman_format | intcomma }}</del><br>{{ product.final_price | toman_format | intcomma}}</li>#}
+{#                                    {% else %}#}
+{#                                    <li class="list-group-item"><strong>Price:</strong> {{ product.final_price | toman_format |intcomma}}<pre></pre></li>#}
+{#                                    {% endif %}#}
+{#                                    {% if product.brand %}#}
+{#                                    <li class="list-group-item"><strong>Brand:</strong> {{ product.brand }}</li>#}
+{#                                    {% else %}#}
+{#                                    <li class="list-group-item"><strong>Brand:</strong> -</li>#}
+{#                                    {% endif %}#}
+{#                                    <li class="list-group-item"><strong>Category:</strong> {{ product.category }}</li>#}
+{#                                </ul>#}
+{#                                <button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>Add to Cart</button>#}
+{#                            </div>#}
+{#                            <!-- End Content -->#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
                 </div>
             </div>
         </div>
@@ -573,6 +578,96 @@
 
 <!-- Neumorphism JS -->
 <script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
+<script>
+    $(document).ready(function (){
+        $.ajax({
+            url: "{% url 'products_list_api' %}",
+            method: "GET",
+            success: function (success) {
+                for (let product of success) {
+                    var html = '<div class="col-md-6 col-lg-4 mb-5 mb-lg-0">' +
+                            '<div class="card bg-primary shadow-inset border-light p-4">' +
+                            '<header class="card-header shadow-soft text-center border border-light rounded mb-2">' +
+                                `<img src="${product.image}" alt="${product.name}" height="200">` +
+                            '</header>' +
+                            '<div class="card-body shadow-soft text-center border border-light rounded">' +
+                                '<ul class="list-group mb-4">' +
+                                    `<li class="list-group-item"><strong>Name:</strong> ${product.name}</li>` +
+                                    `<li class="list-group-item"><strong>Category:</strong> ${product.category_name}</li>`
+                    if (product.discount){
+                        html += `<li class="list-group-item"><strong>Price:</strong> <del>${product.price} T</del><br>${product.final_price} T</li>`
+                    }
+                    else {
+                        html += `<li class="list-group-item"><strong>Price:</strong> ${product.final_price} T</li>`
+                    }
+                    if (product.brand){
+                        html += `<li class="list-group-item"><strong>Brand:</strong> ${product.brand_name}</li>`
+                    }
+                    else {
+                        html += `<li class="list-group-item"><strong>Brand:</strong> -</li>`
+                    }
+                    html += '</ul>' +
+                                '<button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>Add to Cart</button>' +
+                            '</div>' +
+                            <!-- End Content -->
+                        '</div>' +
+                    '</div>'
+                    $('#product_container').append(html)
+                }
+            }
+        })
+    })
+    $('#filter').click(function (){
+        $('#product_container').empty()
+        let category = $('#category_filter').find(":selected").text()
+        let brand = $('#brand_filter').find(":selected").text()
+        let min_price = $('#min_price_filter').val()
+        let max_price = $('#max_price_filter').val()
+        $.ajax({
+            url: "{% url 'products_list_api' %}",
+            method: "GET",
+            data: {
+                category: category,
+                brand: brand,
+                min_price: min_price,
+                max_price: max_price,
+            },
+            success: function (success) {
+                for (let product of success) {
+                    var html = '<div class=" col-md-6 col-lg-4 mb-5 mb-lg-0">' +
+                            '<div class="card bg-primary shadow-inset border-light p-4">' +
+                            '<header class="card-header shadow-soft text-center border border-light rounded mb-2">' +
+                                `<img src="${product.image}" alt="${product.name}" height="200">` +
+                            '</header>' +
+                            '<div class="card-body shadow-soft text-center border border-light rounded">' +
+                                '<ul class="list-group mb-4">' +
+                                    `<li class="list-group-item"><strong>Name:</strong> ${product.name}</li>` +
+                                    `<li class="list-group-item"><strong>Category:</strong> ${product.category_name}</li>`
+                    if (product.discount){
+                        html += `<li class="list-group-item"><strong>Price:</strong> <del>${product.price} T</del><br>${product.final_price}T</li>`
+                    }
+                    else {
+                        html += `<li class="list-group-item"><strong>Price:</strong> ${product.final_price} T<pre></pre></li>`
+                    }
+                    if (product.brand){
+                        html += `<li class="list-group-item"><strong>Brand:</strong> ${product.brand_name}</li>`
+                    }
+                    else {
+                        html += `<li class="list-group-item"><strong>Brand:</strong> -</li>`
+                    }
+                    html += '</ul>' +
+                                '<button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>Add to Cart</button>' +
+                            '</div>' +
+                            <!-- End Content -->
+                        '</div>' +
+                    '</div>'
+                    $('#product_container').append(html)
+                    console.log(html)
+                }
+            }
+        })
+    })
+</script>
 </body>
 
 </html>
