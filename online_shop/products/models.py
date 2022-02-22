@@ -1,6 +1,9 @@
+from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
+
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Customer
@@ -183,6 +186,12 @@ class Category(BaseModel):
         help_text=_('Discount for all of this category products!'),
     )
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        if self.product_set:
+            for product in self.product_set.all():
+                product.save()
+
     def __str__(self):
         return self.name
 
@@ -225,6 +234,20 @@ class Brand(BaseModel):
         help_text=_('Discount for all products of this brand!'),
     )
 
+    @admin.display
+    def colored_name(self):
+        return format_html(
+            '<span style="color: #{};">{}</span>',
+            '0000FF',
+            self.name,
+        )
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        if self.product_set:
+            for product in self.product_set.all():
+                product.save()
+
     def __str__(self):
         return self.name
 
@@ -248,7 +271,7 @@ class Property(BaseModel):
     )
 
     def __str__(self):
-        return self.key
+        return f'{self.key}|{self.value}'
 
 
 class Product(BaseModel):
@@ -341,19 +364,19 @@ class Product(BaseModel):
             return int(self.price)
         if self.discount and (self.category.discount or (self.brand.discount if self.brand else None)):
             total_discount = self.discount + self.category.discount + (self.brand.discount if self.brand else None)
-            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
+            return int(self.price - min(self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.category.discount and ((self.brand.discount if self.brand else None) or self.discount):
             total_discount = self.category.discount + (self.brand.discount if self.brand else None) + self.discount
-            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
+            return int(self.price - min(self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.brand and self.brand.discount:
             total_discount = self.brand.discount
-            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
+            return int(self.price - min(self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.discount:
             total_discount = self.discount
-            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
+            return int(self.price - min(self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
         elif self.category.discount:
             total_discount = self.category.discount
-            return int(min(self.price - self.price * total_discount.value / 100, total_discount.max_amount) if total_discount.max_amount else self.price - self.price * total_discount.value / 100)
+            return int(self.price - min(self.price * total_discount.value / 100, total_discount.max_amount)) if total_discount.max_amount else int(self.price - self.price * total_discount.value / 100)
         # else:
         #     if self.di
         #     total_discount = self.discount + self.category.discount
