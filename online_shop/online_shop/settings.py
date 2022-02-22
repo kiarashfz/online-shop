@@ -154,3 +154,6 @@ EMAIL_HOST_USER = 'kiawfz3673@gmail.com'
 EMAIL_HOST_PASSWORD = '135798642kia'
 
 AUTH_USER_MODEL = 'core.User'
+LOGIN_URL = 'customers:login'
+LOGIN_REDIRECT_URL = 'products:products_list'
+LOGOUT_REDIRECT_URL = 'products:products_list'
