@@ -26,3 +26,11 @@ def toman_format(value):
         return f'{value[:-3]} {_("HezarToman")}'
     else:
         return f'{value} {_("Toman")}'
+
+
+@register.filter
+def non_destroyer(value):
+    if value is None:
+        return '-'
+    else:
+        return value
