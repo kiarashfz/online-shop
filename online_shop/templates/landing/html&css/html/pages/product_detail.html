@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- Primary Meta Tags -->
+    <title>Products | Web Mall</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Neumorphism UI - Pricing">
+    <meta name="author" content="Themesberg">
+
+    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>
+
+    <!--  Social tags -->
+    <meta name="keywords"
+          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
+    <meta name="description"
+          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Neumorphism UI by Themesberg">
+    <meta itemprop="description"
+          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
+    <meta itemprop="image"
+          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="product">
+    <meta name="twitter:site" content="@themesberg">
+    <meta name="twitter:title" content="Neumorphism UI by Themesberg">
+    <meta name="twitter:description"
+          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
+    <meta name="twitter:creator" content="@themesberg">
+    <meta name="twitter:image"
+          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
+
+    <!-- Open Graph data -->
+    <meta property="fb:app_id" content="214738555737136">
+    <meta property="og:title" content="Neumorphism UI by Themesberg"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>
+    <meta property="og:image"
+          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>
+    <meta property="og:description"
+          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>
+    <meta property="og:site_name" content="Themesberg"/>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">
+    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fontawesome -->
+    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          rel="stylesheet">
+
+    <!-- Pixel CSS -->
+    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
+
+    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+</head>
+
+<body>
+<header class="header-global">
+    <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">
+        <div class="container position-relative">
+            <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4" href="{% url 'products:products_list' %}">
+                <img class="navbar-brand-dark" src="../../../../../static/landing/w-logo.png" alt="Logo light">
+                <img class="navbar-brand-light" src="../../../../../static/landing/w-logo.png" alt="Logo dark">
+            </a>
+            <div class="navbar-collapse collapse" id="navbar_global">
+                <div class="navbar-collapse-header">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="{% url 'products:products_list' %}" class="navbar-brand shadow-soft py-2 px-3 rounded border border-light">
+                                <img src="../../../../../static/landing/w-logo.png" alt="Web Mall logo">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <a href="#navbar_global" class="fas fa-times" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" title="close" aria-label="Toggle navigation"></a>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" >
+                            <span class="nav-link-inner-text">Pages</span>
+                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">About</a></li>
+                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">Products</a></li>
+                            <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" >
+                            <span class="fas fa-shopping-cart nav-link-inner-text"></span>
+                            <span class="nav-link-inner-text">Cart</span>
+                            <span class='badge badge-danger'> <b>0</b> </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'customers:logout' %}" class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i class="fas fa-sign-out-alt mr-2"></i>Log Out</a>
+                {% else %}
+                    <a href="{% url 'customers:login' %}" class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i class="fas fa-sign-in-alt mr-2"></i>SignIn / SignUp</a>
+                {% endif %}
+
+{#                <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="btn btn-primary"><i class="fas fa-book"></i> Docs v1.0</a>#}
+                <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+<h1 class="my-4"><pre> </pre></h1>
+<div class="col-12 mb-5 mb-lg-0">
+    <div class="card bg-primary shadow-inset border-light p-4">
+        <!-- Header -->
+    <div class="row">
+        <div class="card-header shadow-soft text-center border border-light rounded mb-2 col-4 d-none d-md-block">
+            <img src="{{ object.image.url }}" alt="{{ object.name }}" height="400">
+        </div>
+        <!-- End Header -->
+        <!-- Content -->
+        <div class="card-body shadow-soft text-center border border-light rounded col-12 col-md-8">
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>Name:</strong> {{ object.name }}</li>
+                {% if object.discount %}
+                    {% load humanize %}
+                    {% load product_extras %}
+                    <li class="list-group-item"><strong>Price:</strong>
+                        <del>{{ object.price | toman_format | intcomma }}</del>
+                        <br>{{ object.final_price | toman_format | intcomma }}</li>
+                {% else %}
+                    <li class="list-group-item">
+                        <strong>Price:</strong> {{ object.final_price | toman_format |intcomma }}
+                        <pre></pre>
+                    </li>
+                {% endif %}
+                {% if product.brand %}
+                    <li class="list-group-item"><strong>Brand:</strong> {{ object.brand }}</li>
+                {% else %}
+                    <li class="list-group-item"><strong>Brand:</strong> -</li>
+                {% endif %}
+                <li class="list-group-item"><strong>Category:</strong> {{ object.category }}</li>
+                <li class="list-group-item"><strong>Discount:</strong> {{ object.discount | non_destroyer }}<strong> | Category Discount:</strong> {{ object.category.discount | non_destroyer }}<strong> | Brand Discount:</strong> {{ object.brand.discount | non_destroyer }}</li>
+            </ul>
+            <button type="button" class="btn btn-primary btn-block mt-5" tabindex="0"><span
+                    class="fas fa-cart-plus mr-2"></span>Add to Cart
+            </button>
+        </div>
+    <div class="card-body shadow-soft text-center border border-light rounded col-12">
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong class="text-behance">Brand ({{ object.brand }}) Description: <br></strong> {{ object.brand.description }}</li>
+                    <li class="list-group-item"><strong class="text-behance">Properties:</strong>
+                    {% for property in object.properties.all %}
+                    <li class="list-group-item">
+                        <strong>{{ property.key }}: </strong> {{ property.value }}
+                        <pre></pre>
+                    </li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+        <!-- End Content -->
+    </div>
+</div>
+<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design trend called Neumorphism.</p>
+                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
+                    <li class="mr-2">
+                        <a href="https://twitter.com/themesberg" target="_blank" class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"
+                        data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">
+                            <span aria-hidden="true" class="fab fa-twitter"></span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="https://www.facebook.com/themesberg/" target="_blank" class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"
+                        data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">
+                            <span aria-hidden="true" class="fab fa-facebook"></span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="https://github.com/themesberg" target="_blank" class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"
+                        data-toggle="tooltip" data-placement="top" title="Open source projects">
+                            <span aria-hidden="true" class="fab fa-github"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://dribbble.com/themesberg" target="_blank" class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"
+                        data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">
+                            <span aria-hidden="true" class="fab fa-dribbble"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
+                <h5>Themesberg</h5>
+                <ul class="footer-links list-unstyled mt-2">
+                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>
+                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a></li>
+                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a></li>
+                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
+                <h5>Other</h5>
+                <ul class="footer-links list-unstyled mt-2">
+                    <li class="mb-1"><a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/" target="_blank">Docs
+                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog" target="_blank">Changelog</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>
+                    </li>
+                    <li>
+                        <a class="p-2" target="_blank" href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-4 mb-5 mb-lg-0">
+                <h5>Subscribe</h5>
+                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best content.</p>
+                <form action="#">
+                    <div class="form-row mb-2">
+                        <div class="col-12">
+                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>
+                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email" aria-label="Subscribe form" id="exampleInputEmail3" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">
+                                <span>Subscribe</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black" href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+        <hr class="my-5">
+        <div class="row">
+            <div class="col">
+                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
+                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3" alt="Themesberg Logo">
+                </a>
+            <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                <p class="font-weight-normal font-small mb-0">Copyright © Themesberg
+                    <span class="current-year">2020</span>. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- Core -->
+<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
+<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>
+
+<!-- Vendor JS -->
+<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>
+<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>
+<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>
+<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
+<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Neumorphism JS -->
+<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
