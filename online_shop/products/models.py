@@ -12,7 +12,6 @@ class BaseDiscount(BaseModel):
 
     TYPES = [
         ('percentage', _('Percentage')),
-        ('amount', _('Amount')),
     ]
 
     type = models.CharField(
@@ -113,6 +112,18 @@ class CustomerOffCode(BaseModel):
 class OffCode(BaseDiscount):
     class Meta:
         verbose_name = _('Off Code')
+
+    TYPES = [
+        ('percentage', _('Percentage')),
+        ('amount', _('Amount')),
+    ]
+
+    type = models.CharField(
+        max_length=15,
+        choices=TYPES,
+        verbose_name=_('type'),
+        help_text=_('This is discount type!'),
+    )
 
     code = models.CharField(
         max_length=63,
