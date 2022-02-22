@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, TemplateView, CreateView
+from django.views.generic import ListView, TemplateView, CreateView, DetailView
 
 from products.models import Product, Brand, Category
 from products.serializers import ProductSerializer
@@ -17,6 +17,10 @@ class ProductListView(TemplateView):
         }
         return extra_context
 
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'landing/html&css/html/pages/products_detail.html'
 
 
 #
