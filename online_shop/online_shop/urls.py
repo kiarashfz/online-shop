@@ -24,5 +24,11 @@ urlpatterns = i18n_patterns(
     path('customers/', include('customers.urls')),
     path('orders/', include('orders.urls')),
     path('products/', include('products.urls')),
+    path('contact/', include('contact.urls')),
     prefix_default_language=False,
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = "Web Mall Admin"
+admin.site.site_title = "Web Mall"
+admin.site.index_title = "Web Mall Admin"
