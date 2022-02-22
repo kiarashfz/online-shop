@@ -57,9 +57,9 @@ class Order(BaseModel):
         if not self.off_code:
             return self.total_price
         elif self.off_code and self.off_code.type == 'amount':
-            return self.total_price - min(self.off_code.value, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.off_code.value
+            return min(self.total_price - min(self.off_code.value, self.off_code.max_amount), 0) if self.off_code.max_amount else min(self.total_price - self.off_code.value, 0)
         elif self.off_code and self.off_code.type == 'percentage':
-            return min(self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value/100, self.off_code.max_amount
+            return self.total_price - min(self.total_price * self.off_code.value/100, self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value/100
 
     def off_code_check(self):
         if self.off_code:
