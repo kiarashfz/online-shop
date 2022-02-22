@@ -20,7 +20,7 @@ class ProductListView(TemplateView):
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'landing/html&css/html/pages/products_detail.html'
+    template_name = 'landing/html&css/html/pages/product_detail.html'
 
 
 #
