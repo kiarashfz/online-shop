@@ -6,6 +6,9 @@ from django.utils.translation import gettext_lazy as _
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}' if self.user.first_name else self.user.phone
+
 
 class Address(BaseModel):
     class Meta:
