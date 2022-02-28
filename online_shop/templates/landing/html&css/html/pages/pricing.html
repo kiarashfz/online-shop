@@ -67,6 +67,8 @@
 
 <!-- Pixel CSS -->
 <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">
 
 <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
@@ -75,6 +77,19 @@
 <body>
 {% load humanize %}
 {% load product_extras %}
+{#<div class="mt-5">#}
+{#<h1 class="mt-5">hiugvn</h1>#}
+{#    <ul class="mt-5">#}
+{#    {% for category in parent_categories %}#}
+{#        <li class="mt-5">#}
+{#            {{ category.name }}#}
+{#            {% if category.parent.count > 0 %}#}
+{#                {% tree_structure category %}#}
+{#            {% endif %}#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{#</div>#}
     <header class="header-global">
     <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">
         <div class="container position-relative">
@@ -109,13 +124,13 @@
 {#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
                         </ul>
                     </li>
-{#                    <li class="nav-item dropdown mega-dropdown">#}
-{#                        <a href="#" class="nav-link" data-toggle="dropdown" >#}
-{#                            <span class="nav-link-inner-text">Components</span>#}
-{#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
-{#                        </a>#}
-{#                        <div class="dropdown-menu">#}
-{#                            <div class="row">#}
+                    <li class="nav-item dropdown mega-dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" >
+                            <span class="nav-link-inner-text">Categories</span>
+                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="row">
 {#                                <div class="col-lg-6 inside-bg d-none d-lg-block">#}
 {#                                    <div class="justify-content-center bg-primary text-white">#}
 {#                                        <div class="px-6 pb-5 pt-3">#}
@@ -133,26 +148,28 @@
 {#                                        </div>#}
 {#                                    </div>#}
 {#                                </div>#}
-{#                                <div class="col pl-0">#}
-{#                                    <ul class="list-style-none">#}
-{#                                        <li><a class="dropdown-item" href="../../html/components/accordions.html">Accordions</a></li>#}
+                                {% for category in parent_categories %}
+                                <div class="col pl-0">
+                                    <ul class="list-style-none">
+                                        <li><a class="dropdown-item" href="{% url 'products:category_detail' pk=category.id %}"><h3 class="border-behance border-bottom">{{ category.name }}</h3></a> {% tree_structure category %}</li>
 {#                                        <li><a class="dropdown-item" href="../../html/components/alerts.html">Alerts</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/badges.html">Badges</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/bootstrap-carousels.html">Bootstrap Carousels</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/breadcrumbs.html">Breadcrumbs</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/buttons.html">Buttons</a></li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters </a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/cards.html">Cards</a></li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce <span class="badge badge-dark ml-3">Pro</span></a></li>#}
-{#                                    </ul>#}
-{#                                </div>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce </a></li>#}
+                                    </ul>
+                                </div>
+                                {% endfor %}
 {#                                <div class="col pl-0">#}
 {#                                    <ul class="list-style-none">#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/forms.html">Forms</a></li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/" target="_blank">Icon Boxes <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/" target="_blank">Icon Boxes</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/modals.html">Modals</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/navs.html">Navs</a></li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/owl-carousel/" target="_blank">Owl Carousels <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/owl-carousel/" target="_blank">Owl Carousels</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/pagination.html">Pagination</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/popovers.html">Popovers</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/progress-bars.html">Progress Bars</a></li>#}
@@ -161,24 +178,24 @@
 {#                                </div>#}
 {#                                <div class="col pl-0">#}
 {#                                    <ul class="list-style-none">#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/#steps" target="_blank">Steps <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/#steps" target="_blank">Steps </a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/tables.html">Tables</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/tabs.html">Tabs</a> </li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/toasts.html">Toasts</a> </li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/timelines/" target="_blank">Timelines <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/timelines/" target="_blank">Timelines </a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/tooltips.html">Tooltips</a></li>#}
 {#                                        <li><a class="dropdown-item" href="../../html/components/typography.html">Typography</a></li>#}
-{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets <span class="badge badge-dark ml-3">Pro</span></a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets</a></li>#}
 {#                                    </ul>#}
 {#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </li>#}
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" >
                             <span class="fas fa-shopping-cart nav-link-inner-text"></span>
                             <span class="nav-link-inner-text">Cart</span>
-                            <span class='badge badge-danger'> <b>0</b> </span>
+                            <span class='badge badge-danger'> <b>{{ cart_count }}</b> </span>
 {#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
                         </a>
 {#                        <div class="dropdown-menu dropdown-menu-lg">#}
@@ -222,7 +239,7 @@
     <main>
 
         <!-- Hero -->
-        <section class="section section-header bg-primary">
+        <section class="section section-header bg-primary pb-5">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-8 text-center">
@@ -569,6 +586,7 @@
         </div>
     </div>
 </footer>
+<div class="loading_modal"><!-- Place at bottom of page --></div>
 
     <!-- Core -->
 <script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
@@ -592,6 +610,13 @@
 <!-- Neumorphism JS -->
 <script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
 <script>
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function() { $body.addClass("loading");},
+        ajaxStop: function() { $body.removeClass("loading");}
+    });
+
     $(document).ready(function (){
         $.ajax({
             url: "{% url 'products:products_list_api' %}",
