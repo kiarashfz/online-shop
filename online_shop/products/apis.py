@@ -14,7 +14,30 @@ class ProductListApiView(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         if request.GET.get('category', False) and request.GET['category'] != 'All':
             queryset = queryset.filter(category__name=request.GET['category'])
-        if request.GET.get('brand', False)  and request.GET['brand'] != 'All':
+        if request.GET.get('brand', False) and request.GET['brand'] != 'All':
+            queryset = queryset.filter(brand__name=request.GET['brand'])
+        if request.GET.get('min_price', False):
+            queryset = queryset.filter(final_price__gte=request.GET['min_price'])
+        if request.GET.get('max_price', False):
+            queryset = queryset.filter(final_price__lte=request.GET['max_price'])
+        serializer = ProductSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class CategoryProductsListApiView(generics.ListCreateAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+    def get_queryset(self):
+        category = Category.objects.get(pk=self.kwargs['category_id'])
+        categories = category.get_all_children()
+        return super(CategoryProductsListApiView, self).get_queryset().filter(category__in=categories)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if request.GET.get('category', False) and request.GET['category'] != 'All':
+            queryset = queryset.filter(category__name=request.GET['category'])
+        if request.GET.get('brand', False) and request.GET['brand'] != 'All':
             queryset = queryset.filter(brand__name=request.GET['brand'])
         if request.GET.get('min_price', False):
             queryset = queryset.filter(final_price__gte=request.GET['min_price'])
