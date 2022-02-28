@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'orders.context_processors.extras',
             ],
         },
     },
@@ -157,3 +158,59 @@ AUTH_USER_MODEL = 'core.User'
 LOGIN_URL = 'customers:login'
 LOGIN_REDIRECT_URL = 'products:products_list'
 LOGOUT_REDIRECT_URL = 'products:products_list'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            # 'format': '{levelname}|{asctime}|{funcName}|{filename}|{lineno}|{module}:{message}',
+            'format': '{levelname} ({asctime}):{message} at {filename} (process: {process}, thread: {thread})',
+            'style': '{'
+        },
+        'short': {
+            'format': '{levelname} ({asctime}): "{message}"',
+            'style': '{'
+        },
+    },
+    'filters': {
+        'length_limit': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda record: len(record.getMessage()) <= 20,
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',  # Console print!
+            'formatter': 'short',
+            'filters': ['length_limit']
+        },
+        'file': {
+            'class': 'logging.FileHandler',  # Write file!
+            'filename': BASE_DIR / 'online-shop.log',
+            'formatter': 'verbose',
+            'level': 'ERROR'
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
+    },
+    'loggers': {
+        'project': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,  # Default: True
+        },
+        'project.developers': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
