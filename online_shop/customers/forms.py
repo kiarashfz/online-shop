@@ -1,21 +1,22 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from core.models import User
 
 
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['phone', 'password']
+        fields = ['phone', 'password1', 'password2', 'password']
 
-    confirm_password = forms.CharField(max_length=63, required=True, label='Confirm Password')
+    password = forms.CharField(max_length=13, required=False)
+    username = forms.CharField(max_length=13, required=False)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-        if password != confirm_password:
-            raise ValidationError(_('Passwords Doesn\'t Match!'))
-
+    def save(self, commit=True):
+        obj = super().save(commit=False)
+        obj.username = obj.phone
+        if commit:
+            obj.save()
+        return obj
