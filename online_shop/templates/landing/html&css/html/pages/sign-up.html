@@ -97,6 +97,13 @@
                         </div>
                         <div class="card-body">
                             <form method="post">
+                                {% if messages %}
+                                    <ul>
+                                        {% for message in messages %}
+                                            <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                                 {% if form.non_field_errors %}
                                     <div class="alert alert-danger" role="alert">
                                         {% for error in form.non_field_errors %}
@@ -107,9 +114,7 @@
                                 {% if form.errors %}
                                     <div class="alert alert-danger" role="alert">
                                         {% for error in form.errors %}
-                                            {% if error == 'phone' %}
-                                                <b>{{ error }} Exist</b>
-                                            {% endif %}
+                                            {{ error }}
                                         {% endfor %}
                                     </div>
                                 {% endif %}
@@ -144,7 +149,7 @@
                                                 <span class="input-group-text"><span
                                                         class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input name="password" class="form-control" id="exampleInputPassword7"
+                                            <input name="password1" class="form-control" id="exampleInputPassword7"
                                                    placeholder="Password" type="password" aria-label="Password"
                                                    required>
                                         </div>
@@ -167,7 +172,7 @@
                                                 <span class="input-group-text"><span
                                                         class="fas fa-unlock-alt"></span></span>
                                             </div>
-                                            <input name="confirm_password" class="form-control"
+                                            <input name="password2" class="form-control"
                                                    id="exampleConfirmPassword7"
                                                    placeholder="Confirm password" type="password"
                                                    aria-label="Password" required>
