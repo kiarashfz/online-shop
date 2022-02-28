@@ -13,7 +13,6 @@ class ProductListView(TemplateView):
     def get_context_data(self, **kwargs):
         extra_context = {
             'brands': Brand.objects.all(),
-            'categories': Category.objects.all(),
         }
         return extra_context
 
@@ -21,6 +20,21 @@ class ProductListView(TemplateView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'landing/html&css/html/pages/product_detail.html'
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'landing/html&css/html/pages/category_products.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['brands'] = Brand.objects.filter(categories__name__contains=self.object.name)
+        return context
+
+    # def get_queryset(self):
+    #     category = Category.objects.get(pk=self.kwargs['category_id'])
+    #     categories = category.get_all_children()
+    #     return super(CategoryProductsListView, self).get_queryset().filter(category__in=categories)
 
 
 #
