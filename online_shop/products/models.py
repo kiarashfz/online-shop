@@ -442,3 +442,7 @@ class ExtraImage(BaseModel):
         verbose_name=_('Product'),
         help_text=_('Product that this image for.')
     )
+
+    image = models.ImageField(
+        verbose_name=_('Image')
+    )
