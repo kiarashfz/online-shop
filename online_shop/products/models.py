@@ -92,23 +92,21 @@ class CustomerOffCode(BaseModel):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Customer'),
     )
 
     off_code = models.ForeignKey(
         'OffCode',
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('OffCode'),
     )
 
     usable_count = models.PositiveSmallIntegerField(
         null=True,
         blank=True,
         default=1,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Usable count'),
+        help_text=_('Times that customer can use this off code!'),
     )
 
 
@@ -407,8 +405,8 @@ class Comment(BaseModel):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Customer'),
+        help_text=_('Customer that this comment is for.'),
     )
 
     parent = models.ForeignKey(
@@ -416,18 +414,31 @@ class Comment(BaseModel):
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Parent Comment'),
+        help_text=_('Comment that you reply it!'),
     )
 
     text = models.TextField(
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Text'),
+        help_text=_('Text of your comment!'),
     )
 
     product = models.ForeignKey(
         Product,
         on_delete=models.RESTRICT,
-        verbose_name=_(''),
-        help_text=_(''),
+        verbose_name=_('Product'),
+        help_text=_('Product that this comment is for.'),
+    )
+
+
+class ExtraImage(BaseModel):
+    class Meta:
+        verbose_name = _('Extra Image')
+        verbose_name_plural = _('Extra Images')
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.RESTRICT,
+        verbose_name=_('Product'),
+        help_text=_('Product that this image for.')
     )
