@@ -105,14 +105,14 @@ class BrandAdmin(BaseAdmin):
     list_per_page = 5
     fieldsets = (
         (None, {
-            'fields': ('name', )
+            'fields': ('name', 'categories')
         }),
         ('Optionals', {
             'fields': ('country', 'description', 'discount'),
         }),
     )
-    # filter_vertical = ['name']  for m2m
-    # auto complete for m2m or fk
+    filter_vertical = ['categories']
+    # autocomplete_fields = ['categories']
     inlines = [ProductInline]
 
 
