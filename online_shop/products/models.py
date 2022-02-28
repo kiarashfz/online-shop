@@ -161,6 +161,7 @@ class OffCode(BaseDiscount):
 class Category(BaseModel):
     class Meta:
         verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     name = models.CharField(
         max_length=31,
@@ -194,6 +195,16 @@ class Category(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def get_all_children(self, include_self=True):
+        r = []
+        if include_self:
+            r.append(self)
+        for c in Category.objects.filter(parent=self):
+            _r = c.get_all_children(include_self=True)
+            if 0 < len(_r):
+                r.extend(_r)
+        return r
 
     # todo: methodi k age discount barash set shod bere hame productaye toye in categoryo in discounto bzne
     # todo: age khode producte az qabl dc dasht dc e categoryo ba oon jaam kone
@@ -232,6 +243,12 @@ class Brand(BaseModel):
         blank=True,
         verbose_name=_('Discount'),
         help_text=_('Discount for all products of this brand!'),
+    )
+
+    categories = models.ManyToManyField(
+        Category,
+        verbose_name=_('Categories'),
+        help_text=_('Categories of this brand!'),
     )
 
     @admin.display
