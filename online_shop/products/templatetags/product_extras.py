@@ -34,3 +34,15 @@ def non_destroyer(value):
         return '-'
     else:
         return value
+
+
+@register.inclusion_tag('path/to/tree_structure.html')
+def tree_structure(category):
+    subs = category.category_set.all()
+    return {"subs": subs}
+
+
+# def get_upload_path(instance, filename):
+# model = instance.album.model.__class__._meta
+# name = model.verbose_name_plural.replace(' ', '_')
+# return f'{name}/images/{filename}'
