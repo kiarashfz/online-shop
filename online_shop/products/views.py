@@ -21,6 +21,11 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'landing/html&css/html/pages/product_detail.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['related_products'] = Product.objects.filter(category=self.object.category).exclude(pk=self.object.id)
+        return context
+
 
 class CategoryDetailView(DetailView):
     model = Category
