@@ -180,12 +180,13 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">
+                        <a href="{% url 'orders:order_items_list' %}">
+{#                        <a href="#" class="nav-link" data-toggle="dropdown">#}
                             <span class="fas fa-shopping-cart nav-link-inner-text"></span>
                             <span class="nav-link-inner-text">Cart</span>
-                            <span class='badge badge-danger'> <b id="cart_count">{{ cart_count }}</b> </span>
+                            <span class='badge badge-danger'> <b id="cart_count">{{ cart_count }}</b> </span></a>
                             {#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
-                        </a>
+{#                        </a>#}
                         {#                        <div class="dropdown-menu dropdown-menu-lg">#}
                         {#                            <div class="col-auto px-0" data-dropdown-content>#}
                         {#                                <div class="list-group list-group-flush">#}
@@ -802,7 +803,7 @@
             error: function () {
                 $.ajax({
                     url: '{% url 'orders:not_login_handler' %}',
-                    method: 'POST',
+                    method: 'post',
                     data: {
                         csrfmiddlewaretoken: '{{ csrf_token }}',
                         product_id: product_id
