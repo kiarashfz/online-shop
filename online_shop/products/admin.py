@@ -2,12 +2,29 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from core.admin import BaseAdmin
-from products.models import Discount, OffCode, Product, Category, Brand, Property
+from products.models import Discount, OffCode, Product, Category, Brand, Property, ExtraImage
 
 
 class ProductInline(admin.StackedInline):
     model = Product
     extra = 1
+
+
+class ExtraImageInline(admin.StackedInline):
+    model = ExtraImage
+    extra = 1
+
+
+class ExtraImageAdmin(BaseAdmin):
+    def image_tag(self, obj):
+        return format_html('<img src="{0}" width="70"/>'.format(obj.image.url))
+
+    image_tag.short_description = 'IMAGE'
+
+    list_display = ['product', 'image_tag']
+    search_fields = ['product__name']
+    list_filter = ['product']
+    list_per_page = 5
 
 
 class DiscountAdmin(BaseAdmin):
@@ -55,6 +72,7 @@ class ProductAdmin(BaseAdmin):
         }),
     )
     filter_vertical = ['properties']
+    inlines = [ExtraImageInline]
     # auto complete for m2m or fk
 
 
@@ -122,3 +140,4 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(Property, PropertyAdmin)
+admin.site.register(ExtraImage, ExtraImageAdmin)
