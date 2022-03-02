@@ -1,0 +1,13 @@
+{% load product_extras %}
+<ul class="list-style-none">
+    {% for sub in subs %}
+        <a href="{% url 'products:category_detail' pk=sub.id %}">
+        <li class="dropdown-item">
+           {{ sub.name }}
+{#            {% if sub.parent.count > 0 %}#}
+                {% tree_structure sub %}
+{#            {% endif %}#}
+        </li>
+        </a>
+    {% endfor %}
+</ul>
