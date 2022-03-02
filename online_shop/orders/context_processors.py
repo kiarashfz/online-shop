@@ -8,12 +8,15 @@ def extras(request):
     categories = Category.objects.all()
     parent_categories = Category.objects.filter(parent=None)
     if request.user.id:
-        user = request.user
-        customer = Customer.objects.get(user=user)
-        cart_count = OrderItem.objects.filter(customer=customer).count()
-        order_items_products_ids = customer.orderitem_set.all().values_list('product', flat=True)
-        order_items = customer.orderitem_set.all()
-        login = True
+        try:
+            user = request.user
+            customer = Customer.objects.get(user=user)
+            cart_count = OrderItem.objects.filter(customer=customer).count()
+            order_items_products_ids = customer.orderitem_set.all().values_list('product', flat=True)
+            order_items = customer.orderitem_set.all()
+            login = True
+        except:
+            user, customer, cart_count, order_items_products_ids, order_items, login = request.user, None, 0, [], None, False
     elif order_items := request.session.get('order_items', None):
         user, customer = None, None
         cart_count = len(order_items)
