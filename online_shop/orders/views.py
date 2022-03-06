@@ -1,10 +1,15 @@
-from django.http import HttpResponse, QueryDict
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.humanize.templatetags.humanize import intcomma
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse, QueryDict, JsonResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
-from orders.models import OrderItem
+from customers.models import Customer, Address
+from orders.models import OrderItem, Order
 from products.models import Product
+from products.templatetags.product_extras import toman_format
 
 
 class NotLoginHandler(View):
@@ -20,7 +25,17 @@ class NotLoginHandler(View):
         data = QueryDict(request.body)
         request.session['order_items'][data['product_id']] = int(data['count'])
         request.session['order_items'] = request.session['order_items']
-        return HttpResponse('ok')
+        order_item = OrderItem(product=Product.objects.get(id=int(data['product_id'])), count=int(data['count']))
+        order_item.final_price = order_item.final_price_calculator()
+        price = order_item.price_formatter()
+        order_items = request.session['order_items']
+        order_items_final_price = 0
+        for order_item in order_items:
+            new_order_item = OrderItem(product=Product.objects.get(id=int(order_item)), count=int(order_items[order_item]))
+            new_order_item.final_price = new_order_item.final_price_calculator()
+            order_items_final_price += new_order_item.final_price
+        order_items_final_price = intcomma(toman_format(order_items_final_price))
+        return JsonResponse({'formatted_price': price, 'order_items_final_price': order_items_final_price})
 
     def delete(self, request):
         data = QueryDict(request.body)
@@ -31,14 +46,63 @@ class NotLoginHandler(View):
 
 class OrderItemListView(ListView):
     model = OrderItem
-    queryset = OrderItem.objects.all()
+    template_name = 'landing/html&css/html/pages/order_items_list.html'
 
     def get_queryset(self):
         if self.request.user.id:
-            return OrderItem.objects.filter(customer__user=self.request.user)
+            return OrderItem.objects.filter(customer__user=self.request.user, status=0)
         else:
-            result = []
-            order_items = self.request.session['order_items']
-            for item in order_items:
-                result.append(OrderItem.objects.create(product=Product.objects.get(pk=item), count=order_items[item]))
-            return result
+            if self.request.session.get('order_items', None):
+                result = []
+                session_order_items = self.request.session['order_items']
+                id_creator = 1
+                for order_item in session_order_items:
+                    product = Product.objects.get(pk=order_item)
+                    new_order_item = OrderItem(product=product, count=session_order_items[order_item])
+                    new_order_item.final_price = new_order_item.product.final_price * new_order_item.count
+                    new_order_item.id = id_creator
+                    id_creator += 1
+                    result.append(new_order_item)
+                return result
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderItemListView, self).get_context_data(**kwargs)
+        if self.get_queryset():
+            if self.request.user.id:
+                context['final_price'] = sum(self.get_queryset().values_list('final_price', flat=True))
+                return context
+            else:
+                final_price = 0
+                for item in self.get_queryset():
+                    final_price += item.final_price
+                context['final_price'] = final_price
+                return context
+
+
+class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Order
+    template_name = 'landing/html&css/html/pages/order_create.html'
+    success_url = 'products:products_list'
+    success_message = 'Thank for choosing Web Mall!'
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderCreateView, self).get_context_data(**kwargs)
+        context['form'].fields['address'].queryset = Address.objects.filter(customer__user=self.request.user)
+        real_order_items = OrderItem.objects.filter(customer__user=self.request.user)
+        fake_order_items = []
+        customer = Customer.objects.get(user=self.request.user)
+        fake_order = Order(customer=customer)
+        id_creator = 1
+        for order_item in real_order_items:
+            new_order_item = OrderItem(product=order_item.product,
+                                       count=order_item.count,
+                                       order=fake_order,
+                                       customer=customer)
+            new_order_item.final_price = new_order_item.final_price_calculator()
+            new_order_item.id = id_creator
+            id_creator += 1
+            fake_order_items.append(new_order_item)
+        context['fake_order_items'] = fake_order_items
+        context['fake_order'] = fake_order
+        return context
