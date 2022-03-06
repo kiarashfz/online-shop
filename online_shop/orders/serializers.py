@@ -13,3 +13,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = '__all__'
+
+    formatted_price = serializers.CharField(source='price_formatter', read_only=True)
+    order_items_final_price = serializers.CharField(source='order_items_final_price', read_only=True)
