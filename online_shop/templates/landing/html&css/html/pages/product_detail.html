@@ -800,7 +800,8 @@
                 let html = '<button id="minus" onclick="minus_order({{ object.id }})" type="button" class="btn btn-primary mt-2 col-2 col-md-1 text-danger text-center" tabindex="0"><span id="count-icon" class="fas fa-trash"></span> </button> <span id="order-count" class="mx-3 mx-sm-5">1</span> <button id="add" onclick="add_order({{ object.id }})" type="button" class="btn btn-primary mt-2 col-2 col-md-1 text-success text-center" tabindex="0"><span class="fas fa-plus-square"></span></button>'
                 $('#order-div').append(html)
             },
-            error: function () {
+            error: function (error) {
+                console.log(error)
                 $.ajax({
                     url: '{% url 'orders:not_login_handler' %}',
                     method: 'post',
