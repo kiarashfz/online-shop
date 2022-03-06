@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from orders.apis import OrderViewSet, OrderItemViewSet, OrderItemOfProduct
-from orders.views import NotLoginHandler
+from orders.views import NotLoginHandler, OrderItemListView, OrderCreateView
 
 router = DefaultRouter()
 router.register(r'orders', OrderViewSet)
@@ -13,4 +13,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('order_item_of_product', OrderItemOfProduct.as_view(), name='order_item_of_product'),
     path('not_login_handler', NotLoginHandler.as_view(), name='not_login_handler'),
+    path('order_items_list', OrderItemListView.as_view(), name='order_items_list'),
+    path('order_create', OrderCreateView.as_view(), name='order_create'),
 ]
