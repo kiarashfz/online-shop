@@ -357,15 +357,14 @@ class Product(BaseModel):
         return f'{self.name}'
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.final_price = self.final_price_calculator
+        self.final_price = self.final_price_calculator()
         super().save(force_insert, force_update, using, update_fields)
 
     def full_clean(self, exclude=None, validate_unique=True):
         if self.discount and self.discount.type == 'amount' and (self.category.discount or self.brand.discount):
             raise ValidationError('You cannot set amount discount when the product has category or brand discount!')
 
-    @property
-    def final_price_calculator(self):
+    def final_price_calculator(self) -> int:
         if self.discount and self.discount.expire and self.discount.expire < timezone.now():
             self.discount = None
             self.save()
