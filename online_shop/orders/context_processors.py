@@ -12,8 +12,8 @@ def extras(request):
             user = request.user
             customer = Customer.objects.get(user=user)
             cart_count = OrderItem.objects.filter(customer=customer).count()
-            order_items_products_ids = customer.orderitem_set.all().values_list('product', flat=True)
-            order_items = customer.orderitem_set.all()
+            order_items_products_ids = customer.orderitem_set.filter(status=0).values_list('product', flat=True)
+            order_items = customer.orderitem_set.filter(status=0)
             login = True
         except:
             user, customer, cart_count, order_items_products_ids, order_items, login = request.user, None, 0, [], None, False
