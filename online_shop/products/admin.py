@@ -46,6 +46,25 @@ class DiscountAdmin(BaseAdmin):
     empty_value_display = '------'
 
 
+class OffCodeAdmin(BaseAdmin):
+    ordering = ['value', 'expire']
+    list_display = ['__str__', 'type', 'value', 'max_amount', 'expire']
+    list_display_links = ['__str__']
+    list_editable = ['value', 'max_amount']
+    search_fields = ['__str__', 'value', 'expire']
+    list_filter = ['value']
+    list_per_page = 5
+    fieldsets = (
+        (None, {
+            'fields': ('type', 'value', 'code')
+        }),
+        ('Optionals', {
+            'fields': ('min_buy', 'max_amount', 'expire', 'usable_count'),
+        }),
+    )
+    empty_value_display = '------'
+
+
 class ProductAdmin(BaseAdmin):
 
     def image_tag(self, obj):
@@ -135,7 +154,7 @@ class BrandAdmin(BaseAdmin):
 
 
 admin.site.register(Discount, DiscountAdmin)
-admin.site.register(OffCode)
+admin.site.register(OffCode, OffCodeAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
