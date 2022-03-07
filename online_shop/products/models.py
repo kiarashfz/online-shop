@@ -353,6 +353,14 @@ class Product(BaseModel):
         help_text=_('Discount of this product!'),
     )
 
+    liked_customers = models.ManyToManyField(
+        Customer,
+        verbose_name=_('Liked Customers'),
+        help_text=_('Customers that like this product!'),
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return f'{self.name}'
 
