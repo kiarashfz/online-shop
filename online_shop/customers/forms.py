@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from core.models import User
+from customers.models import Address
 
 
 class UserForm(UserCreationForm):
@@ -20,3 +21,10 @@ class UserForm(UserCreationForm):
         if commit:
             obj.save()
         return obj
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        exclude = ['customer']
