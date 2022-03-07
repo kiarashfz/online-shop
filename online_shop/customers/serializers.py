@@ -22,3 +22,4 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     customer = serializers.HyperlinkedRelatedField(view_name='customers:user_detail_api_view', read_only=True)
+    complete_province = serializers.CharField(source='get_province_display', read_only=True)
