@@ -2,7 +2,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, 
 from django.urls import path
 
 from customers.apis import CustomerCreateApiView, UserCreateApiView, UserListApiView, UserDetailApiView, \
-    AddressListApiView, AddressDetailApiView
+    AddressListApiView, AddressDetailApiView, AddressDeleteApiView, AddressCreateApiView
 from customers.views import CustomerCreateView, AboutTemplateView, MyLoginView
 
 app_name = 'customers'
@@ -17,6 +17,8 @@ urlpatterns = [
     path('user_detail_api_view/<int:pk>', UserDetailApiView.as_view(), name='user_detail_api_view'),
     path('address_list_api_view/', AddressListApiView.as_view(), name='address_list_api_view'),
     path('address_detail_api_view/<int:pk>', AddressDetailApiView.as_view(), name='address_detail_api_view'),
+    path('address_delete_api_view/<int:pk>', AddressDeleteApiView.as_view(), name='address_delete_api_view'),
+    path('address_create_api_view', AddressCreateApiView.as_view(), name='address_create_api_view'),
     # path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
     # path('password_change/', PasswordChangeView.as_view(), name='password_change'),
 ]
