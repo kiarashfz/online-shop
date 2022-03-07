@@ -1,6 +1,7 @@
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Sum, F
 from django.utils import timezone
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
@@ -13,6 +14,11 @@ class Order(BaseModel):
     class Meta:
         verbose_name = _('Order')
 
+    PAY_STATUSES = [
+        (0, _('UnPayed')),
+        (1, _('Payed')),
+    ]
+
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
@@ -20,9 +26,8 @@ class Order(BaseModel):
 
     address = models.ForeignKey(
         Address,
-        on_delete=models.RESTRICT,
+        on_delete=models.SET_NULL,
         null=True,
-        blank=True,
     )
 
     off_code = models.ForeignKey(
@@ -38,21 +43,30 @@ class Order(BaseModel):
         verbose_name=_('Final Price')
     )
 
+    pay_status = models.IntegerField(
+        choices=PAY_STATUSES,
+        default=0,
+        null=True,
+        blank=True,
+        verbose_name=_('PAY Status'),
+        help_text=_('Pay Status of this Oder!'),
+    )
+
     # todo: validate kon addresesh male customere bashe htmn
 
     def full_clean(self, exclude=None, validate_unique=True):
         if self.off_code and self.off_code.expire and self.off_code.expire < timezone.now():
             raise ValidationError(_('Your off code is expired!'))
         if self.off_code and self.off_code.min_buy and self.total_price < self.off_code.min_buy:
-            raise ValidationError(_(f'This off code minimum buy amount is {self.off_code.min_buy}!'))
+            raise ValidationError(_(f'This off code minimum buy amount is {intcomma(toman_format(self.off_code.min_buy))}!'))
         if not self.off_code_check():
             raise ValidationError(_('Usable counts of this off code is finished!'))
 
-    def stock_reducer(self):
-        for order_item in self.orderitem_set.all():
-            product = order_item.product
-            product.stock -= order_item.count
-            product.save()
+    # def stock_reducer(self):
+    #     for order_item in self.orderitem_set.all():
+    #         product = order_item.product
+    #         product.stock -= order_item.count
+    #         product.save()
 
     @property
     def total_price(self):
@@ -64,7 +78,7 @@ class Order(BaseModel):
             return self.total_price
         elif self.off_code and self.off_code.type == 'amount':
             return min(self.total_price - min(self.off_code.value, self.off_code.max_amount),
-                       0) if self.off_code.max_amount else min(self.total_price - self.off_code.value, 0)
+                       0) if self.off_code.max_amount else max(self.total_price - self.off_code.value, 0)
         elif self.off_code and self.off_code.type == 'percentage':
             return self.total_price - min(self.total_price * self.off_code.value / 100,
                                           self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value / 100
@@ -72,19 +86,16 @@ class Order(BaseModel):
     def off_code_check(self):
         if self.off_code:
             if not self.off_code.customeroffcode_set.all():
-                return not len(
-                    self.customer.order_set.filter(off_code=self.off_code)) > self.off_code.usable_count
+                return not self.customer.order_set.filter(off_code=self.off_code).count() >= self.off_code.usable_count
             else:
                 customer_off_code = CustomerOffCode.objects.get(off_code=self.off_code)
-                return not len(
-                    self.customer.order_set.filter(off_code=self.off_code)) > customer_off_code.usable_count
+                return not self.customer.order_set.filter(off_code=self.off_code).count() >= customer_off_code.usable_count
         else:
             return True
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.pk:
-            self.final_price = self.final_price_calculator
-            self.orderitem_set.filter(status=0).update(status=1)
+        self.final_price = self.final_price_calculator
+        self.orderitem_set.filter(status=0).update(status=1)
         super().save(force_insert, force_update, using, update_fields)
 
 
@@ -146,9 +157,9 @@ class OrderItem(BaseModel):
         verbose_name=_('Final Price')
     )
 
-    def full_clean(self, exclude=None, validate_unique=True):
-        if self.count > self.product.stock:
-            raise ValidationError(f'This count of {self.product.name} is not available in store!')
+    # def full_clean(self, exclude=None, validate_unique=True):
+    #     if self.count > self.product.stock:
+    #         raise ValidationError(f'This count of {self.product.name} is not available in store!')
 
     def __str__(self):
         return f'{self.product} - {self.count}'
@@ -163,6 +174,13 @@ class OrderItem(BaseModel):
     def price_formatter(self):
         return intcomma(toman_format(self.final_price))
 
-    @staticmethod
-    def order_items_final_price(user):
-        return sum(OrderItem.objects.filter(customer__user=user, status=0).values_list('final_price', flat=True))
+    def order_items_final_price(self):
+        return intcomma(toman_format(sum(OrderItem.objects.filter(customer=self.customer, status=0).values_list('final_price', flat=True))))
+
+    @property
+    def order_total_price(self):
+        return sum(OrderItem.objects.filter(customer=self.customer, status=0).values_list('final_price', flat=True))
+
+    @property
+    def order_total_discount(self):
+        return f"{round(100 * (1 - (self.order_total_price /OrderItem.objects.filter(customer=self.customer, status=0).annotate(result=F('count') * F('product__price')).aggregate(Sum('result'))['result__sum'])), 2)}%"
