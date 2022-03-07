@@ -257,21 +257,22 @@
 
                 <div class="container-fluid">
                     <div class="row mx-auto align-items-center justify-content-center">
-                        <form method="post" class="form-group">
+                        <form id="order_create_form" method="post" class="form-group">
                             {#                            <div class="border border-danger shadow-soft col-6 m-auto justify-content-center align-items-center text-danger">#}
                             {% for error in form.errors.values %}
-                                <div class="alert alert-danger border border-danger shadow-soft col-6 m-auto justify-content-center align-items-center text-danger rounded">
+                                <div id="form_alert"
+                                     class="alert alert-danger border border-danger shadow-soft col-6 m-auto justify-content-center align-items-center text-danger rounded">
                                     <b class="border-bottom border-danger">{% if 'required.' in error|striptags %}
                                         Address: {% else %}Off Code:
                                     {% endif %}</b>{{ error|striptags }}
                                 </div>
                             {% endfor %}
                             {% csrf_token %}
+                            <h4 id="address_chooser" class="text-danger mx-auto mt-5">Choose Your Address</h4>
                             {% if addresses %}
-                                <h4 id="address_chooser" class="text-danger mx-auto mt-5">Choose Your Address</h4>
                                 {% for address in addresses %}
                                     <div id="address_{{ address.id }}"
-                                         class="card bg-primary shadow-inset border-light p-4 my-2 col-12 mx-auto">
+                                         class="customer_addresses card bg-primary shadow-inset border-light p-4 my-2 col-12 mx-auto">
                                         <div class="card-header shadow-soft text-center border border-light rounded">
                                             <div class="container-fluid">
                                                 <div class="row m-0 p-0">
@@ -340,7 +341,9 @@
                                     {#                                    </div>#}
                                     {#                                </div>#}
                                 {% endfor %}
-                                <div class="btn btn-success d-block mx-auto fas fa-plus-square mb-5 col-6 col-md-2" data-toggle="modal" data-target="#exampleModal2"> New Address</div>
+                                <div class="btn btn-success d-block mx-auto fas fa-plus-square mb-5 col-6 col-md-2"
+                                     data-toggle="modal" data-target="#exampleModal2"> New Address
+                                </div>
 
                                 <label class="text-danger col-4"><b>Choose Your Off Code</b>
                                     <select name="off_code" class="form-control" data-title="Select Off Code"
@@ -357,7 +360,48 @@
                                 </div>
                                 </form>
                             {% else %}
-                                <div class="card bg-primary shadow-inset border-light p-4 my-3 col-11 mx-auto">
+                                {% for order_item in order_items|slice:":1" %}
+                                    {#                                <div class="container-fluid card-header shadow-soft text-center border border-light rounded col-3 table-success">#}
+                                    {#                                    <div class="row">#}
+                                    <table id="price_table" class="table table-hover table-success d-none">
+                                        <thead>
+                                        <tr>
+                                            <th>Final Price</th>
+                                            <th>Final Discount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ order_item.order_total_price | toman_format | intcomma }}</td>
+                                            <td>{{ order_item.order_total_discount }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    {#                                    </div>#}
+                                    {#                                </div>#}
+                                {% endfor %}
+                                <div id="address_creator_button"
+                                     class="btn btn-success d-none mx-auto fas fa-plus-square mb-5 col-6 col-md-2"
+                                     data-toggle="modal" data-target="#exampleModal2"> New Address
+                                </div>
+
+                                <label id="address_labels" class="d-none text-danger col-4"><b>Choose Your Off Code</b>
+                                    <select name="off_code" class="form-control" data-title="Select Off Code"
+                                            data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                        {% for x,y in form.fields.off_code.choices %}
+                                            <option class="form-control" value="{{ x }}"
+                                                    {% if form.fields.off_code.value == x %}
+                                                    selected{% endif %}>{{ y }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                                <div id="order_creator_button" class="d-none row m-auto">
+                                    <button class="m-auto btn btn-danger" type="submit">Order</button>
+                                </div>
+                                </form>
+                                <div id="no_address_handler"
+                                     class="card bg-primary shadow-inset border-light p-4 my-3 col-11 mx-auto">
                                     <h1>
                                         <pre> </pre>
                                     </h1>
@@ -365,7 +409,9 @@
                                     <h1>
                                         <pre> </pre>
                                     </h1>
-                                <div class="btn btn-success mx-auto fas fa-plus-square mb-2 col-4" data-toggle="modal" data-target="#exampleModal2"> New Address</div>
+                                    <div class="btn btn-success mx-auto fas fa-plus-square mb-2 col-4"
+                                         data-toggle="modal" data-target="#exampleModal2"> New Address
+                                    </div>
                                 </div>
                             {% endif %}
 
@@ -409,17 +455,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-behance" id="exampleModalLabel2"><b>Create Address</b></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body m-auto">
                 {% load crispy_forms_tags %}
-                {% crispy address_form %}
+                <form id="address_create_form">
+                    {% crispy address_form %}
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                <button id="modal_create" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                <button id="modal_create" type="button" class="btn btn-success">Save</button>
             </div>
         </div>
     </div>
@@ -585,11 +633,10 @@
         })
     })
 
-    function non_destroyer(value){
-        if (!value){
+    function non_destroyer(value) {
+        if (!value) {
             return '-'
-        }
-        else {
+        } else {
             return value
         }
     }
@@ -612,29 +659,44 @@
                 postal_code: $('#id_postal_code').val(),
             },
             success: function (success) {
-                let html = `<div id="address_${success.id}"`+
-                                         'class="card bg-primary shadow-inset border-light p-4 my-2 col-12 mx-auto">'+
-                                        '<div class="card-header shadow-soft text-center border border-light rounded">'+
-                                            `<div class="container-fluid"><div class="row m-0 p-0"><input class="my-auto col-1" type="radio" id="${success.id}" name="address" value="${success.id}">`+
-                                                    `<label class="text-left my-auto col-10" for="${success.id}">`+
-                                                        '<div class="my-auto row">'+
-                                                            `<p class="mx-3 my-3"><b>Province:</b> ${non_destroyer(success.complete_province)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>City:</b> ${non_destroyer(success.city)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Area:</b> ${non_destroyer(success.area)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Avenue:</b> ${non_destroyer(success.avenue)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Street:</b> ${non_destroyer(success.street)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Alley:</b> ${non_destroyer(success.alley)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>No:</b> ${non_destroyer(success.no)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Unit:</b> ${non_destroyer(success.unit)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>Floor:</b> ${non_destroyer(success.floor)}</p>`+
-                                                            `<p class="mx-3 my-3"><b>ZIP Code:</b> ${non_destroyer(success.postal_code)}</p>`+
-                                                    '</div></label>'+
-                                                    '<div class="row my-auto col-4 col-md-1 mx-auto">'+
-                                                        '<div class="m-1 justify-content-between">'+
-                                                            `<div id="${success.id}" class="address_edit my-1 btn btn-warning fas fa-edit col-12" data-toggle="modal" data-target="#exampleModal2"></div>`+
-                                                            `<div id="${success.id}" class="address_delete my-1 btn btn-danger fas fa-trash-alt col-12" data-toggle="modal" data-target="#exampleModal"></div>`+
-                                                        '</div></div></div></div></div></div>'
-                $('#address_chooser').after(html)
+                let address_box_html = `<div id="address_${success.id}"` +
+                    'class="card bg-primary shadow-inset border-light p-4 my-2 col-12 mx-auto">' +
+                    '<div class="card-header shadow-soft text-center border border-light rounded">' +
+                    `<div class="container-fluid"><div class="row m-0 p-0"><input class="my-auto col-1" type="radio" id="${success.id}" name="address" value="${success.id}">` +
+                    `<label class="text-left my-auto col-10" for="${success.id}">` +
+                    '<div class="my-auto row">' +
+                    `<p class="mx-3 my-3"><b>Province:</b> ${non_destroyer(success.complete_province)}</p>` +
+                    `<p class="mx-3 my-3"><b>City:</b> ${non_destroyer(success.city)}</p>` +
+                    `<p class="mx-3 my-3"><b>Area:</b> ${non_destroyer(success.area)}</p>` +
+                    `<p class="mx-3 my-3"><b>Avenue:</b> ${non_destroyer(success.avenue)}</p>` +
+                    `<p class="mx-3 my-3"><b>Street:</b> ${non_destroyer(success.street)}</p>` +
+                    `<p class="mx-3 my-3"><b>Alley:</b> ${non_destroyer(success.alley)}</p>` +
+                    `<p class="mx-3 my-3"><b>No:</b> ${non_destroyer(success.no)}</p>` +
+                    `<p class="mx-3 my-3"><b>Unit:</b> ${non_destroyer(success.unit)}</p>` +
+                    `<p class="mx-3 my-3"><b>Floor:</b> ${non_destroyer(success.floor)}</p>` +
+                    `<p class="mx-3 my-3"><b>ZIP Code:</b> ${non_destroyer(success.postal_code)}</p>` +
+                    '</div></label>' +
+                    '<div class="row my-auto col-4 col-md-1 mx-auto">' +
+                    '<div class="m-1 justify-content-between">' +
+                    `<div id="${success.id}" class="address_edit my-1 btn btn-warning fas fa-edit col-12" data-toggle="modal" data-target="#exampleModal2"></div>` +
+                    `<div id="${success.id}" class="address_delete my-1 btn btn-danger fas fa-trash-alt col-12" data-toggle="modal" data-target="#exampleModal"></div>` +
+                    '</div></div></div></div></div></div>'
+                if ($('.customer_addresses').length) {
+                    $('#address_chooser').after(address_box_html)
+                } else {
+                    {#let address_chooser_html = '<h4 id="address_chooser" class="text-danger mx-auto mt-5">Choose Your Address</h4>'#}
+                    $('#address_chooser').after(address_box_html)
+                    $('#price_table').removeClass('d-none')
+                    $('#address_creator_button').removeClass('d-none')
+                    $('#order_creator_button').removeClass('d-none')
+                    $('#address_creator_button').addClass('d-block')
+                    $('#address_labels').removeClass('d-none')
+                    $('#no_address_handler').remove()
+                }
+                $('#modal_create').attr('data-dismiss', "modal")
+                $('#modal_close').trigger('click')
+                $('#address_create_form').trigger('reset')
+
             }
         })
     })
