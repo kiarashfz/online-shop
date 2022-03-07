@@ -43,7 +43,7 @@ class MyLoginView(LoginView):
         if order_items := self.request.session.get('order_items', []):
             for order_item in order_items:
                 try:
-                    old_order_item = OrderItem.objects.get(customer=customer, product_id=order_item)
+                    old_order_item = OrderItem.objects.get(customer=customer, product_id=order_item, status=0)
                     old_order_item.count += order_items[order_item]
                     old_order_item.save()
                 except OrderItem.DoesNotExist:
