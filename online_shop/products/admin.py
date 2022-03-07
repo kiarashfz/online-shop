@@ -84,13 +84,13 @@ class ProductAdmin(BaseAdmin):
             'fields': ('name', 'category', 'brand', 'image', 'properties')
         }),
         ('Marketing', {
-            'fields': ('price', 'discount'),
+            'fields': ('price', 'discount', 'liked_customers'),
         }),
         ('Inventory', {
             'fields': ('stock',),
         }),
     )
-    filter_vertical = ['properties']
+    filter_vertical = ['properties', 'liked_customers']
     inlines = [ExtraImageInline]
     # auto complete for m2m or fk
 
