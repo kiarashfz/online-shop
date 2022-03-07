@@ -4,7 +4,21 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = _('Customer')
+        verbose_name_plural = _('Customers')
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        default='customers/default_customer.png',
+        upload_to='products',
+    )
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}' if self.user.first_name else self.user.phone
@@ -13,6 +27,7 @@ class Customer(models.Model):
 class Address(BaseModel):
     class Meta:
         verbose_name = _('Address')
+        verbose_name_plural = _('Addresses')
 
     PROVINCES = [
         ('thr', _('Tehran')),
@@ -110,3 +125,6 @@ class Address(BaseModel):
         max_length=31,
         verbose_name=_('Postal Code'),
     )
+
+    def __str__(self):
+        return f'{self.area} - {self.avenue}'
