@@ -3,9 +3,11 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, QueryDict, JsonResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView
 
+from customers.forms import AddressForm
 from customers.models import Customer, Address
 from orders.models import OrderItem, Order
 from products.models import Product
@@ -35,7 +37,7 @@ class NotLoginHandler(View):
             new_order_item.final_price = new_order_item.final_price_calculator()
             order_items_final_price += new_order_item.final_price
         order_items_final_price = intcomma(toman_format(order_items_final_price))
-        return JsonResponse({'formatted_price': price, 'order_items_final_price': order_items_final_price})
+        return JsonResponse({'formatted_price': price, 'final_prices_sum': order_items_final_price})
 
     def delete(self, request):
         data = QueryDict(request.body)
@@ -82,27 +84,27 @@ class OrderItemListView(ListView):
 class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Order
     template_name = 'landing/html&css/html/pages/order_create.html'
-    success_url = 'products:products_list'
+    success_url = reverse_lazy('products:products_list')
     success_message = 'Thank for choosing Web Mall!'
-    fields = '__all__'
+    fields = ['address', 'off_code']
 
     def get_context_data(self, **kwargs):
         context = super(OrderCreateView, self).get_context_data(**kwargs)
         context['form'].fields['address'].queryset = Address.objects.filter(customer__user=self.request.user)
-        real_order_items = OrderItem.objects.filter(customer__user=self.request.user)
-        fake_order_items = []
-        customer = Customer.objects.get(user=self.request.user)
-        fake_order = Order(customer=customer)
-        id_creator = 1
-        for order_item in real_order_items:
-            new_order_item = OrderItem(product=order_item.product,
-                                       count=order_item.count,
-                                       order=fake_order,
-                                       customer=customer)
-            new_order_item.final_price = new_order_item.final_price_calculator()
-            new_order_item.id = id_creator
-            id_creator += 1
-            fake_order_items.append(new_order_item)
-        context['fake_order_items'] = fake_order_items
-        context['fake_order'] = fake_order
+        context['addresses'] = Address.objects.filter(customer__user=self.request.user)
+        context['address_form'] = AddressForm()
         return context
+
+    def form_valid(self, form):
+        form.instance.customer = Customer.objects.get(user=self.request.user)
+        validated_form = super(OrderCreateView, self).form_valid(form)
+        OrderItem.objects.filter(customer__user=self.request.user, status=0).update(status=1, order=self.object)
+        self.object.save()
+        return validated_form
+
+    def get_form_kwargs(self):
+        kwargs = super(OrderCreateView, self).get_form_kwargs()
+        if kwargs['instance'] is None:
+            kwargs['instance'] = Order()
+        kwargs['instance'].customer = Customer.objects.get(user=self.request.user)
+        return kwargs
