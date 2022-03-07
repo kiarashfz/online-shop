@@ -477,7 +477,7 @@
                         },
                         success: function (success){
                             $(`#order_item_price_${id}`).html(success.formatted_price)
-                            $('#order_items_final_price').html(success.order_items_final_price)
+                            $('#order_items_final_price').html(success.final_prices_sum)
                         },
                     })
                 },
@@ -494,7 +494,7 @@
                         },
                         success: function (success){
                             $(`#order_item_price_${id}`).html(success.formatted_price)
-                            $('#order_items_final_price').html(success.order_items_final_price)
+                            $('#order_items_final_price').html(success.final_prices_sum)
                         },
                     })
                 }
@@ -579,7 +579,7 @@
                     },
                     success: function (success){
                         $(`#order_item_price_${id}`).html(success.formatted_price)
-                        $('#order_items_final_price').html(success.order_items_final_price)
+                        $('#order_items_final_price').html(success.final_prices_sum)
                     },
                 })
             },
@@ -596,7 +596,7 @@
                     },
                     success: function (success){
                         $(`#order_item_price_${id}`).html(success.formatted_price)
-                        $('#order_items_final_price').html(success.order_items_final_price)
+                        $('#order_items_final_price').html(success.final_prices_sum)
                         },
                 })
             }
