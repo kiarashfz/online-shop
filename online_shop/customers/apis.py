@@ -63,3 +63,26 @@ class AddressDetailApiView(generics.RetrieveAPIView):
 
     # def get_queryset(self):
     #     return Address.objects.filter(customer__user=self.request.user)
+
+
+class AddressDeleteApiView(generics.DestroyAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Address.objects.filter(customer__user=self.request.user)
+
+
+class AddressCreateApiView(generics.CreateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Address.objects.filter(customer__user=self.request.user)
+
+    def perform_create(self, serializer):
+        customer = Customer.objects.get(user=self.request.user)
+        serializer.save(customer=customer)
+
