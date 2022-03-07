@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'contact',
+    'crispy_forms'
+
 ]
 
 MIDDLEWARE = [
@@ -214,3 +216,5 @@ LOGGING = {
         },
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
