@@ -29,7 +29,7 @@ class OrderItemOfProduct(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         if self.request.user.id:
-            serializer = OrderItemSerializer(self.get_queryset().get(product__id=request.GET['product_id']))
+            serializer = OrderItemSerializer(self.get_queryset().get(product__id=request.GET['product_id'], status=0))
             return Response(serializer.data)
         else:
             response = HttpResponse('bad request!')
