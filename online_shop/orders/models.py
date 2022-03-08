@@ -21,7 +21,8 @@ class Order(BaseModel):
 
     SENDING_STATUSES = [
         (0, _('Not Sent')),
-        (1, _('Sent')),
+        (1, _('Sending')),
+        (2, _('Sent')),
     ]
 
     customer = models.ForeignKey(
@@ -111,6 +112,10 @@ class Order(BaseModel):
         self.final_price = self.final_price_calculator
         self.orderitem_set.filter(status=0).update(status=1)
         super().save(force_insert, force_update, using, update_fields)
+
+    @property
+    def final_discount_calculator(self):
+        return f"{round(100 * (1 - (self.final_price / self.orderitem_set.all().annotate(result=F('count') * F('product__price')).aggregate(Sum('result'))['result__sum'])))}%"
 
 
 # todo: ba har order az stocke oon product kam she
