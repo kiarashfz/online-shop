@@ -19,6 +19,11 @@ class Order(BaseModel):
         (1, _('Payed')),
     ]
 
+    SENDING_STATUSES = [
+        (0, _('Not Sent')),
+        (1, _('Sent')),
+    ]
+
     customer = models.ForeignKey(
         Customer,
         on_delete=models.RESTRICT,
@@ -50,6 +55,15 @@ class Order(BaseModel):
         blank=True,
         verbose_name=_('PAY Status'),
         help_text=_('Pay Status of this Oder!'),
+    )
+
+    sending_status = models.IntegerField(
+        choices=SENDING_STATUSES,
+        default=0,
+        null=True,
+        blank=True,
+        verbose_name=_('Sending Status'),
+        help_text=_('Sending Status of this Oder!'),
     )
 
     # todo: validate kon addresesh male customere bashe htmn
