@@ -1,15 +1,16 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.forms import HiddenInput
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, FormView, CreateView
 
 from core.models import User
-from customers.forms import UserForm
+from customers.forms import UserForm, UserUpdateForm, CustomerUpdateForm
 from customers.models import Customer
-from orders.models import OrderItem
+from orders.models import OrderItem, Order
 from products.models import Product
 
 
@@ -50,3 +51,16 @@ class MyLoginView(LoginView):
                     product = Product.objects.get(pk=order_item)
                     OrderItem.objects.create(product=product, count=order_items[order_item], customer=customer)
         return validated_form
+
+
+class CustomerDashboardTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'landing/html&css/html/pages/customer_dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDashboardTemplateView, self).get_context_data(**kwargs)
+        context['unfinished_order_items'] = OrderItem.objects.filter(customer__user=self.request.user, status=0)
+        context['unpaid_orders'] = Order.objects.filter(customer__user=self.request.user, pay_status=0)
+        context['sending'] = Order.objects.filter(customer__user=self.request.user, sending_status=1)
+        context['user_update_form'] = UserUpdateForm(instance=User.objects.get(pk=self.request.user.id))
+        context['customer_update_form'] = CustomerUpdateForm(instance=Customer.objects.get(user=self.request.user))
+        return context
