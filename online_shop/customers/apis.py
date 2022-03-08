@@ -101,3 +101,11 @@ class CustomerUpdateApiView(generics.UpdateAPIView):
 
     def get_queryset(self):
         return Customer.objects.filter(user=self.request.user)
+
+
+class AddressUpdateApiView(generics.UpdateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+
+    def get_queryset(self):
+        return Address.objects.filter(customer__user=self.request.user)
