@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from core.models import User
-from customers.models import Address
+from customers.models import Address, Customer
 
 
 class UserForm(UserCreationForm):
@@ -28,3 +28,24 @@ class AddressForm(forms.ModelForm):
         model = Address
         fields = '__all__'
         exclude = ['customer']
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phone', 'email']
+
+    # username = forms.CharField(max_length=13, required=False)
+
+    def save(self, commit=True):
+        obj = super(UserUpdateForm, self).save(commit=False)
+        obj.username = obj.phone
+        if commit:
+            obj.save()
+        return obj
+
+
+class CustomerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['image']
