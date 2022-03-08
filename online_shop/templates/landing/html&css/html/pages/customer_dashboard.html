@@ -1,0 +1,246 @@
+{% extends 'landing/html&css/html/pages/layout/_base.html' %}
+{% load product_extras %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h1 class="mx-auto mt-5 text-behance text-center">Dashboard</h1>
+    <div class="container-fluid p-5">
+        <ul class="nav nav-pills text-danger">
+            <li class="active"><a class="btn btn-behance mr-2 active rounded-0" data-toggle="pill" href="#orders_tab">Orders</a>
+            </li>
+            <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#addresses_tab">Addresses</a></li>
+            <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#personal_tab">Personal</a></li>
+            <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#favorite_products_tab">Favorite
+                Products</a></li>
+        </ul>
+
+        <div class="tab-content card bg-primary shadow-inset border-light p-4 rounded-0">
+            <div id="orders_tab" class="tab-pane active m-md-5 m-2">
+                <ul class="nav nav-pills text-danger">
+                    <li class="active"><a class="btn btn-outline-danger shadow-none mr-2 active rounded-0"
+                                          data-toggle="pill"
+                                          href="#unfinished_orders">Unfinished Orders</a></li>
+                    <li class=""><a class="btn btn-outline-danger shadow-none mx-2 rounded-0" data-toggle="pill"
+                                    href="#unpaid_orders">Unpaid
+                        Orders</a>
+                    </li>
+                    <li class=""><a class="btn btn-outline-danger shadow-none mx-2 rounded-0" data-toggle="pill"
+                                    href="#sending_orders">Sending
+                        Orders</a>
+                    </li>
+                    <li class=""><a class="btn btn-outline-danger shadow-none mx-2 rounded-0" data-toggle="pill"
+                                    href="#finished_orders">Finished
+                        Orders
+                    </a></li>
+                </ul>
+
+                <div class="tab-content card bg-primary shadow-inset border-light p-4 rounded-0">
+                    <div id="unfinished_orders" class="tab-pane active">
+
+                    </div>
+                    <div id="unpaid_orders" class="tab-pane fade">
+                        <h3>Menu 1</h3>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo
+                            consequat.</p>
+                    </div>
+                    <div id="sending_orders" class="tab-pane fade">
+                        <h3>Menu 2</h3>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium,
+                            totam rem aperiam.</p>
+                    </div>
+                    <div id="finished_orders" class="tab-pane fade">
+                        <h3>Menu 3</h3>
+                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                            explicabo.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="addresses_tab" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+            </div>
+            <div id="personal_tab" class="tab-pane fade">
+                <header class="card-header shadow-soft text-center border border-light rounded m-md-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="container-fluid col-md-3 col-12 my-auto">
+                                <div class="row">
+                                    <img id="customer_image" class="rounded my-auto" src="{{ customer.image.url }}"
+                                         alt="{{ user.last_name }}" width="300">
+                                    <div id="update_customer_button"
+                                         class=" my-auto mx-auto btn btn-warning fas fa-edit col-8 col-md-4 col-lg-2"
+                                         data-toggle="modal" data-target="#customer_update_form_modal"></div>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9 col-12 rounded border p-5 b border-behance shadow-inset shadow-lg align-self-center"
+                                 style="border-width:4px !important;">
+                                <div class="row justify-content-center ">
+                                    <div id="update_user_button"
+                                         class=" my-1 btn btn-warning fas fa-edit col-6 col-md-1"
+                                         data-toggle="modal" data-target="#user_update_form_modal"></div>
+                                    <div class="container-fluid">
+                                        <div class="row text-md-left border border-success p-2">
+                                            <h4 class="fas fa-user m-auto mr-md-auto ml-md-5 my-auto"><b class="text-gray"> First Name:</b></h4>
+                                            <p class="ml-auto mr-5 my-auto h5"
+                                               id="first_name">{{ user.first_name | non_destroyer }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <div class="row text-md-left border border-success p-2">
+                                            <h4 class="fas fa-user m-auto mr-md-auto ml-md-5 my-auto"><b class="text-gray"> Last Name:</b></h4>
+                                            <p class="ml-auto mr-5 my-auto h5"
+                                               id="last_name">{{ user.last_name | non_destroyer }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <div class="row text-md-left border border-success p-2">
+                                            <h4 class="fas fa-phone m-auto mr-md-auto ml-md-5 my-auto"><b class="text-gray"> Phone:</b></h4>
+                                            <p class="ml-auto mr-5 my-auto h5"
+                                               id="phone">{{ user.phone }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <div class="row text-md-left border  border-success p-2">
+                                            <h4 class="fas fa-envelope m-auto mr-md-auto ml-md-5 my-auto"><b class="text-gray"> Email:</b></h4>
+                                            <p class="ml-auto mr-5 my-auto h5"
+                                               id="email">{{ user.email | non_destroyer }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <div id="favorite_products_tab" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal-user -->
+    <div class="modal fade" id="user_update_form_modal" tabindex="-1" role="dialog"
+         aria-labelledby="user_update_form_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-behance" id="user_update_form_modal_label"><b>Update Profile</b></h5>
+                    <button id="update_user_modal_close" type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="user_update_form_container" class="modal-body m-auto">
+                    {% load crispy_forms_tags %}
+                    <form id="user_update_form">
+                        {% crispy user_update_form %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button id="user_update_modal" onclick="update_profile({{ user.id }})" type="button"
+                            class="btn btn-success">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-customer -->
+    <div class="modal fade" id="customer_update_form_modal" tabindex="-1" role="dialog"
+         aria-labelledby="customer_update_form_modal_label"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-behance" id="customer_update_form_modal_label"><b>Change Photo</b></h5>
+                    <button id="update_customer_modal_close" type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="customer_update_form_container" class="modal-body m-auto">
+                    {% load crispy_forms_tags %}
+                    <form id="customer_update_form" enctype="multipart/form-data">
+                        {% crispy customer_update_form %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button id="customer_update_modal" onclick="update_photo({{ customer.id }})" type="button"
+                            class="btn btn-success">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        function update_profile(user_id) {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'customers:user_update_api_view' pk=12345 %}".replace(/12345/, user_id),
+                method: "PATCH",
+                data: {
+                    first_name: $('#id_first_name').val(),
+                    last_name: $('#id_last_name').val(),
+                    phone: $('#id_phone').val(),
+                    email: $('#id_email').val(),
+                    username: $('#id_phone').val(),
+                },
+                success: function (success) {
+                    $('#required_error').remove()
+                    $('#first_name').text(non_destroyer(success.first_name))
+                    $('#last_name').text(non_destroyer(success.last_name))
+                    $('#phone').text(non_destroyer(success.phone))
+                    $('#email').text(non_destroyer(success.email))
+                    $('#update_user_modal_close').trigger('click')
+                },
+                error: function (error) {
+                    $('#required_error').remove()
+                    for (let field of Object.keys(error.responseJSON)) {
+                        let html = `<p id="required_error" class="text-danger m-auto"><b class="border-bottom border-danger">${field}: </b>${error.responseJSON[field][0]}</p>`
+                        $('#user_update_form_container').append(html)
+                    }
+                }
+            })
+        }
+
+        function update_photo(customer_id) {
+            var formData = new FormData(document.getElementById("customer_update_form"))
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'customers:customer_update_api_view' pk=12345 %}".replace(/12345/, customer_id),
+                method: "PATCH",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (success) {
+                    $('#image_error').remove()
+                    $('#update_customer_modal_close').trigger('click')
+                    $('#customer_image').attr('src', success.image)
+                },
+                error: function (error) {
+                    $('#image_error').remove()
+                    for (let field of Object.keys(error.responseJSON)) {
+                        let html = `<p id="image_error" class="text-danger m-auto"><b class="border-bottom border-danger">${field}: </b>${error.responseJSON[field][0]}</p>`
+                        $('#customer_update_form_container').append(html)
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}
