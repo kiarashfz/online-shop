@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.humanize.templatetags.humanize import intcomma
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
@@ -7,6 +8,7 @@ from django.utils.html import format_html
 from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 from customers.models import Customer
+from products.templatetags.product_extras import toman_format
 
 
 class BaseDiscount(BaseModel):
@@ -44,7 +46,7 @@ class BaseDiscount(BaseModel):
     )
 
     def __str__(self):
-        return f'{self.value}%' if self.type == 'percentage' else f'{self.value} Toman'
+        return f'{self.value}% {"- UpTo:" + intcomma(toman_format(self.max_amount)) if self.max_amount else ""} {"- Expire:" + str(self.expire) if self.expire else ""}' if self.type == 'percentage' else f'{intcomma(toman_format(self.value))} {"- UpTo:" + intcomma(toman_format(self.max_amount)) if self.max_amount else ""} {"- Expire:" + str(self.expire) if self.expire else ""}'
 
     # todo: to order checkon validate kon age expiresh gozashte error bde
 
@@ -154,6 +156,10 @@ class OffCode(BaseDiscount):
         verbose_name=_('Usable Count'),
         help_text=_('Usable Count For each customer! Fill it if you want this off code for ALL customers!'),
     )
+
+    def __str__(self):
+        res = super().__str__()
+        return f'{res} {"- MinBuy:" + intcomma(toman_format(self.min_buy)) if self.min_buy else ""}'
 
 
 class Category(BaseModel):
