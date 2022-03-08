@@ -3,7 +3,7 @@ from django.urls import path
 
 from customers.apis import CustomerCreateApiView, UserCreateApiView, UserListApiView, UserDetailApiView, \
     AddressListApiView, AddressDetailApiView, AddressDeleteApiView, AddressCreateApiView, UserUpdateApiView, \
-    CustomerUpdateApiView
+    CustomerUpdateApiView, AddressUpdateApiView
 from customers.views import CustomerCreateView, AboutTemplateView, MyLoginView, CustomerDashboardTemplateView
 
 app_name = 'customers'
@@ -23,6 +23,7 @@ urlpatterns = [
     path('dashboard', CustomerDashboardTemplateView.as_view(), name='dashboard'),
     path('user_update_api_view/<int:pk>', UserUpdateApiView.as_view(), name='user_update_api_view'),
     path('customer_update_api_view/<int:pk>', CustomerUpdateApiView.as_view(), name='customer_update_api_view'),
+    path('address_update_api_view/<int:pk>', AddressUpdateApiView.as_view(), name='address_update_api_view'),
     # path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
     # path('password_change/', PasswordChangeView.as_view(), name='password_change'),
 ]
