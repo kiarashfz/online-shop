@@ -30,7 +30,7 @@ def toman_format(value):
 
 @register.filter
 def non_destroyer(value):
-    if value is None:
+    if value is None or value == '':
         return '-'
     else:
         return value
