@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -8,8 +9,8 @@ from django.views import View
 from django.views.generic import TemplateView, FormView, CreateView
 
 from core.models import User
-from customers.forms import UserForm, UserUpdateForm, CustomerUpdateForm
-from customers.models import Customer
+from customers.forms import UserForm, UserUpdateForm, CustomerUpdateForm, AddressForm
+from customers.models import Customer, Address
 from orders.models import OrderItem, Order
 from products.models import Product
 
@@ -17,7 +18,7 @@ from products.models import Product
 class CustomerCreateView(CreateView):
     template_name = 'landing/html&css/html/pages/sign-up.html'
     form_class = UserForm
-    success_url = reverse_lazy('products:products_list')
+    success_url = reverse_lazy('customers:dashboard')
 
     def form_valid(self, form):
         response = super(CustomerCreateView, self).form_valid(form)
@@ -58,9 +59,12 @@ class CustomerDashboardTemplateView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CustomerDashboardTemplateView, self).get_context_data(**kwargs)
-        context['unfinished_order_items'] = OrderItem.objects.filter(customer__user=self.request.user, status=0)
-        context['unpaid_orders'] = Order.objects.filter(customer__user=self.request.user, pay_status=0)
-        context['sending'] = Order.objects.filter(customer__user=self.request.user, sending_status=1)
+        context['unfinished_order_items'] = OrderItem.objects.filter(customer__user=self.request.user, status=0).order_by('-created')
+        context['unpaid_orders'] = Order.objects.filter(customer__user=self.request.user, pay_status=0).order_by('-created')
+        context['sending_orders'] = Order.objects.filter(customer__user=self.request.user, sending_status=1).order_by('-created')
+        context['finished_orders'] = Order.objects.filter(customer__user=self.request.user, sending_status=2).order_by('-created')
         context['user_update_form'] = UserUpdateForm(instance=User.objects.get(pk=self.request.user.id))
         context['customer_update_form'] = CustomerUpdateForm(instance=Customer.objects.get(user=self.request.user))
+        context['addresses'] = Address.objects.filter(customer__user=self.request.user).order_by('-created')
+        context['address_form'] = AddressForm()
         return context
