@@ -17,8 +17,8 @@ class OrderAdmin(BaseAdmin):
     def unpayed(self, request, queryset):
         queryset.update(pay_status=0)
 
-    ordering = ['pay_status', 'final_price']
-    list_display = ['customer', 'final_price', 'pay_status', 'off_code']
+    ordering = ['-created', 'pay_status', 'final_price']
+    list_display = ['customer', 'final_price', 'pay_status', 'off_code', 'created']
     search_fields = ['final_price']
     list_filter = ['customer', 'pay_status']
     list_per_page = 5
@@ -48,8 +48,8 @@ class OrderItemAdmin(BaseAdmin):
 
     image_tag.short_description = 'IMAGE'
 
-    ordering = ['status', 'final_price']
-    list_display = ['product', 'count', 'customer',  'final_price', 'status', 'image_tag']
+    ordering = ['-created', 'status', 'final_price']
+    list_display = ['product', 'count', 'customer',  'final_price', 'status', 'image_tag', 'created']
     empty_value_display = '------'
     list_editable = ['count']
     search_fields = ['product_name', 'product_brand']
