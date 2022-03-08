@@ -15,6 +15,11 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
+    def update(self, instance, validated_data):
+        if not validated_data['image']:
+            validated_data['image'] = 'customers/default_customer.png'
+        return super(CustomerSerializer, self).update(instance, validated_data)
+
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
