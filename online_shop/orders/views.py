@@ -84,14 +84,14 @@ class OrderItemListView(ListView):
 class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Order
     template_name = 'landing/html&css/html/pages/order_create.html'
-    success_url = reverse_lazy('products:products_list')
+    success_url = reverse_lazy('customers:dashboard')
     success_message = 'Thank for choosing Web Mall!'
     fields = ['address', 'off_code']
 
     def get_context_data(self, **kwargs):
         context = super(OrderCreateView, self).get_context_data(**kwargs)
         context['form'].fields['address'].queryset = Address.objects.filter(customer__user=self.request.user)
-        context['addresses'] = Address.objects.filter(customer__user=self.request.user)
+        context['addresses'] = Address.objects.filter(customer__user=self.request.user).order_by('-created')
         context['address_form'] = AddressForm()
         return context
 
