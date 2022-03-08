@@ -12,13 +12,22 @@ class OrderItemInline(admin.TabularInline):
 
 class OrderAdmin(BaseAdmin):
     def payed(self, request, queryset):
-        queryset.update(pay_status=1)
+        queryset.update(pay_status=1, sending_status=1)
 
     def unpayed(self, request, queryset):
         queryset.update(pay_status=0)
 
+    def sending(self, request, queryset):
+        queryset.update(sending_status=1)
+
+    def sent(self, request, queryset):
+        queryset.update(sending_status=2)
+
+    def not_sent(self, request, queryset):
+        queryset.update(sending_status=0)
+
     ordering = ['-created', 'pay_status', 'final_price']
-    list_display = ['customer', 'final_price', 'pay_status', 'off_code', 'created']
+    list_display = ['customer', 'final_price', 'pay_status', 'sending_status', 'off_code', 'created']
     search_fields = ['final_price']
     list_filter = ['customer', 'pay_status']
     list_per_page = 5
@@ -33,7 +42,7 @@ class OrderAdmin(BaseAdmin):
     # filter_vertical = ['']
     # autocomplete_fields = ['categories']
     inlines = [OrderItemInline]
-    actions = ['payed', 'unpayed']
+    actions = ['payed', 'unpayed', 'sending', 'sent', 'not_sent']
 
 
 class OrderItemAdmin(BaseAdmin):
