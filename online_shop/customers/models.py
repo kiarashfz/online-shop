@@ -17,7 +17,7 @@ class Customer(models.Model):
         null=True,
         blank=True,
         default='customers/default_customer.png',
-        upload_to='products',
+        upload_to='customers',
     )
 
     def __str__(self):
