@@ -86,3 +86,18 @@ class AddressCreateApiView(generics.CreateAPIView):
         customer = Customer.objects.get(user=self.request.user)
         serializer.save(customer=customer)
 
+
+class UserUpdateApiView(generics.UpdateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)
+
+
+class CustomerUpdateApiView(generics.UpdateAPIView):
+    serializer_class = CustomerSerializer
+    queryset = Customer.objects.all()
+
+    def get_queryset(self):
+        return Customer.objects.filter(user=self.request.user)
