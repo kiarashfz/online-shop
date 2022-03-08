@@ -70,52 +70,53 @@
 
 <body>
 {% load product_extras %}
-<header class="header-global">
-    <nav id="navbar-main" aria-label="Primary navigation"
-         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">
-        <div class="container position-relative">
-            <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"
-               href="{% url 'products:products_list' %}">
-                <img class="navbar-brand-dark" src="../../../../../static/landing/w-logo.png" alt="Logo light">
-                <img class="navbar-brand-light" src="../../../../../static/landing/w-logo.png" alt="Logo dark">
-            </a>
-            <div class="navbar-collapse collapse" id="navbar_global">
-                <div class="navbar-collapse-header">
-                    <div class="row">
-                        <div class="col-6 collapse-brand">
-                            <a href="{% url 'products:products_list' %}"
-                               class="navbar-brand shadow-soft py-2 px-3 rounded border border-light">
-                                <img src="../../../../../static/landing/w-logo.png" alt="Web Mall logo">
-                            </a>
-                        </div>
-                        <div class="col-6 collapse-close">
-                            <a href="#navbar_global" class="fas fa-times" data-toggle="collapse"
-                               data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
-                               title="close" aria-label="Toggle navigation"></a>
-                        </div>
-                    </div>
-                </div>
-                <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">
-                            <span class="nav-link-inner-text">Pages</span>
-                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">About</a></li>
-                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">Products</a></li>
-                            <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>
+{% include 'landing/html&css/html/pages/layout/__header.html' %}
+{#<header class="header-global">#}
+{#    <nav id="navbar-main" aria-label="Primary navigation"#}
+{#         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">#}
+{#        <div class="container position-relative">#}
+{#            <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"#}
+{#               href="{% url 'products:products_list' %}">#}
+{#                <img class="navbar-brand-dark" src="../../../../../static/landing/w-logo.png" alt="Logo light">#}
+{#                <img class="navbar-brand-light" src="../../../../../static/landing/w-logo.png" alt="Logo dark">#}
+{#            </a>#}
+{#            <div class="navbar-collapse collapse" id="navbar_global">#}
+{#                <div class="navbar-collapse-header">#}
+{#                    <div class="row">#}
+{#                        <div class="col-6 collapse-brand">#}
+{#                            <a href="{% url 'products:products_list' %}"#}
+{#                               class="navbar-brand shadow-soft py-2 px-3 rounded border border-light">#}
+{#                                <img src="../../../../../static/landing/w-logo.png" alt="Web Mall logo">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="col-6 collapse-close">#}
+{#                            <a href="#navbar_global" class="fas fa-times" data-toggle="collapse"#}
+{#                               data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"#}
+{#                               title="close" aria-label="Toggle navigation"></a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <ul class="navbar-nav navbar-nav-hover align-items-lg-center">#}
+{#                    <li class="nav-item dropdown">#}
+{#                        <a href="#" class="nav-link" data-toggle="dropdown">#}
+{#                            <span class="nav-link-inner-text">Pages</span>#}
+{#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu">#}
+{#                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">About</a></li>#}
+{#                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">Products</a></li>#}
+{#                            <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>#}
                             {#                            <li><a class="dropdown-item" href="{% url 'customers:login' %}">Sign in</a></li>#}
                             {#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown mega-dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">
-                            <span class="nav-link-inner-text">Categories</span>
-                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="row">
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li class="nav-item dropdown mega-dropdown">#}
+{#                        <a href="#" class="nav-link" data-toggle="dropdown">#}
+{#                            <span class="nav-link-inner-text">Categories</span>#}
+{#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
+{#                        </a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            <div class="row">#}
                                 {#                                <div class="col-lg-6 inside-bg d-none d-lg-block">#}
                                 {#                                    <div class="justify-content-center bg-primary text-white">#}
                                 {#                                        <div class="px-6 pb-5 pt-3">#}
@@ -133,13 +134,13 @@
                                 {#                                        </div>#}
                                 {#                                    </div>#}
                                 {#                                </div>#}
-                                {% for category in parent_categories %}
-                                    <div class="col pl-0">
-                                        <ul class="list-style-none">
-                                            <li><a class="dropdown-item"
-                                                   href="{% url 'products:category_detail' pk=category.id %}"><h3
-                                                    class="border-behance border-bottom">{{ category.name }}</h3>
-                                            </a> {% tree_structure category %}</li>
+{#                                {% for category in parent_categories %}#}
+{#                                    <div class="col pl-0">#}
+{#                                        <ul class="list-style-none">#}
+{#                                            <li><a class="dropdown-item"#}
+{#                                                   href="{% url 'products:category_detail' pk=category.id %}"><h3#}
+{#                                                    class="border-behance border-bottom">{{ category.name }}</h3>#}
+{#                                            </a> {% tree_structure category %}</li>#}
                                             {#                                        <li><a class="dropdown-item" href="../../html/components/alerts.html">Alerts</a></li>#}
                                             {#                                        <li><a class="dropdown-item" href="../../html/components/badges.html">Badges</a></li>#}
                                             {#                                        <li><a class="dropdown-item" href="../../html/components/bootstrap-carousels.html">Bootstrap Carousels</a></li>#}
@@ -148,9 +149,9 @@
                                             {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters </a></li>#}
                                             {#                                        <li><a class="dropdown-item" href="../../html/components/cards.html">Cards</a></li>#}
                                             {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce </a></li>#}
-                                        </ul>
-                                    </div>
-                                {% endfor %}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
                                 {#                                <div class="col pl-0">#}
                                 {#                                    <ul class="list-style-none">#}
                                 {#                                        <li><a class="dropdown-item" href="../../html/components/forms.html">Forms</a></li>#}
@@ -176,15 +177,15 @@
                                 {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets</a></li>#}
                                 {#                                    </ul>#}
                                 {#                                </div>#}
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="{% url 'orders:order_items_list' %}">
+{#                            </div>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                    <li class="nav-item dropdown">#}
+{#                        <a href="{% url 'orders:order_items_list' %}">#}
 {#                        <a href="#" class="nav-link" data-toggle="dropdown">#}
-                            <span class="fas fa-shopping-cart nav-link-inner-text"></span>
-                            <span class="nav-link-inner-text">Cart</span>
-                            <span class='badge badge-danger'> <b id="cart_count">{{ cart_count }}</b> </span></a>
+{#                            <span class="fas fa-shopping-cart nav-link-inner-text"></span>#}
+{#                            <span class="nav-link-inner-text">Cart</span>#}
+{#                            <span class='badge badge-danger'> <b id="cart_count">{{ cart_count }}</b> </span></a>#}
                             {#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
 {#                        </a>#}
                         {#                        <div class="dropdown-menu dropdown-menu-lg">#}
@@ -207,32 +208,32 @@
                         {#                                </div>#}
                         {#                            </div>#}
                         {#                        </div>#}
-                    </li>
-                </ul>
-            </div>
-            <div class="d-flex align-items-center">
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'customers:logout' %}"
-                       class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i
-                            class="fas fa-sign-out-alt mr-2"></i>Log Out</a>
-                {% else %}
-                    <a href="{% url 'customers:login' %}"
-                       class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i
-                            class="fas fa-sign-in-alt mr-2"></i>SignIn / SignUp</a>
-                {% endif %}
-
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="d-flex align-items-center">#}
+{#                {% if request.user.is_authenticated %}#}
+{#                    <a href="{% url 'customers:logout' %}"#}
+{#                       class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i#}
+{#                            class="fas fa-sign-out-alt mr-2"></i>Log Out</a>#}
+{#                {% else %}#}
+{#                    <a href="{% url 'customers:login' %}"#}
+{#                       class="btn btn-primary text-secondary d-none d-md-inline-block mr-3"><i#}
+{#                            class="fas fa-sign-in-alt mr-2"></i>SignIn / SignUp</a>#}
+{#                {% endif %}#}
+{##}
                 {#                <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="btn btn-primary"><i class="fas fa-book"></i> Docs v1.0</a>#}
-                <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global"
-                        aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </div>
-    </nav>
-</header>
-<h1 class="my-4">
-    <pre> </pre>
-</h1>
+{#                <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global"#}
+{#                        aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">#}
+{#                    <span class="navbar-toggler-icon"></span>#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </nav>#}
+{#</header>#}
+{#<h1 class="my-4">#}
+{#    <pre> </pre>#}
+{#</h1>#}
 <div class="col-12 mb-5 mb-lg-0">
     <div class="card bg-primary shadow-inset border-light p-4">
         <!-- Header -->
