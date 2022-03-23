@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, CreateView, DetailView
 
-from products.models import Product, Brand, Category
+from products.models import Product, Brand, Category, Comment
 from products.serializers import ProductSerializer
+from company.models import Question
 
 
 class ProductListView(TemplateView):
@@ -13,6 +14,7 @@ class ProductListView(TemplateView):
     def get_context_data(self, **kwargs):
         extra_context = {
             'brands': Brand.objects.all(),
+            'company': Question.objects.all()
         }
         return extra_context
 
@@ -24,6 +26,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['related_products'] = Product.objects.filter(category=self.object.category).exclude(pk=self.object.id)
+        context['parent_comments'] = Comment.objects.filter(parent=None, product=self.object)
         return context
 
 
