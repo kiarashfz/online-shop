@@ -1,3 +1,4 @@
+from company.models import SiteSetting
 from core.models import User
 from customers.models import Customer
 from orders.models import OrderItem
@@ -7,6 +8,7 @@ from products.models import Category
 def extras(request):
     categories = Category.objects.all()
     parent_categories = Category.objects.filter(parent=None)
+    site_setting = SiteSetting.load()
     if request.user.id:
         try:
             user = request.user
@@ -34,4 +36,5 @@ def extras(request):
         'order_items_products_ids': order_items_products_ids,
         'order_items': order_items,
         'login': login,
+        'site_setting': site_setting
     }
