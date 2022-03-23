@@ -58,6 +58,7 @@ class BaseDiscount(BaseModel):
 class Discount(BaseDiscount):
     class Meta:
         verbose_name = _('Discount')
+        verbose_name_plural = _('Discounts')
 
     def __add__(self, other):
         if other is None:
@@ -90,6 +91,7 @@ class Discount(BaseDiscount):
 class CustomerOffCode(BaseModel):
     class Meta:
         verbose_name = _('Customer Off Code')
+        verbose_name_plural = _('Customer Off Codes')
 
     customer = models.ForeignKey(
         Customer,
@@ -115,6 +117,7 @@ class CustomerOffCode(BaseModel):
 class OffCode(BaseDiscount):
     class Meta:
         verbose_name = _('Off Code')
+        verbose_name_plural = _('Off Codes')
 
     TYPES = [
         ('percentage', _('Percentage')),
@@ -217,6 +220,7 @@ class Category(BaseModel):
 class Brand(BaseModel):
     class Meta:
         verbose_name = _('Brand')
+        verbose_name_plural = _('Brands')
 
     name = models.CharField(
         max_length=31,
@@ -278,6 +282,7 @@ class Brand(BaseModel):
 class Property(BaseModel):
     class Meta:
         verbose_name = _('Property')
+        verbose_name_plural = _('Properties')
         unique_together = ('key', 'value')
 
     key = models.CharField(
@@ -298,6 +303,7 @@ class Property(BaseModel):
 class Product(BaseModel):
     class Meta:
         verbose_name = _('Product')
+        verbose_name_plural = _('Products')
 
     name = models.CharField(
         max_length=31,
@@ -414,6 +420,7 @@ class Product(BaseModel):
 class Comment(BaseModel):
     class Meta:
         verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
 
     customer = models.ForeignKey(
         Customer,
@@ -441,6 +448,18 @@ class Comment(BaseModel):
         on_delete=models.RESTRICT,
         verbose_name=_('Product'),
         help_text=_('Product that this comment is for.'),
+    )
+
+    likes = models.PositiveIntegerField(
+        verbose_name=_('Likes'),
+        default=0,
+        blank=True,
+    )
+
+    diss_likes = models.PositiveIntegerField(
+        verbose_name=_('Likes'),
+        default=0,
+        blank=True,
     )
 
 
