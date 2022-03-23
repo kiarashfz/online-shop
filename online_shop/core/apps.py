@@ -6,4 +6,4 @@ class CoreConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'core'
     # icon = 'fa fa-shield'
-    verbose_name = _('Core')
+    verbose_name = _('Users')
