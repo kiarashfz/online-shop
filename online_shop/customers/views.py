@@ -20,16 +20,36 @@ class CustomerCreateView(CreateView):
     form_class = UserForm
     success_url = reverse_lazy('customers:dashboard')
 
+    def get_initial(self):
+        init = super(CustomerCreateView, self).get_initial()
+        init.update({'request': self.request})
+        return init
+
     def form_valid(self, form):
         response = super(CustomerCreateView, self).form_valid(form)
         Customer.objects.create(user=self.object)
         login(self.request, self.object)
         customer = Customer.objects.get(user_id=self.request.user.id)
         if order_items := self.request.session.get('order_items', []):
+            inited_objs = []
             for order_item in order_items:
                 product = Product.objects.get(pk=order_item)
-                OrderItem.objects.create(product=product, count=order_items[order_item], customer=customer)
+                inited_objs.append(OrderItem(product=product, count=order_items[order_item], customer=customer))
+            OrderItem.objects.bulk_create(inited_objs)
+            # for order_item in order_items:
+            #     product = Product.objects.get(pk=order_item)
+            #     OrderItem.objects.create(product=product, count=order_items[order_item], customer=customer)
         return response
+
+    def form_invalid(self, form):
+        if self.request.session['confirm_code']:
+            del self.request.session['confirm_code']
+        return super().form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerCreateView, self).get_context_data(**kwargs)
+        context['confirm_code'] = self.request.session.get('confirm_code', None)
+        return context
 
 
 class AboutTemplateView(LoginRequiredMixin, TemplateView):
