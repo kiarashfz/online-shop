@@ -13,6 +13,7 @@ from products.templatetags.product_extras import toman_format
 class Order(BaseModel):
     class Meta:
         verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
 
     PAY_STATUSES = [
         (0, _('UnPayed')),
@@ -124,6 +125,7 @@ class Order(BaseModel):
 class OrderItem(BaseModel):
     class Meta:
         verbose_name = _('Order Item')
+        verbose_name_plural = _('Order Items')
 
     STATUSES = [
         (0, _('Selected')),
