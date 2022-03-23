@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from core.admin import BaseAdmin
-from products.models import Discount, OffCode, Product, Category, Brand, Property, ExtraImage
+from products.models import Discount, OffCode, Product, Category, Brand, Property, ExtraImage, Comment
 
 
 class ProductInline(admin.StackedInline):
@@ -160,3 +160,4 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(ExtraImage, ExtraImageAdmin)
+admin.site.register(Comment)
