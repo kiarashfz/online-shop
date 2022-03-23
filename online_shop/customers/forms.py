@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
@@ -8,12 +9,17 @@ from customers.models import Address, Customer
 
 
 class UserForm(UserCreationForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = User
         fields = ['phone', 'password1', 'password2', 'password']
 
+    captcha.widget.attrs.update({'class': 'form-control', 'autocomplete': "off"})
+
     password = forms.CharField(max_length=13, required=False)
     username = forms.CharField(max_length=13, required=False)
+    confirm_code = forms.IntegerField(required=True)
 
     def save(self, commit=True):
         obj = super().save(commit=False)
@@ -21,6 +27,13 @@ class UserForm(UserCreationForm):
         if commit:
             obj.save()
         return obj
+
+    def clean(self):
+        request = self.initial['request']
+        cleaned_data = super(UserForm, self).clean()
+        if cleaned_data['confirm_code'] != request.session.get('confirm_code', None):
+            raise ValidationError(_('Your SMS Code is wrong!'))
+        return cleaned_data
 
 
 class AddressForm(forms.ModelForm):
