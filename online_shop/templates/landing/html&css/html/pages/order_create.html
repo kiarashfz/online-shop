@@ -1,77 +1,83 @@
+{% extends 'landing/html&css/html/pages/layout/_base.html' %}
 {% load crispy_forms_filters %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!-- Primary Meta Tags -->
-    <title>Order | Web Mall</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content="Neumorphism UI - Pricing">
-    <meta name="author" content="Themesberg">
-
-    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>
-
-    <!--  Social tags -->
-    <meta name="keywords"
-          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-    <meta name="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Neumorphism UI by Themesberg">
-    <meta itemprop="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta itemprop="image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="product">
-    <meta name="twitter:site" content="@themesberg">
-    <meta name="twitter:title" content="Neumorphism UI by Themesberg">
-    <meta name="twitter:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta name="twitter:creator" content="@themesberg">
-    <meta name="twitter:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Open Graph data -->
-    <meta property="fb:app_id" content="214738555737136">
-    <meta property="og:title" content="Neumorphism UI by Themesberg"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>
-    <meta property="og:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>
-    <meta property="og:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>
-    <meta property="og:site_name" content="Themesberg"/>
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">
-    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Fontawesome -->
-    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-          rel="stylesheet">
-
-    <!-- Pixel CSS -->
-    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">
-
-    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
-</head>
-
-<body>
+{% load i18n %}
 {% load humanize %}
 {% load product_extras %}
-{% include 'landing/html&css/html/pages/layout/__header.html' %}
+{% block title %}{% trans 'Final Order' %}{% endblock %}
+{% block content %}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>#}
+{#    <!-- Primary Meta Tags -->#}
+{#    <title>Order | Web Mall</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <meta name="title" content="Neumorphism UI - Pricing">#}
+{#    <meta name="author" content="Themesberg">#}
+{##}
+{#    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>#}
+{##}
+{#    <!--  Social tags -->#}
+{#    <meta name="keywords"#}
+{#          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">#}
+{#    <meta name="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{##}
+{#    <!-- Schema.org markup for Google+ -->#}
+{#    <meta itemprop="name" content="Neumorphism UI by Themesberg">#}
+{#    <meta itemprop="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta itemprop="image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Twitter Card data -->#}
+{#    <meta name="twitter:card" content="product">#}
+{#    <meta name="twitter:site" content="@themesberg">#}
+{#    <meta name="twitter:title" content="Neumorphism UI by Themesberg">#}
+{#    <meta name="twitter:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta name="twitter:creator" content="@themesberg">#}
+{#    <meta name="twitter:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Open Graph data -->#}
+{#    <meta property="fb:app_id" content="214738555737136">#}
+{#    <meta property="og:title" content="Neumorphism UI by Themesberg"/>#}
+{#    <meta property="og:type" content="article"/>#}
+{#    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>#}
+{#    <meta property="og:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>#}
+{#    <meta property="og:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>#}
+{#    <meta property="og:site_name" content="Themesberg"/>#}
+{##}
+{#    <!-- Favicon -->#}
+{#    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">#}
+{#    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">#}
+{#    <meta name="msapplication-TileColor" content="#ffffff">#}
+{#    <meta name="theme-color" content="#ffffff">#}
+{##}
+{#    <!-- Fontawesome -->#}
+{#    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"#}
+{#          rel="stylesheet">#}
+{##}
+{#    <!-- Pixel CSS -->#}
+{#    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">#}
+{#    {% load static %}#}
+{#    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">#}
+{##}
+{#    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{#{% load humanize %}#}
+{#{% load product_extras %}#}
+{#{% include 'landing/html&css/html/pages/layout/__header.html' %}#}
 {#<header class="header-global">#}
 {#    <nav id="navbar-main" aria-label="Primary navigation"#}
 {#         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">#}
@@ -235,7 +241,7 @@
 {#<h1 class="my-4">#}
 {#    <pre> </pre>#}
 {#</h1>#}
-<h1 class="text-behance text-center">Order</h1>
+<h1 class="text-behance text-center">{% trans 'Order' %}</h1>
 <div class="card bg-primary shadow-inset border-light p-4 my-2 col-11 mx-auto">
     <div class="card-header shadow-soft text-center border border-light rounded col-12 mx-5 d-flex justify-content-between flex-wrap align-self-center">
         <div class="container-fluid">
@@ -269,7 +275,7 @@
                                 </div>
                             {% endfor %}
                             {% csrf_token %}
-                            <h4 id="address_chooser" class="text-danger mx-auto mt-5">Choose Your Address</h4>
+                            <h4 id="address_chooser" class="text-danger mx-auto mt-5">{% trans 'Choose Your Address' %}</h4>
                             {% if addresses %}
                                 {% for address in addresses %}
                                     <div id="address_{{ address.id }}"
@@ -283,27 +289,26 @@
                                                     <label class="text-left my-auto col-10" for="{{ address.id }}">
                                                         <div class="my-auto row">
                                                             <p class="mx-3 my-3">
-                                                                <b>Province:</b> {{ address.get_province_display | non_destroyer }}
+                                                                <b>{% trans 'Province:' %}</b> {{ address.get_province_display | non_destroyer }}
                                                             </p>
                                                             <p class="mx-3 my-3">
-                                                                <b>City:</b> {{ address.city | non_destroyer }}</p>
+                                                                <b>{% trans 'City:' %}</b> {{ address.city | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Area:</b> {{ address.area | non_destroyer }}</p>
+                                                                <b>{% trans 'Area:' %}</b> {{ address.area | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Avenue:</b> {{ address.avenue | non_destroyer }}</p>
+                                                                <b>{% trans 'Avenue:' %}</b> {{ address.avenue | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Street:</b> {{ address.street | non_destroyer }}</p>
+                                                                <b>{% trans 'Street:' %}</b> {{ address.street | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Alley:</b> {{ address.alley | non_destroyer }}</p>
+                                                                <b>{% trans 'Alley:' %}</b> {{ address.alley | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>No:</b> {{ address.no | non_destroyer }}
+                                                                <b>{% trans 'No:' %}</b> {{ address.no | non_destroyer }}
                                                             </p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Unit:</b> {{ address.unit | non_destroyer }}</p>
+                                                                <b>{% trans 'Unit:' %}</b> {{ address.unit | non_destroyer }}</p>
                                                             <p class="mx-3 my-3">
-                                                                <b>Floor:</b> {{ address.floor | non_destroyer }}</p>
-                                                            <p class="mx-3 my-3"><b>ZIP
-                                                                Code:</b> {{ address.postal_code | non_destroyer }}</p>
+                                                                <b>{% trans 'Floor:' %}</b> {{ address.floor | non_destroyer }}</p>
+                                                            <p class="mx-3 my-3"><b>{% trans 'ZIP Code:' %}</b> {{ address.postal_code | non_destroyer }}</p>
                                                         </div>
                                                     </label>
                                                     <div class="row my-auto col-4 col-md-1 mx-auto">
@@ -327,8 +332,8 @@
                                     <table class="table table-hover table-success">
                                         <thead>
                                         <tr>
-                                            <th>Final Price</th>
-                                            <th>Final Discount</th>
+                                            <th>{% trans 'Final Price' %}</th>
+                                            <th>{% trans 'Final Discount' %}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -343,10 +348,10 @@
                                     {#                                </div>#}
                                 {% endfor %}
                                 <div class="btn btn-success d-block mx-auto fas fa-plus-square mb-5 col-6 col-md-2"
-                                     data-toggle="modal" data-target="#exampleModal2"> New Address
+                                     data-toggle="modal" data-target="#exampleModal2"> {% trans 'New Address' %}
                                 </div>
 
-                                <label class="text-danger col-4"><b>Choose Your Off Code</b>
+                                <label class="text-danger col-4"><b>{% trans 'Choose Your Off Code' %}</b>
                                     <select name="off_code" class="form-control" data-title="Select Off Code"
                                             data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                                         {% for x,y in form.fields.off_code.choices %}
@@ -357,7 +362,7 @@
                                     </select>
                                 </label>
                                 <div class="row m-auto">
-                                    <button class="m-auto btn btn-danger" type="submit">Order</button>
+                                    <button class="m-auto btn btn-danger" type="submit">{% trans 'Order' %}</button>
                                 </div>
                                 </form>
                             {% else %}
@@ -367,8 +372,8 @@
                                     <table id="price_table" class="table table-hover table-success d-none">
                                         <thead>
                                         <tr>
-                                            <th>Final Price</th>
-                                            <th>Final Discount</th>
+                                            <th>{% trans 'Final Price' %}</th>
+                                            <th>{% trans 'Final Discount' %}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -387,7 +392,7 @@
                                      data-toggle="modal" data-target="#exampleModal2"> New Address
                                 </div>
 
-                                <label id="address_labels" class="d-none text-danger col-4"><b>Choose Your Off Code</b>
+                                <label id="address_labels" class="d-none text-danger col-4"><b>{% trans 'Choose Your Off Code' %}</b>
                                     <select name="off_code" class="form-control" data-title="Select Off Code"
                                             data-style="btn-default btn-block" data-menu-style="dropdown-blue">
                                         {% for x,y in form.fields.off_code.choices %}
@@ -398,7 +403,7 @@
                                     </select>
                                 </label>
                                 <div id="order_creator_button" class="d-none row m-auto">
-                                    <button class="m-auto btn btn-danger" type="submit">Order</button>
+                                    <button class="m-auto btn btn-danger" type="submit">{% trans 'Order' %}</button>
                                 </div>
                                 </form>
                                 <div id="no_address_handler"
@@ -406,12 +411,12 @@
                                     <h1>
                                         <pre> </pre>
                                     </h1>
-                                    <h3 class="text-center text-danger"><b>You Need an Address to order!!</b></h3>
+                                    <h3 class="text-center text-danger"><b>{% trans 'You Need an Address to order!!' %}</b></h3>
                                     <h1>
                                         <pre> </pre>
                                     </h1>
                                     <div class="btn btn-success mx-auto fas fa-plus-square mb-2 col-4"
-                                         data-toggle="modal" data-target="#exampleModal2"> New Address
+                                         data-toggle="modal" data-target="#exampleModal2"> {% trans 'New Address' %}
                                     </div>
                                 </div>
                             {% endif %}
@@ -473,136 +478,138 @@
         </div>
     </div>
 </div>
-<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design
-                    trend called Neumorphism.</p>
-                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
-                    <li class="mr-2">
-                        <a href="https://twitter.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">
-                            <span aria-hidden="true" class="fab fa-twitter"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://www.facebook.com/themesberg/" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"
-                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">
-                            <span aria-hidden="true" class="fab fa-facebook"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://github.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"
-                           data-toggle="tooltip" data-placement="top" title="Open source projects">
-                            <span aria-hidden="true" class="fab fa-github"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://dribbble.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">
-                            <span aria-hidden="true" class="fab fa-dribbble"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Themesberg</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>
-                    </li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>
-                    </li>
-                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Other</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2"
-                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"
-                                        target="_blank">Docs
-                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"
-                           target="_blank">Changelog</a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>
-                    </li>
-                    <li>
-                        <a class="p-2" target="_blank"
-                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-                <h5>Subscribe</h5>
-                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best
-                    content.</p>
-                <form action="#">
-                    <div class="form-row mb-2">
-                        <div class="col-12">
-                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>
-                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"
-                                   aria-label="Subscribe form" id="exampleInputEmail3" required>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">
-                                <span>Subscribe</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"
-                                                                                               href="#">Privacy
-                    Policy</a></p>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="row">
-            <div class="col">
-                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
-                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"
-                         alt="Themesberg Logo">
-                </a>
-                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg
-                        <span class="current-year">2020</span>. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+{#<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4">#}
+{#                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design#}
+{#                    trend called Neumorphism.</p>#}
+{#                <ul class="d-flex list-unstyled mb-5 mb-lg-0">#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://twitter.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">#}
+{#                            <span aria-hidden="true" class="fab fa-twitter"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://www.facebook.com/themesberg/" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">#}
+{#                            <span aria-hidden="true" class="fab fa-facebook"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://github.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Open source projects">#}
+{#                            <span aria-hidden="true" class="fab fa-github"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="https://dribbble.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">#}
+{#                            <span aria-hidden="true" class="fab fa-dribbble"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Themesberg</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>#}
+{#                    </li>#}
+{#                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Other</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2"#}
+{#                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"#}
+{#                                        target="_blank">Docs#}
+{#                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"#}
+{#                           target="_blank">Changelog</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="p-2" target="_blank"#}
+{#                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-12 col-lg-4 mb-5 mb-lg-0">#}
+{#                <h5>Subscribe</h5>#}
+{#                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best#}
+{#                    content.</p>#}
+{#                <form action="#">#}
+{#                    <div class="form-row mb-2">#}
+{#                        <div class="col-12">#}
+{#                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>#}
+{#                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"#}
+{#                                   aria-label="Subscribe form" id="exampleInputEmail3" required>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">#}
+{#                                <span>Subscribe</span>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"#}
+{#                                                                                               href="#">Privacy#}
+{#                    Policy</a></p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr class="my-5">#}
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">#}
+{#                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"#}
+{#                         alt="Themesberg Logo">#}
+{#                </a>#}
+{#                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">#}
+{#                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg#}
+{#                        <span class="current-year">2020</span>. All rights reserved.</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
 <div class="loading_modal"><!-- Place at bottom of page --></div>
 
 <!-- Core -->
-<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>
-
-<!-- Vendor JS -->
-<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
-<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- Neumorphism JS -->
-<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
+{#<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>#}
+{##}
+{#<!-- Vendor JS -->#}
+{#<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>#}
+{##}
+{#<script async defer src="https://buttons.github.io/buttons.js"></script>#}
+{##}
+{#<!-- Neumorphism JS -->#}
+{#<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>#}
+{% endblock %}
+{% block extra_scripts %}
 <script>
     $body = $("body");
 
@@ -666,16 +673,16 @@
                     `<div class="container-fluid"><div class="row m-0 p-0"><input class="my-auto col-1" type="radio" id="${success.id}" name="address" value="${success.id}">` +
                     `<label class="text-left my-auto col-10" for="${success.id}">` +
                     '<div class="my-auto row">' +
-                    `<p class="mx-3 my-3"><b>Province:</b> ${non_destroyer(success.complete_province)}</p>` +
-                    `<p class="mx-3 my-3"><b>City:</b> ${non_destroyer(success.city)}</p>` +
-                    `<p class="mx-3 my-3"><b>Area:</b> ${non_destroyer(success.area)}</p>` +
-                    `<p class="mx-3 my-3"><b>Avenue:</b> ${non_destroyer(success.avenue)}</p>` +
-                    `<p class="mx-3 my-3"><b>Street:</b> ${non_destroyer(success.street)}</p>` +
-                    `<p class="mx-3 my-3"><b>Alley:</b> ${non_destroyer(success.alley)}</p>` +
-                    `<p class="mx-3 my-3"><b>No:</b> ${non_destroyer(success.no)}</p>` +
-                    `<p class="mx-3 my-3"><b>Unit:</b> ${non_destroyer(success.unit)}</p>` +
-                    `<p class="mx-3 my-3"><b>Floor:</b> ${non_destroyer(success.floor)}</p>` +
-                    `<p class="mx-3 my-3"><b>ZIP Code:</b> ${non_destroyer(success.postal_code)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Province:' %}</b> ${non_destroyer(success.complete_province)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'City:' %}</b> ${non_destroyer(success.city)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Area:' %}</b> ${non_destroyer(success.area)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Avenue:' %}</b> ${non_destroyer(success.avenue)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Street:' %}</b> ${non_destroyer(success.street)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Alley:' %}</b> ${non_destroyer(success.alley)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'No:' %}</b> ${non_destroyer(success.no)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Unit:' %}</b> ${non_destroyer(success.unit)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'Floor:' %}</b> ${non_destroyer(success.floor)}</p>` +
+                    `<p class="mx-3 my-3"><b>{% trans 'ZIP Code:' %}</b> ${non_destroyer(success.postal_code)}</p>` +
                     '</div></label>' +
                     '<div class="row my-auto col-4 col-md-1 mx-auto">' +
                     '<div class="m-1 justify-content-between">' +
@@ -702,6 +709,7 @@
         })
     })
 </script>
-</body>
-
-</html>
+{% endblock %}
+{#</body>#}
+{##}
+{#</html>#}
