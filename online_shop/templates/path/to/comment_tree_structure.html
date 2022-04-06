@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load product_extras %}
+<ul class="list-style-none">
+    {% for sub in subs %}
+        <li class="dropdown-item bg-primary">
+            <div class="row ml-auto">
+                <div
+                        class="card-body shadow-soft text-center border border-light rounded col-12 col-md-11">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <img src="{{ sub.customer.image.url }}"
+                                 alt="{{ sub.customer.first_name }}"
+                                 class="col-2 mr-auto rounded-circle">
+                            <div class="my-auto container-fluid col-10">
+                                <div class="row">
+                                    {% if not sub.customer.user.first_name and not sub.customer.user.last_name %}
+                                        <h4 class="col-12 text-left">{% trans 'No Name' %} {{ sub.customer }}<span
+                                                    class="fas fa-clock ml-5"> {{ sub.created }}</span></h4>
+                                        <h6 class="col-12 text-left"><span class="fas fa-reply text-danger"> to
+                                            {% if not parent.customer.user.first_name and not parent.customer.user.last_name %}
+                                                {% trans 'No Name' %}
+                                            {% else %}
+                                                {{ parent.customer.user.first_name }}
+                                                {{ parent.customer.user.last_name }}{% endif %}</span></h6>
+                                    {% else %}
+                                        <h4 class="col-12 text-left">{{ sub.customer.user.first_name }} {{ sub.customer.user.last_name }}
+                                            <span class="fas fa-clock ml-5"> {{ sub.created }}</span></h4>
+                                        <h6 class="col-12 text-left"><span class="fas fa-reply text-danger"> {% trans 'to' %}
+                                            {% if not parent.customer.user.first_name and not parent.customer.user.last_name %}
+                                                {% trans 'No Name' %}
+                                            {% else %}
+                                                {{ parent.customer.user.first_name }}
+                                                {{ parent.customer.user.last_name }}{% endif %}</span></h6>
+                                    {% endif %}
+                                    <p class="mt-2 text-left col-12">{{ sub.text }}</p>
+                                    <p class="mt-2 text-left col-12"><button type="button"
+                                            class="fas fa-thumbs-up text-success border-0 bg-primary"> {{ sub.likes }}</button><button type="button"
+                                            class="fas fa-thumbs-down text-danger mx-4 border-0 bg-primary"> {{ sub.diss_likes }}</button><button type="button"
+                                            class="fas fa-reply text-secondary border-0 bg-primary"> {% trans 'Reply' %}</button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% comment_tree_structure sub %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
