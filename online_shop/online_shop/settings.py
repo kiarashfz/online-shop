@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'orders',
     'contact',
     'company',
+    'payment',
     'channels',
     'chat',
     'crispy_forms',
@@ -243,46 +244,42 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AZ_IRANIAN_BANK_GATEWAYS = {
     'GATEWAYS': {
-        'BMI': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
-            'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
-            'SECRET_KEY': '<YOUR SECRET CODE>',
-        },
-        'SEP': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
-            'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
-        },
-        'ZARINPAL': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
-        },
+        # 'BMI': {
+        #     'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+        #     'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
+        #     'SECRET_KEY': '<YOUR SECRET CODE>',
+        # },
+        # 'SEP': {
+        #     'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+        #     'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
+        # },
+        # 'ZARINPAL': {
+        #     'MERCHANT_CODE': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        # },
         'IDPAY': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+            'MERCHANT_CODE': 'b96d7c34-9446-4e93-84b1-d96d3649f13c',
             'METHOD': 'POST',  # GET or POST
-            'X_SANDBOX': 0,  # 0 disable, 1 active
+            'X_SANDBOX': 1,  # 0 disable, 1 active
         },
-        'ZIBAL': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
-        },
-        'BAHAMTA': {
-            'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
-        },
-        'MELLAT': {
-            'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
-            'USERNAME': '<YOUR USERNAME>',
-            'PASSWORD': '<YOUR PASSWORD>',
-        },
+        # 'ZIBAL': {
+        #     'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+        # },
+        # 'BAHAMTA': {
+        #     'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+        # },
+        # 'MELLAT': {
+        #     'TERMINAL_CODE': '<YOUR TERMINAL CODE>',
+        #     'USERNAME': '<YOUR USERNAME>',
+        #     'PASSWORD': '<YOUR PASSWORD>',
+        # },
     },
-    'IS_SAMPLE_FORM_ENABLE': True,  # اختیاری و پیش فرض غیر فعال است
+    # 'IS_SAMPLE_FORM_ENABLE': True,  # اختیاری و پیش فرض غیر فعال است
     'DEFAULT': 'IDPAY',
     'CURRENCY': 'IRT',  # اختیاری
     'TRACKING_CODE_QUERY_PARAM': 'tc',  # اختیاری
     'TRACKING_CODE_LENGTH': 16,  # اختیاری
     'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # اختیاری
     'BANK_PRIORITIES': [
-        'BMI',
-        'SEP',
-        'ZARINPAL'
-        # and so on ...
     ],  # اختیاری
 }
 
