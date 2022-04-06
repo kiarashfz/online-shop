@@ -25743,6 +25743,19 @@ button.section-slack:focus {
     }
 }
 
+#producthunt-badge-left {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 99;
+}
+
+@media (max-width: 767.98px) {
+    #producthunt-badge {
+        display: none;
+    }
+}
+
 /**
  * = Sidebars
  */
