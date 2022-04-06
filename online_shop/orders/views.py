@@ -84,7 +84,7 @@ class OrderItemListView(ListView):
 class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Order
     template_name = 'landing/html&css/html/pages/order_create.html'
-    success_url = reverse_lazy('customers:dashboard')
+    success_url = reverse_lazy('payment:payment')
     success_message = 'Thank for choosing Web Mall!'
     fields = ['address', 'off_code']
 
