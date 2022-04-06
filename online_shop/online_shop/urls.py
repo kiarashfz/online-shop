@@ -23,10 +23,11 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('bankgateways/', az_bank_gateways_urls()),
+    path('payment/', include('payment.urls')),
     path('rosetta/', include('rosetta.urls')),
     path('customers/', include('customers.urls')),
     path('orders/', include('orders.urls')),
-    path('products/', include('products.urls')),
+    path('', include('products.urls')),
     path('contact/', include('contact.urls')),
     path('chat/', include('chat.urls')),
     prefix_default_language=False,
