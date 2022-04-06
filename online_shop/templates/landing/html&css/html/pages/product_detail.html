@@ -1,76 +1,83 @@
+{% extends 'landing/html&css/html/pages/layout/_base.html' %}
+{% load i18n %}
 {% load order_extras %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!-- Primary Meta Tags -->
-    <title>Products | Web Mall</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content="Neumorphism UI - Pricing">
-    <meta name="author" content="Themesberg">
-
-    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>
-
-    <!--  Social tags -->
-    <meta name="keywords"
-          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-    <meta name="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Neumorphism UI by Themesberg">
-    <meta itemprop="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta itemprop="image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="product">
-    <meta name="twitter:site" content="@themesberg">
-    <meta name="twitter:title" content="Neumorphism UI by Themesberg">
-    <meta name="twitter:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta name="twitter:creator" content="@themesberg">
-    <meta name="twitter:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Open Graph data -->
-    <meta property="fb:app_id" content="214738555737136">
-    <meta property="og:title" content="Neumorphism UI by Themesberg"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>
-    <meta property="og:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>
-    <meta property="og:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>
-    <meta property="og:site_name" content="Themesberg"/>
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">
-    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Fontawesome -->
-    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-          rel="stylesheet">
-
-    <!-- Pixel CSS -->
-    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">
-
-    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
-</head>
-
-<body>
+{% load i18n %}
+{% load humanize %}
 {% load product_extras %}
-{% include 'landing/html&css/html/pages/layout/__header.html' %}
+{% block title %}{% trans 'Prodct Detail' %}{% endblock %}
+{% block content %}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>#}
+{#    <!-- Primary Meta Tags -->#}
+{#    <title>Products | Web Mall</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <meta name="title" content="Neumorphism UI - Pricing">#}
+{#    <meta name="author" content="Themesberg">#}
+{##}
+{#    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>#}
+{##}
+{#    <!--  Social tags -->#}
+{#    <meta name="keywords"#}
+{#          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">#}
+{#    <meta name="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{##}
+{#    <!-- Schema.org markup for Google+ -->#}
+{#    <meta itemprop="name" content="Neumorphism UI by Themesberg">#}
+{#    <meta itemprop="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta itemprop="image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Twitter Card data -->#}
+{#    <meta name="twitter:card" content="product">#}
+{#    <meta name="twitter:site" content="@themesberg">#}
+{#    <meta name="twitter:title" content="Neumorphism UI by Themesberg">#}
+{#    <meta name="twitter:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta name="twitter:creator" content="@themesberg">#}
+{#    <meta name="twitter:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Open Graph data -->#}
+{#    <meta property="fb:app_id" content="214738555737136">#}
+{#    <meta property="og:title" content="Neumorphism UI by Themesberg"/>#}
+{#    <meta property="og:type" content="article"/>#}
+{#    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>#}
+{#    <meta property="og:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>#}
+{#    <meta property="og:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>#}
+{#    <meta property="og:site_name" content="Themesberg"/>#}
+{##}
+{#    <!-- Favicon -->#}
+{#    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">#}
+{#    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">#}
+{#    <meta name="msapplication-TileColor" content="#ffffff">#}
+{#    <meta name="theme-color" content="#ffffff">#}
+{##}
+{#    <!-- Fontawesome -->#}
+{#    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"#}
+{#          rel="stylesheet">#}
+{##}
+{#    <!-- Pixel CSS -->#}
+{#    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">#}
+{#    {% load static %}#}
+{#    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">#}
+{##}
+{#    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{#{% load product_extras %}#}
+{#{% include 'landing/html&css/html/pages/layout/__header.html' %}#}
 {#<header class="header-global">#}
 {#    <nav id="navbar-main" aria-label="Primary navigation"#}
 {#         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">#}
@@ -106,8 +113,8 @@
 {#                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">About</a></li>#}
 {#                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">Products</a></li>#}
 {#                            <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>#}
-                            {#                            <li><a class="dropdown-item" href="{% url 'customers:login' %}">Sign in</a></li>#}
-                            {#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
+{#                            <li><a class="dropdown-item" href="{% url 'customers:login' %}">Sign in</a></li>#}
+{#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
 {#                        </ul>#}
 {#                    </li>#}
 {#                    <li class="nav-item dropdown mega-dropdown">#}
@@ -117,23 +124,23 @@
 {#                        </a>#}
 {#                        <div class="dropdown-menu">#}
 {#                            <div class="row">#}
-                                {#                                <div class="col-lg-6 inside-bg d-none d-lg-block">#}
-                                {#                                    <div class="justify-content-center bg-primary text-white">#}
-                                {#                                        <div class="px-6 pb-5 pt-3">#}
-                                {#                                            <img src="../../../../../static/landing/assets/img/megamenu-image.jpg" alt="Pixel Components">#}
-                                {#                                        </div>#}
-                                {#                                        <div class="z-2 pb-4 text-center">#}
-                                {#                                            <a href="../../html/components/all.html"  class="btn btn-primary mb-2 mb-sm-0 mr-3 text-secondary">#}
-                                {#                                                <span class="mr-1"><span class="fas fa-th-large"></span></span>#}
-                                {#                                                All components#}
-                                {#                                            </a>#}
-                                {#                                            <a href="https://themesberg.com/docs/neumorphism-ui/components/alerts" target="_blank" class="btn btn-primary mb-2 mb-sm-0">#}
-                                {#                                                <span class="mr-1"><span class="fas fa-book"></span></span>#}
-                                {#                                                Docs v1.0#}
-                                {#                                            </a>#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
+{#                                <div class="col-lg-6 inside-bg d-none d-lg-block">#}
+{#                                    <div class="justify-content-center bg-primary text-white">#}
+{#                                        <div class="px-6 pb-5 pt-3">#}
+{#                                            <img src="../../../../../static/landing/assets/img/megamenu-image.jpg" alt="Pixel Components">#}
+{#                                        </div>#}
+{#                                        <div class="z-2 pb-4 text-center">#}
+{#                                            <a href="../../html/components/all.html"  class="btn btn-primary mb-2 mb-sm-0 mr-3 text-secondary">#}
+{#                                                <span class="mr-1"><span class="fas fa-th-large"></span></span>#}
+{#                                                All components#}
+{#                                            </a>#}
+{#                                            <a href="https://themesberg.com/docs/neumorphism-ui/components/alerts" target="_blank" class="btn btn-primary mb-2 mb-sm-0">#}
+{#                                                <span class="mr-1"><span class="fas fa-book"></span></span>#}
+{#                                                Docs v1.0#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
 {#                                {% for category in parent_categories %}#}
 {#                                    <div class="col pl-0">#}
 {#                                        <ul class="list-style-none">#}
@@ -141,42 +148,42 @@
 {#                                                   href="{% url 'products:category_detail' pk=category.id %}"><h3#}
 {#                                                    class="border-behance border-bottom">{{ category.name }}</h3>#}
 {#                                            </a> {% tree_structure category %}</li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/alerts.html">Alerts</a></li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/badges.html">Badges</a></li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/bootstrap-carousels.html">Bootstrap Carousels</a></li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/breadcrumbs.html">Breadcrumbs</a></li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/buttons.html">Buttons</a></li>#}
-                                            {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters </a></li>#}
-                                            {#                                        <li><a class="dropdown-item" href="../../html/components/cards.html">Cards</a></li>#}
-                                            {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce </a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/alerts.html">Alerts</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/badges.html">Badges</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/bootstrap-carousels.html">Bootstrap Carousels</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/breadcrumbs.html">Breadcrumbs</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/buttons.html">Buttons</a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/jquery-counters/" target="_blank">Counters </a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/cards.html">Cards</a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/e-commerce/" target="_blank">E-commerce </a></li>#}
 {#                                        </ul>#}
 {#                                    </div>#}
 {#                                {% endfor %}#}
-                                {#                                <div class="col pl-0">#}
-                                {#                                    <ul class="list-style-none">#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/forms.html">Forms</a></li>#}
-                                {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/" target="_blank">Icon Boxes</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/modals.html">Modals</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/navs.html">Navs</a></li>#}
-                                {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/owl-carousel/" target="_blank">Owl Carousels</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/pagination.html">Pagination</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/popovers.html">Popovers</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/progress-bars.html">Progress Bars</a></li>#}
-                                {##}
-                                {#                                    </ul>#}
-                                {#                                </div>#}
-                                {#                                <div class="col pl-0">#}
-                                {#                                    <ul class="list-style-none">#}
-                                {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/#steps" target="_blank">Steps </a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/tables.html">Tables</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/tabs.html">Tabs</a> </li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/toasts.html">Toasts</a> </li>#}
-                                {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/timelines/" target="_blank">Timelines </a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/tooltips.html">Tooltips</a></li>#}
-                                {#                                        <li><a class="dropdown-item" href="../../html/components/typography.html">Typography</a></li>#}
-                                {#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets</a></li>#}
-                                {#                                    </ul>#}
-                                {#                                </div>#}
+{#                                <div class="col pl-0">#}
+{#                                    <ul class="list-style-none">#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/forms.html">Forms</a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/" target="_blank">Icon Boxes</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/modals.html">Modals</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/navs.html">Navs</a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/plugins/owl-carousel/" target="_blank">Owl Carousels</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/pagination.html">Pagination</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/popovers.html">Popovers</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/progress-bars.html">Progress Bars</a></li>#}
+{##}
+{#                                    </ul>#}
+{#                                </div>#}
+{#                                <div class="col pl-0">#}
+{#                                    <ul class="list-style-none">#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/icon-boxes/#steps" target="_blank">Steps </a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/tables.html">Tables</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/tabs.html">Tabs</a> </li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/toasts.html">Toasts</a> </li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://themesberg.com/docs/neumorphism-ui/components/timelines/" target="_blank">Timelines </a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/tooltips.html">Tooltips</a></li>#}
+{#                                        <li><a class="dropdown-item" href="../../html/components/typography.html">Typography</a></li>#}
+{#                                        <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="https://demo.themesberg.com/neumorphism-ui-pro/html/components/widgets.html" target="_blank">Widgets</a></li>#}
+{#                                    </ul>#}
+{#                                </div>#}
 {#                            </div>#}
 {#                        </div>#}
 {#                    </li>#}
@@ -186,28 +193,28 @@
 {#                            <span class="fas fa-shopping-cart nav-link-inner-text"></span>#}
 {#                            <span class="nav-link-inner-text">Cart</span>#}
 {#                            <span class='badge badge-danger'> <b id="cart_count">{{ cart_count }}</b> </span></a>#}
-                            {#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
+{#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
 {#                        </a>#}
-                        {#                        <div class="dropdown-menu dropdown-menu-lg">#}
-                        {#                            <div class="col-auto px-0" data-dropdown-content>#}
-                        {#                                <div class="list-group list-group-flush">#}
-                        {#                                    <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">#}
-                        {#                                        <span class="icon icon-sm icon-secondary"><span class="fas fa-file-alt"></span></span>#}
-                        {#                                        <div class="ml-4">#}
-                        {#                                            <span class="text-dark d-block">Documentation<span class="badge badge-sm badge-secondary ml-2">v1.0</span></span>#}
-                        {#                                            <span class="small">Examples and guides</span>#}
-                        {#                                        </div>#}
-                        {#                                    </a>#}
-                        {#                                    <a href="https://github.com/themesberg/neumorphism-ui/issues" target="_blank" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">#}
-                        {#                                        <span class="icon icon-sm icon-secondary"><span class="fas fa-microphone-alt"></span></span>#}
-                        {#                                        <div class="ml-4">#}
-                        {#                                            <span class="text-dark d-block">Support</span>#}
-                        {#                                            <span class="small">Looking for answers? Ask us!</span>#}
-                        {#                                        </div>#}
-                        {#                                    </a>#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
+{#                        <div class="dropdown-menu dropdown-menu-lg">#}
+{#                            <div class="col-auto px-0" data-dropdown-content>#}
+{#                                <div class="list-group list-group-flush">#}
+{#                                    <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">#}
+{#                                        <span class="icon icon-sm icon-secondary"><span class="fas fa-file-alt"></span></span>#}
+{#                                        <div class="ml-4">#}
+{#                                            <span class="text-dark d-block">Documentation<span class="badge badge-sm badge-secondary ml-2">v1.0</span></span>#}
+{#                                            <span class="small">Examples and guides</span>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                    <a href="https://github.com/themesberg/neumorphism-ui/issues" target="_blank" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">#}
+{#                                        <span class="icon icon-sm icon-secondary"><span class="fas fa-microphone-alt"></span></span>#}
+{#                                        <div class="ml-4">#}
+{#                                            <span class="text-dark d-block">Support</span>#}
+{#                                            <span class="small">Looking for answers? Ask us!</span>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
 {#                    </li>#}
 {#                </ul>#}
 {#            </div>#}
@@ -222,7 +229,7 @@
 {#                            class="fas fa-sign-in-alt mr-2"></i>SignIn / SignUp</a>#}
 {#                {% endif %}#}
 {##}
-                {#                <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="btn btn-primary"><i class="fas fa-book"></i> Docs v1.0</a>#}
+{#                <a href="https://themesberg.com/docs/neumorphism-ui/getting-started/quick-start/" target="_blank" class="btn btn-primary"><i class="fas fa-book"></i> Docs v1.0</a>#}
 {#                <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbar_global"#}
 {#                        aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">#}
 {#                    <span class="navbar-toggler-icon"></span>#}
@@ -272,34 +279,33 @@
             <!-- Content -->
             <div id="order-div" class="card-body shadow-soft text-center border border-light rounded col-12 col-md-8">
                 <ul class="list-group mb-4">
-                    <li class="list-group-item"><strong>Name:</strong> {{ object.name }}</li>
+                    <li class="list-group-item"><strong>{% trans 'Name:' %}</strong> {{ object.name }}</li>
                     {% if object.discount %}
                         {% load humanize %}
                         {% load product_extras %}
-                        <li class="list-group-item"><strong>Price:</strong>
+                        <li class="list-group-item"><strong>{% trans 'Price:' %}</strong>
                             <del>{{ object.price | toman_format | intcomma }}</del>
                             <br>{{ object.final_price | toman_format | intcomma }}</li>
                     {% else %}
                         <li class="list-group-item">
-                            <strong>Price:</strong> {{ object.final_price | toman_format | intcomma }}
+                            <strong>{% trans 'Price:' %}</strong> {{ object.final_price | toman_format | intcomma }}
                             <pre></pre>
                         </li>
                     {% endif %}
                     {% if object.brand %}
-                        <li class="list-group-item"><strong>Brand:</strong> {{ object.brand }}</li>
+                        <li class="list-group-item"><strong>{% trans 'Brand:' %}</strong> {{ object.brand }}</li>
                     {% else %}
-                        <li class="list-group-item"><strong>Brand:</strong> -</li>
+                        <li class="list-group-item"><strong>{% trans 'Brand:' %}</strong> -</li>
                     {% endif %}
-                    <li class="list-group-item"><strong>Category:</strong> {{ object.category }}</li>
-                    <li class="list-group-item"><strong>Discount:</strong> {{ object.discount | non_destroyer }}<strong>
-                        | Category Discount:</strong> {{ object.category.discount | non_destroyer }}<strong> | Brand
-                        Discount:</strong> {{ object.brand.discount | non_destroyer }}</li>
+                    <li class="list-group-item"><strong>{% trans 'Category:' %}</strong> {{ object.category }}</li>
+                    <li class="list-group-item"><strong>{% trans 'Discount:' %}</strong> {{ object.discount | non_destroyer }}<strong>
+                        | {% trans 'Category Discount:' %}</strong> {{ object.category.discount | non_destroyer }}<strong> | {% trans 'Brand Discount:' %}</strong> {{ object.brand.discount | non_destroyer }}</li>
                 </ul>
                 {% if login %}
                     {% if object.id not in order_items_products_ids %}
                         <button id="order" onclick="order({{ object.id }})" type="button"
                                 class="btn btn-primary btn-block mt-5" tabindex="0"><span
-                                class="fas fa-cart-plus mr-2"></span>Add to Cart
+                                class="fas fa-cart-plus mr-2"></span>{% trans 'Add to Cart' %}
                         </button>
                     {% else %}
                         {% for order_item in order_items %}
@@ -361,16 +367,21 @@
 
             <div class="card-body shadow-soft text-center border border-light rounded col-12 mt-3">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a class="text-danger" data-toggle="tab" href="#properties"><b>Properties</b></a>
+                    <li class="active"><a class="text-danger" data-toggle="tab" href="#properties"><b>{% trans 'Properties' %}</b></a>
                     </li>
                     <li>
                         <pre> | </pre>
                     </li>
-                    <li><a data-toggle="tab" href="#brand_description" class="text-danger"><b>Brand</b></a></li>
+                    <li><a data-toggle="tab" href="#brand_description" class="text-danger"><b>{% trans 'Brand' %}</b></a></li>
                     <li>
                         <pre> | </pre>
                     </li>
-                    <li><a data-toggle="tab" href="#related_products" class="text-danger"><b>Related Products</b></a>
+                    <li><a data-toggle="tab" href="#related_products" class="text-danger"><b>{% trans 'Related Products' %}</b></a>
+                    </li>
+                    <li>
+                        <pre> | </pre>
+                    </li>
+                    <li><a data-toggle="tab" href="#comments" class="text-danger"><b>{% trans 'Comments' %}</b></a>
                     </li>
                 </ul>
 
@@ -390,7 +401,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <h4 class="text-behance">This product doesn't have any brands!</h4>
+                                <h4 class="text-behance">{% trans 'This product doesnt have any brands!' %}</h4>
                             {% endif %}
                         </div>
                     </div>
@@ -400,14 +411,14 @@
                                 <!-- Header -->
                                 <div class="row">
                                     <div class="card-header shadow-soft text-center border border-light rounded mb-2 col-12 col-md-2 mr-md-5 justify-content-center align-self-center">
-                                        <h4 class="text-behance">Properties</h4>
+                                        <h4 class="text-behance">{% trans 'Properties' %}</h4>
                                     </div>
                                     <div id="order-div"
                                          class="card-body shadow-soft text-center border border-light rounded col-12 col-md-9">
                                         <ul class="list-group mb-4 my-auto">
                                             {% for property in object.properties.all %}
                                                 <li class="list-group-item">
-                                                    <strong>{{ property.key }}: </strong> {{ property.value }}
+                                                    <strong>{% trans property.key %}</strong> {% trans property.value %}
                                                     <pre></pre>
                                                 </li>
                                             {% endfor %}
@@ -415,7 +426,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <h4 class="text-behance">This product doesn't have any properties!</h4>
+                                <h4 class="text-behance">{% trans 'This product doesnt have any properties!' %}</h4>
                             {% endif %}
                         </div>
 
@@ -442,34 +453,34 @@
                                                 <div class="card-body shadow-soft text-center border border-light rounded">
                                                     <ul class="list-group mb-4">
                                                         <li class="list-group-item">
-                                                            <strong>Name:</strong> {{ product.name }}</li>
+                                                            <strong>{% trans 'Name:' %}</strong> {{ product.name }}</li>
                                                         {% if product.discount %}
                                                             {% load humanize %}
                                                             {% load product_extras %}
-                                                            <li class="list-group-item"><strong>Price:</strong>
+                                                            <li class="list-group-item"><strong>{% trans 'Price:' %}</strong>
                                                                 <del>{{ product.price | toman_format | intcomma }}</del>
                                                                 <br>{{ product.final_price | toman_format | intcomma }}
                                                             </li>
                                                         {% else %}
                                                             <li class="list-group-item">
-                                                                <strong>Price:</strong> {{ product.final_price | toman_format |intcomma }}
+                                                                <strong>{% trans 'Price:' %}</strong> {{ product.final_price | toman_format |intcomma }}
                                                                 <pre></pre>
                                                             </li>
                                                         {% endif %}
                                                         {% if product.brand %}
                                                             <li class="list-group-item">
-                                                                <strong>Brand:</strong> {{ product.brand }}</li>
+                                                                <strong>{% trans 'Brand:' %}</strong> {{ product.brand }}</li>
                                                         {% else %}
-                                                            <li class="list-group-item"><strong>Brand:</strong> -
+                                                            <li class="list-group-item"><strong>{% trans 'Brand:' %}</strong> -
                                                             </li>
                                                         {% endif %}
                                                         <li class="list-group-item">
-                                                            <strong>Category:</strong> {{ product.category }}</li>
+                                                            <strong>{% trans 'Category:' %}</strong> {{ product.category }}</li>
                                                     </ul>
                                                     <a href="{% url 'products:product_detail' pk=product.id %}">
                                                         <button type="button" class="btn btn-primary btn-block"
                                                                 tabindex="0">
-                                                            <span class="fas fa-cart-plus mr-2"></span>Go To Product
+                                                            <span class="fas fa-cart-plus mr-2"></span>{% trans 'Go To Product' %}
                                                         </button>
                                                     </a>
                                                 </div>
@@ -485,9 +496,58 @@
                             </div>
                         {% else %}
                             <div class="card bg-primary shadow-inset border-light p-4">
-                                <h4 class="text-behance">This product doesn't have any related products!</h4>
+                                <h4 class="text-behance">{% trans 'This product doesnt have any related products!' %}</h4>
                             </div>
                         {% endif %}
+                    </div>
+                    <div id="comments" class="tab-pane">
+                        <div class="card bg-primary shadow-inset border-light p-4">
+                            {% if product.comment_set.all %}
+                                <!-- Header -->
+                                {% for comment in parent_comments %}
+                                    <ul class="list-style-none mt-3">
+                                    <li>
+                                        <div class="row">
+                                            <div
+                                                 class="card-body shadow-soft text-center border border-light rounded col-12 col-md-11">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <img src="{{ comment.customer.image.url }}"
+                                                             alt="{{ comment.customer.first_name }}"
+                                                             class="col-2 mr-auto rounded-circle">
+                                                        <div class="my-auto container-fluid col-10">
+                                                            <div class="row">
+                                                                {% if not comment.customer.user.first_name and not comment.customer.user.last_name %}
+                                                                    <h4 class="col-12 text-left">{% trans 'No Name' %} <span
+                                                                            class="fas fa-clock ml-5"> {{ comment.created }}</span>
+                                                                    </h4>
+                                                                {% else %}
+                                                                    <h4 class="col-12 text-left">{{ comment.customer.user.first_name }} {{ comment.customer.user.last_name }}
+                                                                        <span class="fas fa-clock ml-5"> {{ comment.created }}</span>
+                                                                    </h4>
+                                                                {% endif %}
+                                                                <p class="mt-4 text-left col-12">{{ comment.text }}</p>
+                                                                <p class="mt-2 text-left col-12"><button type="button"
+                                                                        class="fas fa-thumbs-up text-success border-0 bg-primary"> {{ comment.likes }}</button><button type="button"
+                                                                        class="fas fa-thumbs-down text-danger mx-4 border-0 bg-primary"> {{ comment.diss_likes }}</button><button type="button"
+                                                                        class="fas fa-reply text-secondary border-0 bg-primary"> {% trans 'Reply' %}</button>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        {% comment_tree_structure comment %}
+                                    </li>
+                                    </ul>
+
+                                {% endfor %}
+                            {% else %}
+                                <h4 class="text-behance">{% trans 'This product doesnt have any comments!' %}</h4>
+                            {% endif %}
+                        </div>
                     </div>
                     {#                    </ul>#}
                     {#                    <div id="home" class="tab-pane fade in active">#}
@@ -509,142 +569,144 @@
         <!-- End Content -->
     </div>
 </div>
-<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest
-                    design
-                    trend called Neumorphism.</p>
-                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
-                    <li class="mr-2">
-                        <a href="https://twitter.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">
-                            <span aria-hidden="true" class="fab fa-twitter"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://www.facebook.com/themesberg/" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"
-                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">
-                            <span aria-hidden="true" class="fab fa-facebook"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://github.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"
-                           data-toggle="tooltip" data-placement="top" title="Open source projects">
-                            <span aria-hidden="true" class="fab fa-github"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://dribbble.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">
-                            <span aria-hidden="true" class="fab fa-dribbble"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Themesberg</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a>
-                    </li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>
-                    </li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About
-                        Us</a>
-                    </li>
-                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Other</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2"
-                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"
-                                        target="_blank">Docs
-                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2"
-                           href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"
-                           target="_blank">Changelog</a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>
-                    </li>
-                    <li>
-                        <a class="p-2" target="_blank"
-                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-                <h5>Subscribe</h5>
-                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best
-                    content.</p>
-                <form action="#">
-                    <div class="form-row mb-2">
-                        <div class="col-12">
-                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email
-                                address</label>
-                            <input type="email" class="form-control mb-2" placeholder="example@company.com"
-                                   name="email"
-                                   aria-label="Subscribe form" id="exampleInputEmail3" required>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">
-                                <span>Subscribe</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <p class="text-gray font-small m-0">We’ll never share your details. See our <a
-                        class="text-black"
-                        href="#">Privacy
-                    Policy</a></p>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="row">
-            <div class="col">
-                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
-                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"
-                         alt="Themesberg Logo">
-                </a>
-                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg
-                        <span class="current-year">2020</span>. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+{#<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4">#}
+{#                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest#}
+{#                    design#}
+{#                    trend called Neumorphism.</p>#}
+{#                <ul class="d-flex list-unstyled mb-5 mb-lg-0">#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://twitter.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">#}
+{#                            <span aria-hidden="true" class="fab fa-twitter"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://www.facebook.com/themesberg/" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">#}
+{#                            <span aria-hidden="true" class="fab fa-facebook"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://github.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Open source projects">#}
+{#                            <span aria-hidden="true" class="fab fa-github"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="https://dribbble.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">#}
+{#                            <span aria-hidden="true" class="fab fa-dribbble"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Themesberg</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About#}
+{#                        Us</a>#}
+{#                    </li>#}
+{#                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Other</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2"#}
+{#                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"#}
+{#                                        target="_blank">Docs#}
+{#                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2"#}
+{#                           href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"#}
+{#                           target="_blank">Changelog</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="p-2" target="_blank"#}
+{#                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-12 col-lg-4 mb-5 mb-lg-0">#}
+{#                <h5>Subscribe</h5>#}
+{#                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best#}
+{#                    content.</p>#}
+{#                <form action="#">#}
+{#                    <div class="form-row mb-2">#}
+{#                        <div class="col-12">#}
+{#                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email#}
+{#                                address</label>#}
+{#                            <input type="email" class="form-control mb-2" placeholder="example@company.com"#}
+{#                                   name="email"#}
+{#                                   aria-label="Subscribe form" id="exampleInputEmail3" required>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">#}
+{#                                <span>Subscribe</span>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <p class="text-gray font-small m-0">We’ll never share your details. See our <a#}
+{#                        class="text-black"#}
+{#                        href="#">Privacy#}
+{#                    Policy</a></p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr class="my-5">#}
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">#}
+{#                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"#}
+{#                         alt="Themesberg Logo">#}
+{#                </a>#}
+{#                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">#}
+{#                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg#}
+{#                        <span class="current-year">2020</span>. All rights reserved.</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
 <div class="loading_modal"><!-- Place at bottom of page --></div>
-<!-- Core -->
-<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>
-
-<!-- Vendor JS -->
-<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
-<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- Neumorphism JS -->
-<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
+{#<!-- Core -->#}
+{#<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>#}
+{##}
+{#<!-- Vendor JS -->#}
+{#<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>#}
+{##}
+{#<script async defer src="https://buttons.github.io/buttons.js"></script>#}
+{##}
+{#<!-- Neumorphism JS -->#}
+{#<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>#}
+{% endblock %}
+{% block extra_scripts %}
 <script>
     $body = $("body");
 
@@ -824,5 +886,6 @@
     }
 
 </script>
-</body>
-</html>
+{% endblock %}
+{#</body>#}
+{#</html>#}
