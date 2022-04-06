@@ -17,12 +17,12 @@ class CategoryTest(TestCase):
     def tests_category_discount(self):
         self.category1.discount = self.discount1
         self.category1.save()
-        self.assertEqual(self.product1.final_price, 20000)
+        self.assertEqual(self.product1.final_price_calculator, 20000)
         self.brand1.discount = self.discount2
         self.brand1.save()
         self.product2.brand = self.brand1
         self.product2.save()
-        self.assertEqual(self.product2.final_price, 360000000)
+        self.assertEqual(self.product2.final_price_calculator, 360000000)
 
 
 class CustomerOffCodeTest(TestCase):
@@ -71,13 +71,13 @@ class ProductTest(TestCase):
                                                discount=self.discount2)
 
     def test_final_price(self):
-        self.assertEqual(self.product1.final_price, 8000)
-        self.assertEqual(self.product2.final_price, 40000)
-        self.assertEqual(self.product3.final_price, 40000)
-        self.assertEqual(self.product4.final_price, 40000)
-        self.assertEqual(self.product5.final_price, 40000)
-        self.assertEqual(self.product6.final_price, 40000)
-        self.assertEqual(self.product7.final_price, 40000)
+        self.assertEqual(self.product1.final_price_calculator, 8000)
+        self.assertEqual(self.product2.final_price_calculator, 40000)
+        self.assertEqual(self.product3.final_price_calculator, 40000)
+        self.assertEqual(self.product4.final_price_calculator, 40000)
+        self.assertEqual(self.product5.final_price_calculator, 40000)
+        self.assertEqual(self.product6.final_price_calculator, 40000)
+        self.assertEqual(self.product7.final_price_calculator, 40000)
 
 
 class DiscountTest(TestCase):
