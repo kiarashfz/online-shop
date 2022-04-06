@@ -1,4 +1,7 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
 <!--
+                     {% get_current_language as LANGUAGE_CODE %}
 
 =========================================================
 * Neumorphism UI - v1.0.0
@@ -15,12 +18,12 @@
 
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html {% if LANGUAGE_CODE == 'fa' %}lang="fa" dir="rtl" {% else %}lang="en" dir="ltr"{% endif %}>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- Primary Meta Tags -->
-    <title>Web Mall - Sign up</title>
+    <title>Web Mall - {% trans 'Sign up'%}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="title" content="Neumorphism UI - Sign up">
     <meta name="author" content="Themesberg">
@@ -81,6 +84,8 @@
     <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">
 
 </head>
 
@@ -93,9 +98,9 @@
                 <div class="col-12 col-md-8 col-lg-6 justify-content-center">
                     <div class="card bg-primary shadow-soft border-light p-4">
                         <div class="card-header text-center pb-0">
-                            <h2 class="mb-0 h5">Create Account</h2>
+                            <h2 class="mb-0 h5">{% trans 'Create Account' %}</h2>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body {% if LANGUAGE_CODE == 'fa' %}text-right{% endif %}">
                             <form method="post">
                                 {% if form.errors %}
                                     {% for field in form %}
@@ -114,28 +119,31 @@
                                 {% csrf_token %}
                                 <!-- Form -->
                                 <div class="form-group">
-                                    <label for="exampleInputIcon4">Your Phone</label>
+                                    <label for="exampleInputIcon4">{% trans 'Your Phone' %}</label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><span class="fas fa-phone"></span></span>
                                         </div>
-                                        <input name="phone" class="form-control" id="exampleInputIcon4"
-                                               placeholder="09123456789" type="text" aria-label="phone">
+                                        <input name="phone" class="form-control" id="phone_input"
+                                               placeholder="09123456789" type="text" aria-label="phone" required
+                                               readonly
+                                               onfocus="this.removeAttribute('readonly');">
                                         {#                                    </div>#}
                                     </div>
                                     <!-- End of Form -->
                                     <div class="form-group">
                                         <!-- Form -->
                                         <div class="form-group">
-                                            <label for="exampleInputPassword7">Password</label>
+                                            <label for="exampleInputPassword7">{% trans 'Password' %}</label>
                                             <div class="input-group mb-4">
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><span
                                                         class="fas fa-unlock-alt"></span></span>
                                                 </div>
                                                 <input name="password1" class="form-control" id="exampleInputPassword7"
-                                                       placeholder="Password" type="password" aria-label="Password"
-                                                       required>
+                                                       placeholder="{% trans 'Password' %}" type="password" aria-label="Password"
+                                                       required readonly
+                                                       onfocus="this.removeAttribute('readonly');">
                                             </div>
                                             {% for field in form %}
                                                 {% if field.name == 'password' %}
@@ -150,7 +158,7 @@
                                         <!-- End of Form -->
                                         <!-- Form -->
                                         <div class="form-group">
-                                            <label for="exampleConfirmPassword7">Confirm Password</label>
+                                            <label for="exampleConfirmPassword7">{% trans 'Confirm Password' %}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><span
@@ -158,8 +166,9 @@
                                                 </div>
                                                 <input name="password2" class="form-control"
                                                        id="exampleConfirmPassword7"
-                                                       placeholder="Confirm password" type="password"
-                                                       aria-label="Password" required>
+                                                       placeholder="{% trans 'Confirm Password' %}" type="password"
+                                                       aria-label="Password" required readonly
+                                                       onfocus="this.removeAttribute('readonly');">
 
                                             </div>
                                             {% for field in form %}
@@ -173,37 +182,69 @@
                                             {% endfor %}
                                         </div>
                                         <!-- End of Form -->
-                                        <div class="form-check mb-4">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-                                            <label class="form-check-label" for="defaultCheck6">
-                                                I agree to the <a href="#">terms and conditions</a>
-                                            </label>
-                                        </div>
+                                        {#                                        <div class="form-check mb-4">#}
+                                        {#                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">#}
+                                        {#                                            <label class="form-check-label" for="defaultCheck6">#}
+                                        {#                                                I agree to the <a href="#">terms and conditions</a>#}
+                                        {#                                            </label>#}
+                                        {#                                        </div>#}
                                     </div>
-                                    <button id="sign_up" type="submit" class="btn btn-block btn-primary">Sign Up
-                                    </button>
+                                    {{ form.captcha.label }}<br>
+                                    <button class="fas fa-redo captcha border-0 bg-primary" type="button"></button>
+                                    {{ form.captcha }}<br>
+                                    {% if confirm_code %}
+                                        <label for="exampleInputIcon9">{% trans 'Confirm Code' %}</label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-sms"></span></span>
+                                            </div>
+                                            <input placeholder="{% trans 'Confirm Code' %}" required name="confirm_code"
+                                                   class="form-control" id="exampleInputIcon9"
+                                                   type="text" aria-label="confirm_code">
+                                        </div>
+                                        <button type="submit" class="btn btn-block btn-primary">{% trans 'Sign Up' %}
+                                        </button>
+                                    {% else %}
+                                        <label id="confirm_code_label" for="exampleInputIcon9" class="d-none">{% trans 'Confirm Code' %}</label>
+                                        <div id="confirm_code_input" class="input-group mb-4 d-none">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-sms"></span></span>
+                                            </div>
+                                            <input placeholder="{% trans 'Confirm Code' %}" required name="confirm_code"
+                                                   class="form-control" id="exampleInputIcon9"
+                                                   type="text" aria-label="confirm_code">
+                                        </div>
+                                        <button id="sign_up" type="submit" class="btn btn-block btn-primary d-none">{% trans 'Sign Up' %}
+                                        </button>
+                                        <button id="confirm_code_button" type="button"
+                                                class="btn btn-block btn-primary pointer-event">{% trans 'Send SMS' %}
+                                        </button>
+                                    {% endif %}
+
+
                             </form>
-{#                            <div class="mt-3 mb-4 text-center">#}
-{#                                <span class="font-weight-normal">or</span>#}
-{#                            </div>#}
-{#                            <div class="btn-wrapper my-4 text-center">#}
-{#                                <button class="btn btn-primary btn-icon-only text-facebook mr-2" type="button"#}
-{#                                        aria-label="facebook button" title="facebook button">#}
-{#                                    <span aria-hidden="true" class="fab fa-facebook-f"></span>#}
-{#                                </button>#}
-{#                                <button class="btn btn-primary btn-icon-only text-twitter mr-2" type="button"#}
-{#                                        aria-label="twitter button" title="twitter button">#}
-{#                                    <span aria-hidden="true" class="fab fa-twitter"></span>#}
-{#                                </button>#}
-{#                                <button class="btn btn-primary btn-icon-only text-facebook" type="button"#}
-{#                                        aria-label="github button" title="github button">#}
-{#                                    <span aria-hidden="true" class="fab fa-github"></span>#}
-{#                                </button>#}
-{#                            </div>#}
+                            {#                            <div class="mt-3 mb-4 text-center">#}
+                            {#                                <span class="font-weight-normal">or</span>#}
+                            {#                            </div>#}
+                            {#                            <div class="btn-wrapper my-4 text-center">#}
+                            {#                                <button class="btn btn-primary btn-icon-only text-facebook mr-2" type="button"#}
+                            {#                                        aria-label="facebook button" title="facebook button">#}
+                            {#                                    <span aria-hidden="true" class="fab fa-facebook-f"></span>#}
+                            {#                                </button>#}
+                            {#                                <button class="btn btn-primary btn-icon-only text-twitter mr-2" type="button"#}
+                            {#                                        aria-label="twitter button" title="twitter button">#}
+                            {#                                    <span aria-hidden="true" class="fab fa-twitter"></span>#}
+                            {#                                </button>#}
+                            {#                                <button class="btn btn-primary btn-icon-only text-facebook" type="button"#}
+                            {#                                        aria-label="github button" title="github button">#}
+                            {#                                    <span aria-hidden="true" class="fab fa-github"></span>#}
+                            {#                                </button>#}
+                            {#                            </div>#}
+
                             <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
                                     <span class="font-weight-normal">
-                                        Already have an account?
-                                        <a href="{% url 'customers:login' %}" class="font-weight-bold">Login here</a>
+                                        {% trans 'Already have an account?' %}
+                                        <a href="{% url 'customers:login' %}" class="font-weight-bold">{% trans 'Login here' %}</a>
                                     </span>
                             </div>
                         </div>
@@ -213,6 +254,7 @@
         </div>
     </section>
 </main>
+<div class="loading_modal"><!-- Place at bottom of page --></div>
 
 <!-- Core -->
 <script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
@@ -236,17 +278,50 @@
 <!-- Neumorphism JS -->
 <script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
 <script>
-    {#$('#sign_up').click(function (){#}
-    {#    $.ajax({#}
-    {#        url: "{% url 'user_create_api' %}",#}
-    {#        method: "POST",#}
-    {#        data: {#}
-    {#        },#}
-    {#        success: function (success) {#}
-    {#            alert('ok')#}
-    {#            console.log(success)#}
-    {#        }#}
-    {#    })#}
+
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () {
+            $body.addClass("loading");
+        },
+        ajaxStop: function () {
+            $body.removeClass("loading");
+        }
+    });
+
+    $('#confirm_code_button').click(function () {
+        $.ajax({
+            url: "{% url 'customers:confirm_code' %}",
+            method: "GET",
+            data: {
+                phone: $('#phone_input').val()
+            },
+            success: function () {
+                $('#confirm_code_label').removeClass('d-none')
+                $('#confirm_code_input').removeClass('d-none')
+                $('#sign_up').removeClass('d-none')
+                $('#confirm_code_button').addClass('d-none')
+            }
+        })
+    })
+
+    {#$('.js-captcha-refresh').click(function () {#}
+    {#    $form = $(this).parents('form');#}
+    {##}
+    {#    $.getJSON($(this).data('url'), {}, function (json) {#}
+    {#        // This should update your captcha image src and captcha hidden input#}
+    {#    });#}
+    {##}
+    {#    return false;});#}
+
+    $('.captcha').click(function () {
+        $.getJSON("/captcha/refresh/", function (result) {
+            $('.captcha').attr('src', result['image_url']);
+            $('#id_captcha_0').val(result['key'])
+        });
+    });
+
 </script>
 </body>
 
