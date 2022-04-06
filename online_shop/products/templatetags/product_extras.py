@@ -9,7 +9,8 @@ def toman_format(value):
     value = str(value)
     length = len(value)
     if length > 9:
-        if {value[-1], value[-2], value[-3], value[-4], value[-5], value[-6], value[-7], value[-8], value[-9]} == {str(0)}:
+        if {value[-1], value[-2], value[-3], value[-4], value[-5], value[-6], value[-7], value[-8], value[-9]} == {
+            str(0)}:
             return f'{value[:-9]} {_("MilliardToman")}'
         elif {value[-1], value[-2], value[-3], value[-4], value[-5], value[-6]} == {str(0)}:
             return f'{value[:-6]} {_("MilliardToman")}'
@@ -41,6 +42,11 @@ def tree_structure(category):
     subs = category.category_set.all()
     return {"subs": subs}
 
+
+@register.inclusion_tag('path/to/comment_tree_structure.html')
+def comment_tree_structure(comment):
+    subs = comment.comment_set.all()
+    return {"subs": subs, 'parent': comment}
 
 # def get_upload_path(instance, filename):
 # model = instance.album.model.__class__._meta
