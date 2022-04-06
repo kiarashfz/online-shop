@@ -1,3 +1,10 @@
+{% extends 'landing/html&css/html/pages/layout/_base.html' %}
+{% load i18n %}
+{% load i18n %}
+{% load humanize %}
+{% load product_extras %}
+{% block title %}{% trans 'Category' %}{% endblock %}
+{% block content %}
 <!--
 
 =========================================================
@@ -14,79 +21,79 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!-- Primary Meta Tags -->
-    <title>Products | Web Mall</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content="Neumorphism UI - Pricing">
-    <meta name="author" content="Themesberg">
-
-    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>
-
-    <!--  Social tags -->
-    <meta name="keywords"
-          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-    <meta name="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Neumorphism UI by Themesberg">
-    <meta itemprop="description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta itemprop="image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="product">
-    <meta name="twitter:site" content="@themesberg">
-    <meta name="twitter:title" content="Neumorphism UI by Themesberg">
-    <meta name="twitter:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">
-    <meta name="twitter:creator" content="@themesberg">
-    <meta name="twitter:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">
-
-    <!-- Open Graph data -->
-    <meta property="fb:app_id" content="214738555737136">
-    <meta property="og:title" content="Neumorphism UI by Themesberg"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>
-    <meta property="og:image"
-          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>
-    <meta property="og:description"
-          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>
-    <meta property="og:site_name" content="Themesberg"/>
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">
-    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Fontawesome -->
-    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-          rel="stylesheet">
-
-    <!-- Pixel CSS -->
-    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">
-
-    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
-</head>
-
-<body>
-{% load humanize %}
-{% load product_extras %}
-{% include 'landing/html&css/html/pages/layout/__header.html' %}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>#}
+{#    <!-- Primary Meta Tags -->#}
+{#    <title>{% trans 'Products' %} | {% trans 'Web Mall' %}</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <meta name="title" content="Neumorphism UI - Pricing">#}
+{#    <meta name="author" content="Themesberg">#}
+{##}
+{#    <link rel="canonical" href="https://themesberg.com/product/ui-kits/neumorphism-ui/"/>#}
+{##}
+{#    <!--  Social tags -->#}
+{#    <meta name="keywords"#}
+{#          content="neumorphism, neumorphism ui, neomorphism, neomorphism ui, neomorphism css, neumorphism css, neumorph, neumorphic, design system, login, form, table, tables, card, cards, navbar, modal, icons, icons, map, chat, carousel, menu, datepicker, gallery, slider, date, social, dropdown, search, tab, nav, footer, date picker, forms, tabs, time, button, select, input, timeline, cart, about us, account, log in, blog, profile, portfolio, landing page, ecommerce, shop, landing, register, app, contact, one page, sign up, signup, store, bootstrap 4, bootstrap4, dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, themesberg, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">#}
+{#    <meta name="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{##}
+{#    <!-- Schema.org markup for Google+ -->#}
+{#    <meta itemprop="name" content="Neumorphism UI by Themesberg">#}
+{#    <meta itemprop="description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta itemprop="image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Twitter Card data -->#}
+{#    <meta name="twitter:card" content="product">#}
+{#    <meta name="twitter:site" content="@themesberg">#}
+{#    <meta name="twitter:title" content="Neumorphism UI by Themesberg">#}
+{#    <meta name="twitter:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages.">#}
+{#    <meta name="twitter:creator" content="@themesberg">#}
+{#    <meta name="twitter:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg">#}
+{##}
+{#    <!-- Open Graph data -->#}
+{#    <meta property="fb:app_id" content="214738555737136">#}
+{#    <meta property="og:title" content="Neumorphism UI by Themesberg"/>#}
+{#    <meta property="og:type" content="article"/>#}
+{#    <meta property="og:url" content="https://demo.themesberg.com/neumorphism-ui/"/>#}
+{#    <meta property="og:image"#}
+{#          content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/neumorphism-ui/neumorphism-thumbnail.jpg"/>#}
+{#    <meta property="og:description"#}
+{#          content="Start developing neumorphic web applications and pages using Neumorphism UI. It features over 100 individual components and 5 example pages."/>#}
+{#    <meta property="og:site_name" content="Themesberg"/>#}
+{##}
+{#    <!-- Favicon -->#}
+{#    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">#}
+{#    <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">#}
+{#    <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">#}
+{#    <meta name="msapplication-TileColor" content="#ffffff">#}
+{#    <meta name="theme-color" content="#ffffff">#}
+{##}
+{#    <!-- Fontawesome -->#}
+{#    <link type="text/css" href="../../../../../static/landing/vendor/@fortawesome/fontawesome-free/css/all.min.css"#}
+{#          rel="stylesheet">#}
+{##}
+{#    <!-- Pixel CSS -->#}
+{#    <link type="text/css" href="../../../../../static/landing/css/neumorphism.css" rel="stylesheet">#}
+{#    {% load static %}#}
+{#    <link rel="stylesheet" href="{% static 'layout/css/loading.css' %}">#}
+{##}
+{#    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{#{% load humanize %}#}
+{#{% load product_extras %}#}
+{#{% include 'landing/html&css/html/pages/layout/__header.html' %}#}
 {#<header class="header-global">#}
 {#    <nav id="navbar-main" aria-label="Primary navigation"#}
 {#         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light position-fixed">#}
@@ -270,13 +277,13 @@
     <h1 class="my-5">
         <pre></pre>
     </h1>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5 {% if LANGUAGE_CODE == 'fa' %}text-right{% endif %}">
         <div class="row mt-5">
             {#            filter#}
             <div class="container-fluid col-9 mt-5">
                 <div class="row card shadow-inset p-3">
                     <div class="card-body px-5 py-3 shadow-soft border border-light rounded" style="color: blue">
-                        <h3 class="border-bottom border-dark">Filter</h3>
+                        <h3 class="border-bottom border-dark">{% trans 'Filter' %}</h3>
                         {#                        <label class="mt-5"><b>Category</b>#}
                         {#                            <select id="category_filter" class="form-control">#}
                         {#                                <option value="All">All</option>#}
@@ -285,21 +292,21 @@
                         {#                                {% endfor %}#}
                         {#                            </select>#}
                         {#                        </label>#}
-                        <label class="mt-5"><b>Brand</b>
+                        <label class="mt-5"><b>{% trans 'Brand' %}</b>
                             <select id="brand_filter" class="form-control">
-                                <option value="All">All</option>
+                                <option value="All">{% trans 'All' %}</option>
                                 {% for brand in brands %}
                                     <option value="{{ brand.name }}">{{ brand.name }}</option>
                                 {% endfor %}
                             </select>
                         </label>
-                        <label class="mt-3"><b>Minimum Price</b>
+                        <label class="mt-3"><b>{% trans 'Minimum Price' %}</b>
                             <input id="min_price_filter" type="number" class="form-control">
                         </label>
-                        <label class="mt-3"><b>Maximum Price</b>
+                        <label class="mt-3"><b>{% trans 'Maximum Price' %}</b>
                             <input id="max_price_filter" type="number" class="form-control">
                         </label>
-                        <button id="filter" type="submit" class="btn btn-primary">Apply</button>
+                        <a role="button" id="filter" type="submit" class="btn btn-primary">{% trans 'Apply' %}</a>
                     </div>
                 </div>
             </div>
@@ -344,12 +351,12 @@
                             </div>
                             <div class="container-fluid mt-5">
                                 <div class="row justify-content-center ">
-                                    <button id="previous" class="btn btn-light mr-3 d-none" value=""
-                                            onclick="NextOrPre(this.value)"><< Previous
-                                    </button>
-                                    <button id="next" class="btn btn-light d-none" value=""
-                                            onclick="NextOrPre(this.value)">Next >>
-                                    </button>
+                                    <a role="button" id="previous" class="btn btn-light mr-3 d-none" value=""
+                                            onclick="NextOrPre(this.value)"><< {% trans 'Previous' %}
+                                    </a>
+                                    <a role="button" id="next" class="btn btn-light d-none" value=""
+                                            onclick="NextOrPre(this.value)">{% trans 'Next' %} >>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -360,327 +367,329 @@
     </div>
     <!-- End of Section -->
     <!-- Section -->
-    <div class="section section-lg pt-0">
-        <div class="container">
-            <div class="row text-center justify-content-center">
-                <div class="col-md-8 mb-5">
-                    <h2 class="h4 font-weight-light">Trusted by</h2>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/airbnb.svg"
-                                 class="img-fluid image-sm" alt="airbnb logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/paypal.svg"
-                                 class="img-fluid image-sm" alt="paypal logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/ebay.svg"
-                                 class="img-fluid image-sm" alt="ebay logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/forbes.svg"
-                                 class="img-fluid image-sm" alt="forbes logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/corsair.svg"
-                                 class="img-fluid image-sm" alt="corsair logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 text-center">
-                    <div class="card bg-primary shadow-soft border-light mb-4">
-                        <div class="card-body py-5">
-                            <img src="../../../../../static/landing/assets/img/clients/pinterest.svg"
-                                 class="img-fluid image-sm" alt="pinterest logo">
-                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary text-dark btn-icon">
-                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>
-                                <span class="btn-inner-text font-weight-bold">See story</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{#    <div class="section section-lg pt-0">#}
+{#        <div class="container">#}
+{#            <div class="row text-center justify-content-center">#}
+{#                <div class="col-md-8 mb-5">#}
+{#                    <h2 class="h4 font-weight-light">Trusted by</h2>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row align-items-center">#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/airbnb.svg"#}
+{#                                 class="img-fluid image-sm" alt="airbnb logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/paypal.svg"#}
+{#                                 class="img-fluid image-sm" alt="paypal logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/ebay.svg"#}
+{#                                 class="img-fluid image-sm" alt="ebay logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/forbes.svg"#}
+{#                                 class="img-fluid image-sm" alt="forbes logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/corsair.svg"#}
+{#                                 class="img-fluid image-sm" alt="corsair logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-4 text-center">#}
+{#                    <div class="card bg-primary shadow-soft border-light mb-4">#}
+{#                        <div class="card-body py-5">#}
+{#                            <img src="../../../../../static/landing/assets/img/clients/pinterest.svg"#}
+{#                                 class="img-fluid image-sm" alt="pinterest logo">#}
+{#                            <p class="card-text py-5 mb-0">Some quick example text to build on the card title and make#}
+{#                                up the bulk of the card's content.</p>#}
+{#                            <a href="#" class="btn btn-primary text-dark btn-icon">#}
+{#                                <span class="btn-inner-icon"><span class="far fa-eye"></span></span>#}
+{#                                <span class="btn-inner-text font-weight-bold">See story</span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
     <!-- End of section -->
-    <section class="section section-lg bg-primary pt-0">
-        <div class="container">
-            <div class="row text-center justify-content-center">
-                <div class="col-md-8 mb-5">
-                    <h2 class="font-weight-light">Frequently asked <span class="font-weight-bold">questions</span></h2>
-                    <p class="lead">Find the answer to your question.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <!--Accordion-->
-                    <div class="accordion shadow-soft rounded" id="accordionExample1">
-                        <div class="card card-sm card-body bg-primary border-light mb-0">
-                            <a href="#panel-1" data-target="#panel-1" class="accordion-panel-header"
-                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
-                                <span class="h6 mb-0 font-weight-bold">Our Company</span>
-                                <span class="icon"><span class="fas fa-plus"></span></span>
-                            </a>
-                            <div class="collapse" id="panel-1">
-                                <div class="pt-3">
-                                    <p class="mb-0">
-                                        At Themesberg, our mission has always been focused on bringing openness and
-                                        transparency to the design process. We've always believed that by providing a
-                                        space where designers can share ongoing work not only empowers them to make
-                                        better products, it also
-                                        helps them grow. We're proud to be a part of creating a more open culture and to
-                                        continue building a product that supports this vision.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-sm card-body bg-primary border-light mb-0">
-                            <a href="#panel-2" data-target="#panel-2" class="accordion-panel-header"
-                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
-                                <span class="h6 mb-0 font-weight-bold">Neumorphism Components</span>
-                                <span class="icon"><span class="fas fa-plus"></span></span>
-                            </a>
-                            <div class="collapse" id="panel-2">
-                                <div class="pt-3">
-                                    <p class="mb-0">
-                                        At Themesberg, our mission has always been focused on bringing openness and
-                                        transparency to the design process. We've always believed that by providing a
-                                        space where designers can share ongoing work not only empowers them to make
-                                        better products, it also
-                                        helps them grow. We're proud to be a part of creating a more open culture and to
-                                        continue building a product that supports this vision. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-sm card-body bg-primary border-light mb-0">
-                            <a href="#panel-3" data-target="#panel-3" class="accordion-panel-header"
-                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-3">
-                                <span class="h6 mb-0 font-weight-bold">What is Neumorph Ui Kit?</span>
-                                <span class="icon"><span class="fas fa-plus"></span></span>
-                            </a>
-                            <div class="collapse" id="panel-3">
-                                <div class="pt-3">
-                                    <p class="mb-0">
-                                        At Themesberg, our mission has always been focused on bringing openness and
-                                        transparency to the design process. We've always believed that by providing a
-                                        space where designers can share ongoing work not only empowers them to make
-                                        better products, it also
-                                        helps them grow. We're proud to be a part of creating a more open culture and to
-                                        continue building a product that supports this vision. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-sm card-body bg-primary border-light">
-                            <a href="#panel-4" data-target="#panel-4" class="accordion-panel-header"
-                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-4">
-                                <span class="h6 mb-0 font-weight-bold">Licenses</span>
-                                <span class="icon"><span class="fas fa-plus"></span></span>
-                            </a>
-                            <div class="collapse" id="panel-4">
-                                <div class="pt-3">
-                                    <p class="mb-0">
-                                        At Themesberg, our mission has always been focused on bringing openness and
-                                        transparency to the design process. We've always believed that by providing a
-                                        space where designers can share ongoing work not only empowers them to make
-                                        better products, it also
-                                        helps them grow. We're proud to be a part of creating a more open culture and to
-                                        continue building a product that supports this vision. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of Accordion-->
-                </div>
-            </div>
-        </div>
-    </section>
+{#    <section class="section section-lg bg-primary pt-0">#}
+{#        <div class="container">#}
+{#            <div class="row text-center justify-content-center">#}
+{#                <div class="col-md-8 mb-5">#}
+{#                    <h2 class="font-weight-light">Frequently asked <span class="font-weight-bold">questions</span></h2>#}
+{#                    <p class="lead">Find the answer to your question.</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row justify-content-center">#}
+{#                <div class="col-lg-8">#}
+{#                    <!--Accordion-->#}
+{#                    <div class="accordion shadow-soft rounded" id="accordionExample1">#}
+{#                        <div class="card card-sm card-body bg-primary border-light mb-0">#}
+{#                            <a href="#panel-1" data-target="#panel-1" class="accordion-panel-header"#}
+{#                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">#}
+{#                                <span class="h6 mb-0 font-weight-bold">Our Company</span>#}
+{#                                <span class="icon"><span class="fas fa-plus"></span></span>#}
+{#                            </a>#}
+{#                            <div class="collapse" id="panel-1">#}
+{#                                <div class="pt-3">#}
+{#                                    <p class="mb-0">#}
+{#                                        At Themesberg, our mission has always been focused on bringing openness and#}
+{#                                        transparency to the design process. We've always believed that by providing a#}
+{#                                        space where designers can share ongoing work not only empowers them to make#}
+{#                                        better products, it also#}
+{#                                        helps them grow. We're proud to be a part of creating a more open culture and to#}
+{#                                        continue building a product that supports this vision.#}
+{#                                    </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="card card-sm card-body bg-primary border-light mb-0">#}
+{#                            <a href="#panel-2" data-target="#panel-2" class="accordion-panel-header"#}
+{#                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">#}
+{#                                <span class="h6 mb-0 font-weight-bold">Neumorphism Components</span>#}
+{#                                <span class="icon"><span class="fas fa-plus"></span></span>#}
+{#                            </a>#}
+{#                            <div class="collapse" id="panel-2">#}
+{#                                <div class="pt-3">#}
+{#                                    <p class="mb-0">#}
+{#                                        At Themesberg, our mission has always been focused on bringing openness and#}
+{#                                        transparency to the design process. We've always believed that by providing a#}
+{#                                        space where designers can share ongoing work not only empowers them to make#}
+{#                                        better products, it also#}
+{#                                        helps them grow. We're proud to be a part of creating a more open culture and to#}
+{#                                        continue building a product that supports this vision. </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="card card-sm card-body bg-primary border-light mb-0">#}
+{#                            <a href="#panel-3" data-target="#panel-3" class="accordion-panel-header"#}
+{#                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-3">#}
+{#                                <span class="h6 mb-0 font-weight-bold">What is Neumorph Ui Kit?</span>#}
+{#                                <span class="icon"><span class="fas fa-plus"></span></span>#}
+{#                            </a>#}
+{#                            <div class="collapse" id="panel-3">#}
+{#                                <div class="pt-3">#}
+{#                                    <p class="mb-0">#}
+{#                                        At Themesberg, our mission has always been focused on bringing openness and#}
+{#                                        transparency to the design process. We've always believed that by providing a#}
+{#                                        space where designers can share ongoing work not only empowers them to make#}
+{#                                        better products, it also#}
+{#                                        helps them grow. We're proud to be a part of creating a more open culture and to#}
+{#                                        continue building a product that supports this vision. </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="card card-sm card-body bg-primary border-light">#}
+{#                            <a href="#panel-4" data-target="#panel-4" class="accordion-panel-header"#}
+{#                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-4">#}
+{#                                <span class="h6 mb-0 font-weight-bold">Licenses</span>#}
+{#                                <span class="icon"><span class="fas fa-plus"></span></span>#}
+{#                            </a>#}
+{#                            <div class="collapse" id="panel-4">#}
+{#                                <div class="pt-3">#}
+{#                                    <p class="mb-0">#}
+{#                                        At Themesberg, our mission has always been focused on bringing openness and#}
+{#                                        transparency to the design process. We've always believed that by providing a#}
+{#                                        space where designers can share ongoing work not only empowers them to make#}
+{#                                        better products, it also#}
+{#                                        helps them grow. We're proud to be a part of creating a more open culture and to#}
+{#                                        continue building a product that supports this vision. </p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!--End of Accordion-->#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
 </main>
 
 {#    <a id="producthunt-badge" href="https://www.producthunt.com/posts/neumorphism-ui?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-neumorphism-ui" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=200908&theme=dark" alt="Neumorphism UI - Neumorphism inspired UI web components, sections and pages | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>#}
 
-<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design
-                    trend called Neumorphism.</p>
-                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
-                    <li class="mr-2">
-                        <a href="https://twitter.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">
-                            <span aria-hidden="true" class="fab fa-twitter"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://www.facebook.com/themesberg/" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"
-                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">
-                            <span aria-hidden="true" class="fab fa-facebook"></span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://github.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"
-                           data-toggle="tooltip" data-placement="top" title="Open source projects">
-                            <span aria-hidden="true" class="fab fa-github"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://dribbble.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">
-                            <span aria-hidden="true" class="fab fa-dribbble"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Themesberg</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>
-                    </li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>
-                    </li>
-                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Other</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2"
-                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"
-                                        target="_blank">Docs
-                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"
-                           target="_blank">Changelog</a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>
-                    </li>
-                    <li>
-                        <a class="p-2" target="_blank"
-                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-                <h5>Subscribe</h5>
-                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best
-                    content.</p>
-                <form action="#">
-                    <div class="form-row mb-2">
-                        <div class="col-12">
-                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>
-                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"
-                                   aria-label="Subscribe form" id="exampleInputEmail3" required>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">
-                                <span>Subscribe</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"
-                                                                                               href="#">Privacy
-                    Policy</a></p>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="row">
-            <div class="col">
-                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
-                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"
-                         alt="Themesberg Logo">
-                </a>
-                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg
-                        <span class="current-year">2020</span>. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+{#<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4">#}
+{#                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design#}
+{#                    trend called Neumorphism.</p>#}
+{#                <ul class="d-flex list-unstyled mb-5 mb-lg-0">#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://twitter.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">#}
+{#                            <span aria-hidden="true" class="fab fa-twitter"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://www.facebook.com/themesberg/" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">#}
+{#                            <span aria-hidden="true" class="fab fa-facebook"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="mr-2">#}
+{#                        <a href="https://github.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Open source projects">#}
+{#                            <span aria-hidden="true" class="fab fa-github"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="https://dribbble.com/themesberg" target="_blank"#}
+{#                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"#}
+{#                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">#}
+{#                            <span aria-hidden="true" class="fab fa-dribbble"></span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Themesberg</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>#}
+{#                    </li>#}
+{#                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-6 col-lg-2 mb-5 mb-lg-0">#}
+{#                <h5>Other</h5>#}
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2"#}
+{#                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"#}
+{#                                        target="_blank">Docs#}
+{#                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"#}
+{#                           target="_blank">Changelog</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="p-2" target="_blank"#}
+{#                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-12 col-lg-4 mb-5 mb-lg-0">#}
+{#                <h5>Subscribe</h5>#}
+{#                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best#}
+{#                    content.</p>#}
+{#                <form action="#">#}
+{#                    <div class="form-row mb-2">#}
+{#                        <div class="col-12">#}
+{#                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>#}
+{#                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"#}
+{#                                   aria-label="Subscribe form" id="exampleInputEmail3" required>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">#}
+{#                                <span>Subscribe</span>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"#}
+{#                                                                                               href="#">Privacy#}
+{#                    Policy</a></p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <hr class="my-5">#}
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">#}
+{#                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"#}
+{#                         alt="Themesberg Logo">#}
+{#                </a>#}
+{#                <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">#}
+{#                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg#}
+{#                        <span class="current-year">2020</span>. All rights reserved.</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</footer>#}
 <div class="loading_modal"><!-- Place at bottom of page --></div>
 
 <!-- Core -->
-<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>
-<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>
-
-<!-- Vendor JS -->
-<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>
-<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>
-<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
-<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>
-
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
-<!-- Neumorphism JS -->
-<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>
+{#<script src="../../../../../static/landing/vendor/jquery/dist/jquery.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/popper.js/dist/umd/popper.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap/dist/js/bootstrap.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/headroom.js/dist/headroom.min.js"></script>#}
+{##}
+{#<!-- Vendor JS -->#}
+{#<script src="../../../../../static/landing/vendor/onscreen/dist/on-screen.umd.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/nouislider/distribute/nouislider.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/waypoints/lib/jquery.waypoints.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jarallax/dist/jarallax.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery.counterup/jquery.counterup.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>#}
+{#<script src="../../../../../static/landing/vendor/prismjs/prism.js"></script>#}
+{##}
+{#<script async defer src="https://buttons.github.io/buttons.js"></script>#}
+{##}
+{#<!-- Neumorphism JS -->#}
+{#<script src="../../../../../static/landing/assets/js/neumorphism.js"></script>#}
+{% endblock %}
+{% block extra_scripts %}
 <script>
     $body = $("body");
 
@@ -720,20 +729,20 @@
                         '</header>' +
                         '<div class="card-body shadow-soft text-center border border-light rounded">' +
                         '<ul class="list-group mb-4">' +
-                        `<li class="list-group-item"><strong>Name:</strong> ${product.name}</li>` +
-                        `<li class="list-group-item"><strong>Category:</strong> ${product.category_name}</li>`
+                        `<li class="list-group-item"><strong>{% trans 'Name:' %}</strong> ${product.name}</li>` +
+                        `<li class="list-group-item"><strong>{% trans 'Category:' %}</strong> ${product.category_name}</li>`
                     if (product.discount || product.category_discount || product.brand_discount) {
-                        html += `<li class="list-group-item"><strong>Price:</strong> <del>${product.price} T</del><br>${product.final_price} T</li>`
+                        html += `<li class="list-group-item"><strong>{% trans 'Price:' %}</strong> <del>${product.price} T</del><br>${product.final_price} T</li>`
                     } else {
-                        html += `<li class="list-group-item"><strong>Price:</strong> ${product.final_price} T<pre> </pre></li>`
+                        html += `<li class="list-group-item"><strong>{% trans 'Price:' %}</strong> ${product.final_price} T<pre> </pre></li>`
                     }
                     if (product.brand) {
-                        html += `<li class="list-group-item"><strong>Brand:</strong> ${product.brand_name}</li>`
+                        html += `<li class="list-group-item"><strong>{% trans 'Brand:' %}</strong> ${product.brand_name}</li>`
                     } else {
-                        html += `<li class="list-group-item"><strong>Brand:</strong> -</li>`
+                        html += `<li class="list-group-item"><strong>{% trans 'Brand:' %}</strong> -</li>`
                     }
                     html += '</ul>' +
-                        `<a href="${url}" target="_blank"><button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>Go to Product</button></a>` +
+                        `<a href="${url}" target="_blank"><button type="button" class="btn btn-primary btn-block" tabindex="0"><span class="fas fa-cart-plus mr-2"></span>{% trans 'Go to Product' %}</button></a>` +
                         '</div>' +
                         <!-- End Content -->
                         '</div>' +
@@ -855,6 +864,7 @@
         })
     }
 </script>
-</body>
-
-</html>
+{% endblock %}
+{#</body>#}
+{##}
+{#</html>#}
