@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from core.admin import BaseAdmin
-from products.models import Discount, OffCode, Product, Category, Brand, Property, ExtraImage, Comment
+from products.models import Discount, OffCode, Product, Category, Brand, Property, ExtraImage, Comment, CustomerOffCode
 
 
 class ProductInline(admin.StackedInline):
@@ -62,6 +62,25 @@ class OffCodeAdmin(BaseAdmin):
             'fields': ('min_buy', 'max_amount', 'expire', 'usable_count'),
         }),
     )
+    empty_value_display = '------'
+
+
+class CustomerOffCodeAdmin(BaseAdmin):
+    ordering = ['customer']
+    list_display = ['off_code', 'customer', 'usable_count']
+    list_display_links = ['off_code']
+    list_editable = ['usable_count']
+    search_fields = ['customer', 'off_code']
+    list_filter = ['customer']
+    list_per_page = 5
+    # fieldsets = (
+    #     (None, {
+    #         'fields': ('type', 'value', 'code')
+    #     }),
+    #     ('Optionals', {
+    #         'fields': ('min_buy', 'max_amount', 'expire', 'usable_count'),
+    #     }),
+    # )
     empty_value_display = '------'
 
 
@@ -160,4 +179,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Brand, BrandAdmin)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(ExtraImage, ExtraImageAdmin)
+admin.site.register(CustomerOffCode, CustomerOffCodeAdmin)
 admin.site.register(Comment)

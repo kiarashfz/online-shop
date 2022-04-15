@@ -1,8 +1,11 @@
+from django import forms
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView, CreateView, DetailView
 
+from customers.models import Customer
+from products.forms import CommentCreateForm
 from products.models import Product, Brand, Category, Comment
 from products.serializers import ProductSerializer
 from company.models import Question
@@ -27,6 +30,13 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['related_products'] = Product.objects.filter(category=self.object.category).exclude(pk=self.object.id)
         context['parent_comments'] = Comment.objects.filter(parent=None, product=self.object)
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentCreateForm(initial={'product': self.object.id, 'customer': Customer.objects.get(user=self.request.user)})
+            context['comment_form'].fields['customer'].widget = forms.HiddenInput()
+            context['comment_form'].fields['product'].widget = forms.HiddenInput()
+            context['comment_form'].fields['parent'].label = 'Reply To'
+            context['comment_form'].fields['text'].label = 'Comment'
+            context['comment_form'].fields['parent'].queryset = Comment.objects.filter(product=self.object)
         return context
 
 

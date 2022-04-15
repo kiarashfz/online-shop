@@ -298,39 +298,41 @@
         {#            <img src="../../static/landing/shop2.jpg" alt="shop" class="mx-auto mb-5 mt-0" style="background-repeat: repeat">#}
         {#        </div>#}
         {#    </div>#}
+        <h3 class="mt-4 text-center text-secondary">{% trans 'Best-selling products' %}</h3>
+
         <div class="container-fluid {% if LANGUAGE_CODE == 'fa' %}text-right{% endif %}">
             <div class="row">
                 {#            filter#}
-                <div class="container-fluid col-9">
-                    <div class="row card shadow-inset p-3">
-                        <div class="card-body px-5 py-3 shadow-soft border border-light rounded" style="color: blue">
-                            <h3 class="border-bottom border-dark ">{% trans 'Filter' %}</h3>
-                            <label class="mt-5"><b>{% trans 'Category' %}</b>
-                                <select id="category_filter" class="form-control">
-                                    <option value="All">{% trans 'All' %}</option>
-                                    {% for category in categories %}
-                                        <option value="{{ category.name }}">{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </label>
-                            <label class="mt-5"><b>{% trans 'Brand' %}</b>
-                                <select id="brand_filter" class="form-control">
-                                    <option value="All">{% trans 'All' %}</option>
-                                    {% for brand in brands %}
-                                        <option value="{{ brand.name }}">{{ brand.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </label>
-                            <label class="mt-3"><b>{% trans 'Minimum Price' %}</b>
-                                <input id="min_price_filter" type="number" class="form-control">
-                            </label>
-                            <label class="mt-3"><b>{% trans 'Maximum Price' %}</b>
-                                <input id="max_price_filter" type="number" class="form-control">
-                            </label>
-                            <a id="filter" role="button" type="submit" class="btn btn-primary">{% trans 'Apply' %}</a>
-                        </div>
-                    </div>
-                </div>
+{#                <div class="container-fluid col-9">#}
+{#                    <div class="row card shadow-inset p-3">#}
+{#                        <div class="card-body px-5 py-3 shadow-soft border border-light rounded" style="color: blue">#}
+{#                            <h3 class="border-bottom border-dark ">{% trans 'Filter' %}</h3>#}
+{#                            <label class="mt-5"><b>{% trans 'Category' %}</b>#}
+{#                                <select id="category_filter" class="form-control">#}
+{#                                    <option value="All">{% trans 'All' %}</option>#}
+{#                                    {% for category in categories %}#}
+{#                                        <option value="{{ category.name }}">{{ category.name }}</option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </label>#}
+{#                            <label class="mt-5"><b>{% trans 'Brand' %}</b>#}
+{#                                <select id="brand_filter" class="form-control">#}
+{#                                    <option value="All">{% trans 'All' %}</option>#}
+{#                                    {% for brand in brands %}#}
+{#                                        <option value="{{ brand.name }}">{{ brand.name }}</option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </label>#}
+{#                            <label class="mt-3"><b>{% trans 'Minimum Price' %}</b>#}
+{#                                <input id="min_price_filter" type="number" class="form-control">#}
+{#                            </label>#}
+{#                            <label class="mt-3"><b>{% trans 'Maximum Price' %}</b>#}
+{#                                <input id="max_price_filter" type="number" class="form-control">#}
+{#                            </label>#}
+{#                            <a id="filter" role="button" type="submit" class="btn btn-primary">{% trans 'Apply' %}</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
                 {#            filter#}
                 <div class="container-fluid col-10">
                     <div class="row">

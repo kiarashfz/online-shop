@@ -1,9 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordChangeView
 from django.urls import path
 
-from customers.apis import CustomerCreateApiView, UserCreateApiView, UserListApiView, UserDetailApiView, \
-    AddressListApiView, AddressDetailApiView, AddressDeleteApiView, AddressCreateApiView, UserUpdateApiView, \
-    CustomerUpdateApiView, AddressUpdateApiView, ConfirmCode
+from customers.apis import CustomerCreateApiView, UserCreateApiView, UserListApiView, UserDetailApiView, AddressListApiView, AddressDetailApiView, AddressDeleteApiView, AddressCreateApiView, UserUpdateApiView, CustomerUpdateApiView, AddressUpdateApiView, ConfirmCode
 from customers.views import CustomerCreateView, AboutTemplateView, MyLoginView, CustomerDashboardTemplateView
 
 app_name = 'customers'

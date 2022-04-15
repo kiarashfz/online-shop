@@ -1,10 +1,14 @@
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.humanize.templatetags.humanize import intcomma
 from django.http import HttpResponse
 from rest_framework import generics, viewsets, renderers
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from orders.models import Order, OrderItem
 from orders.serializers import OrderSerializer, OrderItemSerializer
+from products.models import OffCode
+from products.templatetags.product_extras import toman_format
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -35,3 +39,9 @@ class OrderItemOfProduct(generics.ListAPIView):
             response = HttpResponse('bad request!')
             response.status_code = 400
             return response
+
+
+class AfterOffCodeApiView(APIView):
+    def post(self, request):
+        after_off_code = intcomma(toman_format(int(Order.after_off_code_price(OffCode.objects.get(id=request.POST['off_code_id']), int(request.POST['total_price'])))))
+        return Response(after_off_code, status=200)

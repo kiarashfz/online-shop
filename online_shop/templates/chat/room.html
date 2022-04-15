@@ -1,18 +1,21 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
+{% extends 'landing/html&css/html/pages/layout/_base.html' %}
+{% load crispy_forms_filters %}
+{% load i18n %}
+{% load humanize %}
+{% load product_extras %}
+{% block title %}{% trans 'Final Order' %}{% endblock %}
+{% block content %}
+    <div class="mx-auto col-6 shadow-soft rounded"><h3 class="text-behance text-center">Support Chat</h3><textarea class="col-12 bg-dark text-white rounded p-4" rows="10" id="chat-log" disabled></textarea><br>
+        <input class="form-control col-6" id="chat-message-input" type="text" placeholder="Type your text here!" size="100"><br>
+    <input class="btn btn-outline-behance mb-5" id="chat-message-submit" type="button" value="Send"></div>
+
     {{ room_name|json_script:"room-name" }}
+{% endblock %}
+{% block extra_scripts %}
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+        console.log(roomName)
+        console.log(typeof (roomName))
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -22,8 +25,12 @@
         );
 
         chatSocket.onmessage = function(e) {
+            let name = '{{ request.user.first_name }}'
+            if (!name){
+                name = 'User'
+            }
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            document.querySelector('#chat-log').value += (name + ':\t' + data.message + '\n');
         };
 
         chatSocket.onclose = function(e) {
@@ -46,5 +53,4 @@
             messageInputDom.value = '';
         };
     </script>
-</body>
-</html>
+{% endblock %}

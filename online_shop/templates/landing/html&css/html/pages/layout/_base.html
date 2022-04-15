@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html {% if LANGUAGE_CODE == 'fa' %}lang="fa" dir="rtl" {% else %}lang="en" dir="ltr"{% endif %}>
@@ -6,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- Primary Meta Tags -->
-    <title>{% block title %}{% endblock %} | {% trans 'Web Mall' %}</title>
+    <title>{% block title %}{% endblock %} | {% trans site_setting.site_name %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="title" content="Neumorphism UI - Pricing">
     <meta name="author" content="Themesberg">
@@ -48,9 +49,9 @@
     <meta property="og:site_name" content="Themesberg"/>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../static/landing/w-logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../static/landing/w-logo.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ site_setting.logo.url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ site_setting.logo.url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ site_setting.logo.url }}">
     <link rel="manifest" href="../../../../../static/landing/assets/img/favicon/site.webmanifest">
     <link rel="mask-icon" href="../../../../../static/landing/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -82,123 +83,116 @@
        href="{% url 'chat:room' room_name=user.phone %}" target="_blank"><img
             src="{% static 'chat/supportchatlogo.png' %}" alt="online support" style="height: 100px" height="100px"></a>
 {% endif %}
-<div class="bg-dark text-white rounded shadow-soft p-1" style="position: fixed;bottom: 25px;left: 25px;z-index: 99;">
-    {% get_current_language as LANGUAGE_CODE %}
-    {% get_available_languages as LANGUAGES %}
-    {% get_language_info_list for LANGUAGES as languages %}
-    <ul class="mr-auto text-secondary">
-        {% for lang in languages %}
-            <li class="text-center">
-                <a href="/{{ lang.code }}/" class="mx-auto" {% if lang.code == LANGUAGE_CODE %}{% endif %}>
-                    {{ lang.code }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-
-</div>
+{#<div class="bg-dark text-white rounded shadow-soft p-1" style="position: fixed;bottom: 25px;left: 25px;z-index: 99;">#}
+{#    {% get_current_language as LANGUAGE_CODE %}#}
+{#    {% get_available_languages as LANGUAGES %}#}
+{#    {% get_language_info_list for LANGUAGES as languages %}#}
+{#    <ul class="mr-auto text-secondary">#}
+{#        {% for lang in languages %}#}
+{#            <li class="text-center">#}
+{#                <a href="/{{ lang.code }}/" class="mx-auto" {% if lang.code == LANGUAGE_CODE %}{% endif %}>#}
+{#                    {{ lang.code }}#}
+{#                </a>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{##}
+{#</div>#}
 <footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-                <p><strong>Neumorphism UI PRO</strong> is a premium Bootstrap UI Kit built based on the newest design
-                    trend called Neumorphism.</p>
-                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
+                <p><strong>{{ site_setting.site_name }}</strong>{{ site_setting.description }}</p>
+            </div>
+            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
+                <h5 class="fas fa-phone"><a href="tel:{{ site_setting.contact_phone }}" class="border-bottom border-dark">{{ site_setting.contact_phone }}</a></h5>
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>#}
+{#                    </li>#}
+{#                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>#}
+{#                </ul>#}
+            </div>
+            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
+                <h5>Social Medias</h5>
+                                <ul class="d-flex list-unstyled mb-5 mb-lg-0">
                     <li class="mr-2">
-                        <a href="https://twitter.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="twitter social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow @themesberg on Twitter">
-                            <span aria-hidden="true" class="fab fa-twitter"></span>
+                        <a href="{{ site_setting.telegram_link }}" target="_blank"
+                           class="btn btn-icon-only btn-pill btn-primary" aria-label="telegram social link"
+                           data-toggle="tooltip" data-placement="top" title="DM on telegram">
+                            <span aria-hidden="true" class="fab fa-telegram"></span>
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="https://www.facebook.com/themesberg/" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="facebook social link"
-                           data-toggle="tooltip" data-placement="top" title="Like @themesberg on Facebook">
-                            <span aria-hidden="true" class="fab fa-facebook"></span>
+                        <a href="{{ site_setting.instagram_link }}" target="_blank"
+                           class="btn btn-icon-only btn-pill btn-primary" aria-label="instagram social link"
+                           data-toggle="tooltip" data-placement="top" title="Like on instagram">
+                            <span aria-hidden="true" class="fab fa-instagram"></span>
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="https://github.com/themesberg" target="_blank"
+                        <a href="{{ site_setting.github_link }}" target="_blank"
                            class="btn btn-icon-only btn-pill btn-primary" aria-label="github social link"
                            data-toggle="tooltip" data-placement="top" title="Open source projects">
                             <span aria-hidden="true" class="fab fa-github"></span>
                         </a>
                     </li>
-                    <li>
-                        <a href="https://dribbble.com/themesberg" target="_blank"
-                           class="btn btn-icon-only btn-pill btn-primary" aria-label="dribbble social link"
-                           data-toggle="tooltip" data-placement="top" title="Follow us on Dribbble">
-                            <span aria-hidden="true" class="fab fa-dribbble"></span>
-                        </a>
-                    </li>
+
                 </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Themesberg</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/blog">Blog</a></li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/products">Products</a>
-                    </li>
-                    <li class="mb-1"><a class="p-2" target="_blank" href="https://themesberg.com/about">About Us</a>
-                    </li>
-                    <li><a class="p-2" target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-lg-2 mb-5 mb-lg-0">
-                <h5>Other</h5>
-                <ul class="footer-links list-unstyled mt-2">
-                    <li class="mb-1"><a class="p-2"
-                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"
-                                        target="_blank">Docs
-                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"
-                           target="_blank">Changelog</a>
-                    </li>
-                    <li class="mb-1">
-                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>
-                    </li>
-                    <li>
-                        <a class="p-2" target="_blank"
-                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>
-                    </li>
-                </ul>
+
+{#                <ul class="footer-links list-unstyled mt-2">#}
+{#                    <li class="mb-1"><a class="p-2"#}
+{#                                        href="https://themesberg.com/docs/pixel-bootstrap/getting-started/overview/"#}
+{#                                        target="_blank">Docs#}
+{#                        <span class="badge badge-gray text-uppercase ml-2">v1.0</span></a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" href="https://themesberg.com/docs/pixel-bootstrap/getting-started/changelog"#}
+{#                           target="_blank">Changelog</a>#}
+{#                    </li>#}
+{#                    <li class="mb-1">#}
+{#                        <a class="p-2" target="_blank" href="https://themesberg.com/licensing">License</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a class="p-2" target="_blank"#}
+{#                           href="https://github.com/themesberg/pixel-bootstrap-ui-kit/issues">Support</a>#}
+{#                    </li>#}
+{#                </ul>#}
             </div>
             <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-                <h5>Subscribe</h5>
-                <p class="text-gray font-small mt-2">Join our mailing list. We write rarely, but only the best
-                    content.</p>
-                <form action="#">
-                    <div class="form-row mb-2">
-                        <div class="col-12">
-                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>
-                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"
-                                   aria-label="Subscribe form" id="exampleInputEmail3" required>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">
-                                <span>Subscribe</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"
-                                                                                               href="#">Privacy
-                    Policy</a></p>
+                <h5><a href="mailto:{{ site_setting.contact_email }}" class="border-bottom border-dark">{{ site_setting.contact_email }}</a></h5>
+                <p class="text-gray font-small mt-2">{{ site_setting.email_description }}</p>
+{#                <form action="#">#}
+{#                    <div class="form-row mb-2">#}
+{#                        <div class="col-12">#}
+{#                            <label class="h6 font-weight-normal d-none" for="exampleInputEmail3">Email address</label>#}
+{#                            <input type="email" class="form-control mb-2" placeholder="example@company.com" name="email"#}
+{#                                   aria-label="Subscribe form" id="exampleInputEmail3" required>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                            <button type="submit" class="btn btn-primary btn-block" data-loading-text="Sending">#}
+{#                                <span>Subscribe</span>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <p class="text-gray font-small m-0">We’ll never share your details. See our <a class="text-black"#}
+{#                                                                                               href="#">Privacy#}
+{#                    Policy</a></p>#}
             </div>
         </div>
         <hr class="my-5">
         <div class="row">
             <div class="col">
-                <a href="https://themesberg.com" target="_blank" class="d-flex justify-content-center">
-                    <img src="../../../../../static/landing/assets/img/themesberg.svg" height="25" class="mb-3"
-                         alt="Themesberg Logo">
+                <a href="#" target="_blank" class="d-flex justify-content-center">
+                    <img src="{{ site_setting.logo.url }}" height="25" class="mb-3"
+                         alt="Site Logo">
                 </a>
                 <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
-                    <p class="font-weight-normal font-small mb-0">Copyright © Themesberg
-                        <span class="current-year">2020</span>. All rights reserved.</p>
+                    <p class="font-weight-normal font-small mb-0">Copyright © {{ site_setting.site_name }}
+                        <span class="current-year">2022</span>. All rights reserved.</p>
                 </div>
             </div>
         </div>

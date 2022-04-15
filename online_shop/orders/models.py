@@ -99,6 +99,13 @@ class Order(BaseModel):
             return self.total_price - min(self.total_price * self.off_code.value / 100,
                                           self.off_code.max_amount) if self.off_code.max_amount else self.total_price - self.total_price * self.off_code.value / 100
 
+    @staticmethod
+    def after_off_code_price(off_code: OffCode, total_price: int):
+        if off_code and off_code.type == 'amount':
+            return min(total_price - min(off_code.value, off_code.max_amount), 0) if off_code.max_amount else max(total_price - off_code.value, 0)
+        elif off_code and off_code.type == 'percentage':
+            return total_price - min(total_price * off_code.value / 100, off_code.max_amount) if off_code.max_amount else total_price - total_price * off_code.value / 100
+
     def off_code_check(self):
         if self.off_code:
             if not self.off_code.customeroffcode_set.all():

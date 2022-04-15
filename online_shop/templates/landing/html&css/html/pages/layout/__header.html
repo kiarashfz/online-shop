@@ -1,3 +1,4 @@
+{% load static %}
 {% load product_extras %}
 {% load i18n %}
 <header class="header-global">
@@ -6,16 +7,30 @@
         <div class="container position-relative">
             <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"
                href="{% url 'products:products_list' %}">
-                <img class="navbar-brand-dark" src="../../../../../static/landing/w-logo.png" alt="Logo light">
-                <img class="navbar-brand-light" src="../../../../../static/landing/w-logo.png" alt="Logo dark">
+                <img class="navbar-brand-dark" src="{{ site_setting.logo.url }}" alt="Logo light">
+                <img class="navbar-brand-light" src="{{ site_setting.logo.url }}" alt="Logo dark">
             </a>
+            <div class="navbar-brand shadow-soft px-2 rounded border border-light mr-lg-4">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                <p class="mr-auto text-secondary my-auto">
+                    {% for lang in languages %}
+                        {% if lang.code not in LANGUAGE_CODE %}
+                            <a href="/{{ lang.code }}/" class="mx-auto my-auto">
+                                {{ lang.code }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
             <div class="navbar-collapse collapse" id="navbar_global">
                 <div class="navbar-collapse-header">
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <a href="{% url 'products:products_list' %}"
                                class="navbar-brand shadow-soft py-2 px-3 rounded border border-light">
-                                <img src="../../../../../static/landing/w-logo.png" alt="Web Mall logo">
+                                <img src="{{ site_setting.logo.url }}" alt="Web Mall logo">
                             </a>
                         </div>
                         <div class="col-6 collapse-close">
@@ -26,19 +41,19 @@
                     </div>
                 </div>
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">
-                            <span class="nav-link-inner-text">{% trans 'Pages' %}</span>
-                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">{% trans 'About' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">{% trans 'Products' %}</a></li>
-                            <li><a class="dropdown-item" href="../../html/pages/contact.html">{% trans 'Contact' %}</a></li>
-                            {#                            <li><a class="dropdown-item" href="{% url 'customers:login' %}">Sign in</a></li>#}
-                            {#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
-                        </ul>
-                    </li>
+                    {#                    <li class="nav-item dropdown">#}
+                    {#                        <a href="#" class="nav-link" data-toggle="dropdown">#}
+                    {#                            <span class="nav-link-inner-text">{% trans 'Pages' %}</span>#}
+                    {#                            <span class="fas fa-angle-down nav-link-arrow ml-2"></span>#}
+                    {#                        </a>#}
+                    {#                        <ul class="dropdown-menu">#}
+                    {#                            <li><a class="dropdown-item" href="{% url 'customers:about' %}">{% trans 'About' %}</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="{% url 'products:products_list' %}">{% trans 'Products' %}</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="../../html/pages/contact.html">{% trans 'Contact' %}</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="{% url 'customers:login' %}">Sign in</a></li>#}
+                    {#                            <li><a class="dropdown-item" href="{% url 'customers:sign-up' %}">Sign up</a></li>#}
+                    {#                        </ul>#}
+                    {#                    </li>#}
                     <li class="nav-item dropdown mega-dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown">
                             <span class="nav-link-inner-text">{% trans 'Categories' %}</span>

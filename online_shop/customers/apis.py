@@ -122,22 +122,22 @@ class ConfirmCode(APIView):
     def get(self, request):
         confirm_code = random.randint(1000, 9999)
         phone = request.GET.get('phone', None)
-        # try:
-        api = KavenegarAPI(
-            '63692F4778315056363552346E79796C55624C765973447649314859516156705A706557763430634D48513D')
-        params = {
-            'sender': '10008663',
-            'receptor': f'{phone}',
-            'message': f'Hi !\nWelcome to Web Mall!\n\nYour confirm code: {confirm_code}',
-        }
-        print(confirm_code)
-        # response = api.sms_send(params)
-        # except APIException as e:
-        #     print(e)
-        #     return Response(status=400)
-        # except HTTPException as e:
-        #     print(e)
-        #     return Response(status=400)
+        try:
+            api = KavenegarAPI(
+                '63692F4778315056363552346E79796C55624C765973447649314859516156705A706557763430634D48513D')
+            params = {
+                'sender': '10008663',
+                'receptor': f'{phone}',
+                'message': f'Hi !\nWelcome to Web Mall!\n\nYour confirm code: {confirm_code}',
+            }
+            print(confirm_code)
+            # response = api.sms_send(params)
+        except APIException as e:
+            print(e)
+            return Response(status=400)
+        except HTTPException as e:
+            print(e)
+            return Response(status=400)
         request.session['confirm_code'] = confirm_code
         return Response(status=200)
 

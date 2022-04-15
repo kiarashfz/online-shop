@@ -4,13 +4,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, QueryDict, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, CreateView
 
 from customers.forms import AddressForm
 from customers.models import Customer, Address
 from orders.models import OrderItem, Order
-from products.models import Product
+from products.models import Product, OffCode
 from products.templatetags.product_extras import toman_format
 
 
@@ -85,12 +86,21 @@ class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Order
     template_name = 'landing/html&css/html/pages/order_create.html'
     success_url = reverse_lazy('payment:payment')
-    success_message = 'Thank for choosing Web Mall!'
+    # success_message = 'Thank for choosing Web Mall!'
     fields = ['address', 'off_code']
+
+    def get_initial(self):
+        init = super(OrderCreateView, self).get_initial()
+        init.update({'request': self.request})
+        return init
 
     def get_context_data(self, **kwargs):
         context = super(OrderCreateView, self).get_context_data(**kwargs)
         context['form'].fields['address'].queryset = Address.objects.filter(customer__user=self.request.user)
+        off_code1 = OffCode.objects.filter(customers=None, expire__gte=timezone.now())
+        off_code2 = OffCode.objects.filter(customers=Customer.objects.get(user=self.request.user), expire__gte=timezone.now())
+        off_codes = off_code1 | off_code2
+        context['form'].fields['off_code'].queryset = off_codes
         context['addresses'] = Address.objects.filter(customer__user=self.request.user).order_by('-created')
         context['address_form'] = AddressForm()
         return context
@@ -98,6 +108,7 @@ class OrderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.customer = Customer.objects.get(user=self.request.user)
         validated_form = super(OrderCreateView, self).form_valid(form)
+        self.request.session['created_order_id'] = Order.objects.get(id=form.instance.id).id
         OrderItem.objects.filter(customer__user=self.request.user, status=0).update(status=1, order=self.object)
         self.object.save()
         return validated_form

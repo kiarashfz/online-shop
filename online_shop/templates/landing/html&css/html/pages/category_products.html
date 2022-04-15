@@ -6,7 +6,6 @@
 {% block title %}{% trans 'Category' %}{% endblock %}
 {% block content %}
 <!--
-
 =========================================================
 * Neumorphism UI - v1.0.0
 =========================================================
@@ -277,8 +276,11 @@
     <h1 class="my-5">
         <pre></pre>
     </h1>
+
     <div class="container-fluid mt-5 {% if LANGUAGE_CODE == 'fa' %}text-right{% endif %}">
-        <div class="row mt-5">
+                <h2 class="mx-auto text-center text-behance">{{ object }}</h2>
+
+        <div class="row mt-0">
             {#            filter#}
             <div class="container-fluid col-9 mt-5">
                 <div class="row card shadow-inset p-3">

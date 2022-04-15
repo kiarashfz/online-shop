@@ -113,6 +113,9 @@ class CustomerOffCode(BaseModel):
         help_text=_('Times that customer can use this off code!'),
     )
 
+    def __str__(self):
+        return f'Customer Off Code {self.id}'
+
 
 class OffCode(BaseDiscount):
     class Meta:
@@ -426,7 +429,7 @@ class Comment(BaseModel):
         Customer,
         on_delete=models.RESTRICT,
         verbose_name=_('Customer'),
-        help_text=_('Customer that this comment is for.'),
+        # help_text=_('Customer that this comment is for.'),
     )
 
     parent = models.ForeignKey(
@@ -435,19 +438,19 @@ class Comment(BaseModel):
         null=True,
         blank=True,
         verbose_name=_('Parent Comment'),
-        help_text=_('Comment that you reply it!'),
+        # help_text=_('Comment that you reply it!'),
     )
 
     text = models.TextField(
         verbose_name=_('Text'),
-        help_text=_('Text of your comment!'),
+        # help_text=_('Text of your comment!'),
     )
 
     product = models.ForeignKey(
         Product,
         on_delete=models.RESTRICT,
         verbose_name=_('Product'),
-        help_text=_('Product that this comment is for.'),
+        # help_text=_('Product that this comment is for.'),
     )
 
     likes = models.PositiveIntegerField(
@@ -461,6 +464,9 @@ class Comment(BaseModel):
         default=0,
         blank=True,
     )
+
+    def __str__(self):
+        return f'{self.customer.user.first_name if self.customer.user.first_name else "No Name"}: {self.text[:20]}....'
 
 
 class ExtraImage(BaseModel):

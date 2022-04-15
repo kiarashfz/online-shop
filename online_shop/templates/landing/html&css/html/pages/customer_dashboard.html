@@ -22,8 +22,14 @@
                     <div class="modal-body m-auto">
                         <ul class="messages">
                             {% for message in messages %}
-                                <li{% if message.tags %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                    <li{% if message.tags %}
+                                    class="text-danger {{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% else %}
+                                    <li{% if message.tags %}
                                     class="text-behance {{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endif %}
+
                             {% endfor %}
                         </ul>
                     </div>
@@ -43,7 +49,7 @@
             </li>
             <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#addresses_tab">{% trans 'Addresses' %}</a></li>
             <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#personal_tab">{% trans 'Personal' %}</a></li>
-            <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#favorite_products_tab">{% trans 'Favorite Products' %}</a></li>
+{#            <li><a class="btn btn-behance mx-2 rounded-0" data-toggle="pill" href="#favorite_products_tab">{% trans 'Favorite Products' %}</a></li>#}
         </ul>
 
         <div class="tab-content card bg-primary shadow-inset border-light p-4 rounded-0">
@@ -232,6 +238,7 @@
                                                         <div class="col-12 text-center m-auto">{{ unpaid_order.off_code }}</div>
                                                     {% endif %}
                                                 </div>
+                                                <a href="{% url 'payment:pay_unpaid' order_id=unpaid_order.id %}"><button class="btn btn-success col-12">Pay</button></a>
                                             </div>
 
                                         </div>
@@ -595,11 +602,11 @@
                     </div>
                 </header>
             </div>
-            <div id="favorite_products_tab" class="tab-pane fade">
+{#            <div id="favorite_products_tab" class="tab-pane fade">#}
                 {#                <h3>Menu 3</h3>#}
                 {#                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt#}
                 {#                    explicabo.</p>#}
-            </div>
+{#            </div>#}
         </div>
     </div>
 
@@ -785,6 +792,7 @@
                     $('#image_error').remove()
                     $('#update_customer_modal_close').trigger('click')
                     $('#customer_image').attr('src', success.image)
+                    $('#customer_update_form').trigger("reset")
                 },
                 error: function (error) {
                     $('#image_error').remove()

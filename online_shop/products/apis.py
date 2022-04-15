@@ -1,12 +1,13 @@
 from pprint import pprint
 
+from django.db.models import Count
 from rest_framework import mixins, generics, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from products.models import Product, Category, Discount, OffCode, Property
+from products.models import Product, Category, Discount, OffCode, Property, Comment
 from products.serializers import ProductSerializer, CategorySerializer, DiscountSerializer, OffCodeSerializer, \
-    PropertySerializer
+    PropertySerializer, CommentSerializer
 
 
 # class MyPaginator(PageNumberPagination):
@@ -15,7 +16,7 @@ from products.serializers import ProductSerializer, CategorySerializer, Discount
 
 class ProductListApiView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.annotate(orderitem_count=Count('orderitem')).order_by('-orderitem_count')[:9]
     pagination_class = PageNumberPagination
 
     def get(self, request, *args, **kwargs):
@@ -119,3 +120,8 @@ class PropertyListApiView(generics.ListCreateAPIView):
 class PropertyDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PropertySerializer
     queryset = Property.objects.all()
+
+
+class CommentCreateApiView(generics.CreateAPIView):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
