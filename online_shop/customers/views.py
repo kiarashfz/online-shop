@@ -31,14 +31,14 @@ class CustomerCreateView(CreateView):
         login(self.request, self.object)
         customer = Customer.objects.get(user_id=self.request.user.id)
         if order_items := self.request.session.get('order_items', []):
-            inited_objs = []
-            for order_item in order_items:
-                product = Product.objects.get(pk=order_item)
-                inited_objs.append(OrderItem(product=product, count=order_items[order_item], customer=customer))
-            OrderItem.objects.bulk_create(inited_objs)
+            # inited_objs = []
             # for order_item in order_items:
             #     product = Product.objects.get(pk=order_item)
-            #     OrderItem.objects.create(product=product, count=order_items[order_item], customer=customer)
+            #     inited_objs.append(OrderItem(product=product, count=order_items[order_item], customer=customer))
+            # OrderItem.objects.bulk_create(inited_objs)
+            for order_item in order_items:
+                product = Product.objects.get(pk=order_item)
+                OrderItem.objects.create(product=product, count=order_items[order_item], customer=customer)
         return response
 
     def form_invalid(self, form):
